@@ -1,4 +1,5 @@
 package src;
+
 public class Cliente extends Utilizador {
     private String NIF;
     private String morada;
@@ -25,9 +26,15 @@ public class Cliente extends Utilizador {
         return telefone;
     }
 
+    public void setMorada(){
+        this.morada = Validator.validateInput("Morada");
+    }
+
     public static void loggedUserLoop(Utilizador user) {
         Main.clearConsole();
-        System.out.println("Bem-vindo " + user.getNome());
+        System.out.println("hi " + user.getNome());
+        System.out.println("tipo " + user.getTipo());
+        Main.pressEnterKey();
     }
 
     public static Cliente registerNewUser(String estado, String type) {

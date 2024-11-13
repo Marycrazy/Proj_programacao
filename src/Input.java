@@ -1,13 +1,16 @@
 package src;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
 public class Input {
     private static Scanner scanner;
     private static BufferedReader fileReader;
+    private static BufferedWriter fileWriter;
 
     private static Scanner getScanner() {
         if (scanner == null) {
@@ -43,11 +46,20 @@ public class Input {
         }
     }
 
-    public static void openFile(String filename) {
+    public static void openFIleReade(String filename) {
         try {
             fileReader = new BufferedReader(new FileReader(filename));
         } catch (FileNotFoundException e) {
             System.out.println("Error opening file: " + e.getMessage());
+        }
+    }
+
+    // Abre o arquivo para escrita (append)
+    public static void openFileWrite(String filename, boolean append) {
+        try {
+            fileWriter = new BufferedWriter(new FileWriter(filename, append));
+        } catch (IOException e) {
+            System.out.println("Error opening file for writing: " + e.getMessage());
         }
     }
 
@@ -60,6 +72,18 @@ public class Input {
         } catch (IOException e) {
             System.out.println("Error reading file: " + e.getMessage());
             return null;
+        }
+    }
+
+    // Escreve uma linha no arquivo
+    public static void writeFileLine(String line) {
+        try {
+            if (fileWriter != null) {
+                fileWriter.write(line);
+                fileWriter.newLine(); // Adiciona nova linha após a escrita
+            }
+        } catch (IOException e) {
+            System.out.println("Error writing to file: " + e.getMessage());
         }
     }
 

@@ -3,7 +3,8 @@ package src;
 public class Main {
     public static void main(String[] args) {
         try {
-            Ficheiros.showObjectFileContents();
+            //Ficheiros.readObjectsFicheiro();
+            pressEnterKey();
             Ficheiros.doUsersExist();
             mainLoop();
         } catch (Exception e) {
@@ -26,10 +27,10 @@ public class Main {
             switch (option) {
                 case "1":
                     Utilizador user = loginUser();
+                    pressEnterKey();
                     if (user != null) {
                         Utilizador.loggedUserLoop(user);
                     }
-                    pressEnterKey();
                     break;
                 case "2":
                     registerUser();
@@ -37,6 +38,7 @@ public class Main {
                     break;
                 case "0":
                     clearConsole();
+                    System.out.println("A sair...");
                     running = false;
                     break;
                 default:
@@ -66,7 +68,7 @@ public class Main {
                 Ficheiros.insertObjectFicheiro(admin);
                 break;
             case "2":
-                Utilizador tecnico = Utilizador.registerNewUser("inativo", "tecnico");
+                Utilizador tecnico = Utilizador.registerNewUser("activo", "tecnico");
                 Ficheiros.insertUserFicehiro(tecnico);
                 Ficheiros.insertObjectFicheiro(tecnico);
                 break;
@@ -74,6 +76,9 @@ public class Main {
                 Utilizador cliente = Utilizador.registerNewUser("inativo", "cliente");
                 Ficheiros.insertUserFicehiro(cliente);
                 Ficheiros.insertObjectFicheiro(cliente);
+                break;
+            case "4":
+                System.out.println("A voltar ao menu principal.");
                 break;
             default:
                 System.out.println("Invalid option. Please try again.");
@@ -88,7 +93,20 @@ public class Main {
         String login = Input.readLine();
         System.out.print("Password: ");
         String password = Validator.encryptPassword(Input.readLine());
-        return Ficheiros.authenticateUser(login, password);
+        Utilizador user = Ficheiros.authenticateUser(login, password);
+        if (user != null) {
+            if(user.getEstado().equals("inativo")){
+                System.out.println(user.getNome() + " está inativo, ainda não pode aceder a aplicação.");
+                pressEnterKey();
+                return null;
+            }
+            else{
+                System.out.println("Bem-vindo " + user.getNome());
+                pressEnterKey();
+                return user;
+            }
+        }
+        return null;
     }
 
     // Press any key to continue

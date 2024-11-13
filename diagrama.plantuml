@@ -1,0 +1,108 @@
+@startuml diagrama
+class Utilizador {
+  - login: String
+  - password: String
+  - nome: String
+  - estado: String
+  - email: String
+  - tipo: String
+  + Utilizador(login: String, password: String, nome: String, estado: String, email: String, tipo: String)
+  + getLogin(): String
+  + getPassword(): String
+  + getNome(): String
+  + getEstado(): String
+  + getEmail(): String
+  + getTipo(): String
+  + setPassword()
+  + setNome()
+  + setEstado(estado: String)
+  + loggedUserLoop(user: Utilizador)
+  + registerNewUser(estado: String, type: String): Utilizador
+}
+
+class Cliente extends Utilizador {
+  - NIF: String
+  - morada: String
+  - telefone: String
+  + Cliente(login: String, password: String, nome: String, estado: String, email: String, tipo: String, NIF: String, morada: String, telefone: String)
+  + getNIF(): String
+  + getMorada(): String
+  + getTelefone(): String
+  + setMorada()
+  + loggedUserLoop(user: Utilizador)
+  + registerNewUser(estado: String, type: String): Cliente
+}
+
+class Tecnicos extends Utilizador {
+  - NIF: String
+  - morada: String
+  - telefone: String
+  + Tecnicos(login: String, password: String, nome: String, estado: String, email: String, tipo: String, NIF: String, morada: String, telefone: String)
+  + getNIF(): String
+  + getMorada(): String
+  + getTelefone(): String
+  + setMorada()
+  + loggedUserLoop(user: Utilizador)
+  + registerNewUser(estado: String, type: String): Tecnicos
+}
+
+class Administrador extends Utilizador {
+    +Administrador()
+    +loggedUserLoop()
+    +registerNewUser()
+}
+
+class Main {
+        +main(String[] args)
+        -mainLoop()
+        +registerUser()
+        +loginUser() Utilizador
+        +pressEnterKey()
+        +clearConsole()
+    }
+
+class Validator {
+  - validators: Map<String, Function<String, Boolean>>
+  + isValidEmail(email: String): boolean
+  + isValidNIF(nif: String): boolean
+  + isValidPhoneNumber(phoneNumber: String): boolean
+  + isValidName(name: String): boolean
+  + isValidLogin(login: String): boolean
+  + isValidAddress(address: String): boolean
+  + validatePassword(type: String): String
+  + validateInput(typeString: String): String
+  - encryptPassword(password: String): String
+}
+
+class Ficheiros {
+  + doUsersExist()
+  + insertUserFicehiro(user: Utilizador)
+  + insertObjectFicheiro(user: Utilizador)
+  + showObjectFileContents()
+  + authenticateUser(login: String, password: String): Utilizador
+  - getUserDetails(login: String): Utilizador
+}
+
+class Input {
+  - scanner: Scanner
+  - fileReader: BufferedReader
+  - getScanner(): Scanner
+  + readLine(): String
+  + hasNextInt(): boolean
+  + closeScanner()
+  + openFIleReade(filename: String)
+  + readFileLine(): String
+  + closeFile()
+}
+
+Main "1" -- "1" Ficheiros
+Main "1" -- "1" Input
+Main "1" -- "1" Validator
+Tecnicos --> Validator
+Cliente --> Validator
+Administrador --> Validator
+Ficheiros --> Utilizador
+Validator --> Input
+Ficheiros --> Input
+Utilizador --> Input
+

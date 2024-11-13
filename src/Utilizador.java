@@ -1,11 +1,11 @@
 package src;
 
-public class Utilizador {
-    private String login;
+public class Utilizador{
+    private String login; //unico
     private String password;
     private String nome;
     private String estado;
-    private String email;
+    private String email; //unico
     private String tipo;
 
     //construtor
@@ -18,7 +18,7 @@ public class Utilizador {
         this.tipo = tipo;
     }
 
-    //getters
+    //getters e setters
     public String getLogin() {
         return login;
     }
@@ -43,14 +43,19 @@ public class Utilizador {
         return tipo;
     }
 
+    public void setPassword() {
+        this.password = Validator.validatePassword("Password");
+    }
+
+    public void setNome() {
+        this.nome = Validator.validateInput("Name");
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
     public static void loggedUserLoop(Utilizador user) {
-        // nao esquecer de tirar esta parte foi so para testar
-        System.out.println("olá, " + user.getNome());
-        System.out.println("Tipo de utilizador: " + user.getTipo());
-        System.out.println("Estado: " + user.getEstado());
-        System.out.println("Email: " + user.getEmail());
-        System.out.println("Login: " + user.getLogin());
-        Main.pressEnterKey();
         switch (user.getTipo()) {
             case "administrador":
                 Administrador.loggedUserLoop(user);

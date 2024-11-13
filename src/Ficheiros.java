@@ -1,9 +1,16 @@
 package src;
+import java.io.EOFException;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.io.FileWriter;
-import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class Ficheiros {
@@ -22,66 +29,74 @@ public class Ficheiros {
         } catch (Exception e) {
                     System.out.println("Erro ao verificar se o ficheiro existe: " + e.getMessage());
                 }
-            }
+    }
 
-            public static void insertUserFicehiro(Utilizador user) {
-                System.out.println("Inserting user into file...");
-                try (PrintWriter writer = new PrintWriter(new FileWriter("docs/credenciais_acesso.txt", true))) {
-                    writer.println(user.getLogin() + ", " + user.getPassword());
-                    System.out.println("Dados escritos com sucesso.");
-                } catch (IOException e) {
-                    System.err.println("Erro ao escrever no ficheiro: " + e.getMessage());
-                }
-            }
+    public static void insertUserFicehiro(Utilizador user) {
+        System.out.println("Inserting user into file...");
+        try{
+            Input.openFileWrite("docs/credenciais_acesso.txt", true);
+            Input.writeFileLine(user.getLogin() + ", " + user.getPassword());
+            System.out.println("Dados escritos com sucesso.");
+            Input.closeFile();
+        } catch (Exception e) {
+            System.out.println("Erro ao inserir o utilizador no ficheiro: " + e.getMessage());
+        }
+    }
 
 
     //inserir dados num ficheiro de objetos
     public static void insertObjectFicheiro(Utilizador user) {
         System.out.println("Inserting user into file...");
-        try (PrintWriter writer = new PrintWriter(new FileWriter("docs/dados_apl.dat", true))) {
-            switch (user.getTipo()) {
-                case "administrador":
-                    writer.println(user.getLogin() + ", " + user.getPassword() + ", " + user.getNome() + ", " + user.getEstado() + ", " + user.getEmail() + ", " + user.getTipo());
-                    break;
-                case "tecnico":
-                    writer.println(user.getLogin() + ", " + user.getPassword() + ", " + user.getNome() + ", " + user.getEstado() + ", " + user.getEmail() + ", " + user.getTipo() + ", " + ((Tecnicos) user).getNIF() + ", " + ((Tecnicos) user).getMorada() + ", " + ((Tecnicos) user).getTelefone());
-                    break;
-                case "cliente":
-                    writer.println(user.getLogin() + ", " + user.getPassword() + ", " + user.getNome() + ", " + user.getEstado() + ", " + user.getEmail() + ", " + user.getTipo() + ", " + ((Cliente) user).getNIF() + ", " + ((Cliente) user).getMorada() + ", " + ((Cliente) user).getTelefone());
-                    break;
-                default:
-                    break;
-            }
+        String filePath = "docs/dados_apl.dat";
+        List<Utilizador> users = new ArrayList<>();
+
+        // Tenta carregar os objetos existentes no arquivo
+        try (ObjectInputStream reader = new ObjectInputStream(new FileInputStream(filePath))) {
+            users = (List<Utilizador>) reader.readObject();
+        } catch (FileNotFoundException e) {
+            System.out.println("Arquivo não encontrado. Criando um novo arquivo.");
+        } catch (EOFException | ClassNotFoundException e) {
+            System.out.println("Arquivo vazio ou sem dados existentes.");
+        } catch (IOException e) {
+            System.err.println("Erro ao ler o arquivo: " + e.getMessage());
+        }
+
+        // Adiciona o novo objeto `user` à lista
+        users.add(user);
+
+        // Grava a lista inteira de volta ao arquivo
+        try (ObjectOutputStream writer = new ObjectOutputStream(new FileOutputStream(filePath))) {
+            writer.writeObject(users);
             System.out.println("Dados escritos com sucesso.");
         } catch (IOException e) {
             System.err.println("Erro ao escrever no ficheiro: " + e.getMessage());
         }
     }
 
-    //mostrar dados de um ficheiro de objetos
-    public static void showObjectFileContents() {
-        System.out.println("Showing contents of object file...");
-        try {
-            File arquivo = new File("docs/dados_apl.dat");
-            if (arquivo.exists()) {
-                Scanner scanner = new Scanner(arquivo);
-                while (scanner.hasNextLine()) {
-                    String line = scanner.nextLine();
-                    System.out.println(line);
-                }
-                scanner.close();
-            } else {
-                System.out.println("O ficheiro não existe.");
-            }
-        } catch (Exception e) {
-            System.out.println("Erro ao ler o ficheiro: " + e.getMessage());
+    // Método de leitura de objetos do arquivo
+    public static List<Utilizador> readObjectsFicheiro() {
+        System.out.println("Reading users from file...");
+        List<Utilizador> users = new ArrayList<>();
+        String filePath = "docs/dados_apl.dat";
+
+        try (ObjectInputStream reader = new ObjectInputStream(new FileInputStream(filePath))) {
+            users = (List<Utilizador>) reader.readObject();
+            System.out.println("Dados lidos com sucesso.");
+        } catch (FileNotFoundException e) {
+            System.out.println("Arquivo não encontrado. Nenhum dado a carregar.");
+        } catch (EOFException e) {
+            System.out.println("Arquivo vazio.");
+        } catch (IOException | ClassNotFoundException e) {
+            System.err.println("Erro ao ler o arquivo: " + e.getMessage());
         }
+        return users;
     }
+
 
     public static Utilizador authenticateUser(String login, String password) {
         System.out.println("Authenticating user...");
         try {
-            Input.openFile("docs/credenciais_acesso.txt");
+            Input.openFIleReade("docs/credenciais_acesso.txt");
             String line;
             while ((line = Input.readFileLine()) != null) {
                 String[] credentials = line.split(", ");
@@ -92,6 +107,7 @@ public class Ficheiros {
             }
             Input.closeFile();
             System.out.println("Login ou password incorretos.");
+            Main.pressEnterKey();
         } catch (Exception e) {
             System.out.println("Erro ao autenticar o utilizador: " + e.getMessage());
         }
@@ -99,29 +115,14 @@ public class Ficheiros {
     }
 
     private static Utilizador getUserDetails(String login) {
-        System.out.println("Fetching user details...");
-        try {
-            Input.openFile("docs/dados_apl.dat");
-            String line;
-            while ((line = Input.readFileLine()) != null) {
-                String[] userDetails = line.split(", ");
-                    if (userDetails[0].equals(login)) {
-                        switch (userDetails[5]) {
-                            case "administrador":
-                                return new Administrador(userDetails[0], userDetails[1], userDetails[2], userDetails[3], userDetails[4], userDetails[5]);
-                            case "tecnico":
-                                return new Tecnicos(userDetails[0], userDetails[1], userDetails[2], userDetails[3], userDetails[4], userDetails[5], userDetails[6], userDetails[7], userDetails[8]);
-                            case "cliente":
-                                return new Cliente(userDetails[0], userDetails[1], userDetails[2], userDetails[3], userDetails[4], userDetails[5], userDetails[6], userDetails[7], userDetails[8]);
-                            default:
-                                break;
-                        }
-                    }
+        System.out.println("Searching for user with login: " + login);
+        List<Utilizador> users = readObjectsFicheiro();
+        for (Utilizador user : users) {
+            if (user.getLogin().equals(login)) {
+                return user;
             }
-            Input.closeFile();
-        } catch (Exception e) {
-            System.out.println("Erro ao obter detalhes do utilizador: " + e.getMessage());
         }
+        System.out.println("Utilizador não encontrado com login: " + login);
         return null;
     }
 

@@ -1,5 +1,6 @@
 package src;
-public class Tecnicos extends Utilizador {
+
+public class Tecnicos extends Utilizador{
     private String NIF;
     private String morada;
     private String telefone;
@@ -11,7 +12,7 @@ public class Tecnicos extends Utilizador {
         this.telefone = telefone;
     }
 
-    // Getters
+    // Getters e setters
     public String getNIF() {
         return NIF;
     }
@@ -24,9 +25,17 @@ public class Tecnicos extends Utilizador {
         return telefone;
     }
 
+    public void setMorada(){
+        this.morada = Validator.validateInput("Morada");
+    }
+
     public static void loggedUserLoop(Utilizador user) {
         Main.clearConsole();
-        System.out.println("Bem-vindo " + user.getNome());
+        System.out.println("hi " + user.getNome());
+        System.out.println("tipo " + user.getTipo());
+        System.out.println("NIF: " + ((Tecnicos) user).getNIF());
+        Main.pressEnterKey();
+
     }
 
     public static Tecnicos registerNewUser(String estado, String type) {
@@ -41,5 +50,3 @@ public class Tecnicos extends Utilizador {
         return new Tecnicos(login, password, name, estado, email, type, NIF, morada, telefone);
     }
 }
-/*cliente, 15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225, Cliente, false, dfsh@ksdf.com, cliente
-oi_my, 15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225, HI Hello, true, hi@gn.com, administrador */

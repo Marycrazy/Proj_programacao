@@ -4,7 +4,7 @@ public class Tecnicos extends Utilizador {
     private String morada;
     private String telefone;
 
-    public Tecnicos(String login, String password, String nome, boolean estado, String email, String tipo, String NIF, String morada, String telefone) {
+    public Tecnicos(String login, String password, String nome, String estado, String email, String tipo, String NIF, String morada, String telefone) {
         super(login, password, nome, estado, email, tipo);
         this.NIF = NIF;
         this.morada = morada;
@@ -20,11 +20,16 @@ public class Tecnicos extends Utilizador {
         return morada;
     }
 
-    private String getTelefone() {
+    public String getTelefone() {
         return telefone;
     }
 
-    public static Tecnicos registerNewUser(boolean estado, String type) {
+    public static void loggedUserLoop(Utilizador user) {
+        Main.clearConsole();
+        System.out.println("Bem-vindo " + user.getNome());
+    }
+
+    public static Tecnicos registerNewUser(String estado, String type) {
         Main.clearConsole();
         String login = Validator.validateInput("Login");
         String password = Validator.validatePassword("Password");
@@ -36,3 +41,5 @@ public class Tecnicos extends Utilizador {
         return new Tecnicos(login, password, name, estado, email, type, NIF, morada, telefone);
     }
 }
+/*cliente, 15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225, Cliente, false, dfsh@ksdf.com, cliente
+oi_my, 15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225, HI Hello, true, hi@gn.com, administrador */

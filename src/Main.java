@@ -1,4 +1,5 @@
 package src;
+
 public class Main {
     public static void main(String[] args) {
         try {
@@ -24,11 +25,10 @@ public class Main {
             String option = Input.readLine();
             switch (option) {
                 case "1":
-                    /*User user = loginUser();
+                    Utilizador user = loginUser();
                     if (user != null) {
-                        User.loggedUserLoop(user);
-                    }*/
-                    System.out.println("Login");
+                        Utilizador.loggedUserLoop(user);
+                    }
                     pressEnterKey();
                     break;
                 case "2":
@@ -61,17 +61,17 @@ public class Main {
         String option = Input.readLine();
         switch (option) {
             case "1":
-                Utilizador admin = Utilizador.registerNewUser(false, "administrador");
+                Utilizador admin = Utilizador.registerNewUser("inativo", "administrador");
                 Ficheiros.insertUserFicehiro(admin);
                 Ficheiros.insertObjectFicheiro(admin);
                 break;
             case "2":
-                Utilizador tecnico = Utilizador.registerNewUser(false, "tecnico");
+                Utilizador tecnico = Utilizador.registerNewUser("inativo", "tecnico");
                 Ficheiros.insertUserFicehiro(tecnico);
                 Ficheiros.insertObjectFicheiro(tecnico);
                 break;
             case "3":
-                Utilizador cliente = Utilizador.registerNewUser(false, "cliente");
+                Utilizador cliente = Utilizador.registerNewUser("inativo", "cliente");
                 Ficheiros.insertUserFicehiro(cliente);
                 Ficheiros.insertObjectFicheiro(cliente);
                 break;
@@ -81,6 +81,16 @@ public class Main {
                 break;
         }
     }
+
+    public static Utilizador loginUser() {
+        clearConsole();
+        System.out.print("Login: ");
+        String login = Input.readLine();
+        System.out.print("Password: ");
+        String password = Validator.encryptPassword(Input.readLine());
+        return Ficheiros.authenticateUser(login, password);
+    }
+
     // Press any key to continue
     public static void pressEnterKey() {
         System.out.print("Press Enter to continue...");

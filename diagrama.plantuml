@@ -95,6 +95,16 @@ class Input {
   + closeFile()
 }
 
+class Sistema {
+  -List~Usuario~ usuarios
+  -List~Servico~ servicos
+  -List~Equipamento~ equipamentos
+  +autenticarUsuario()
+  +registrarLog()
+  +salvarDados()
+  +carregarDados()
+}
+
 Main "1" -- "1" Ficheiros
 Main "1" -- "1" Input
 Main "1" -- "1" Validator

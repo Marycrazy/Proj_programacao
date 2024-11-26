@@ -81,6 +81,7 @@ public class Input {
             if (fileWriter != null) {
                 fileWriter.write(line);
                 fileWriter.newLine(); // Adiciona nova linha após a escrita
+                fileWriter.flush(); // Força a escrita imediata no arquivo
             }
         } catch (IOException e) {
             System.out.println("Error writing to file: " + e.getMessage());

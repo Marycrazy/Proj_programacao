@@ -1,6 +1,7 @@
 package src;
+import java.io.Serializable;
 
-public class Utilizador{
+public class Utilizador implements Serializable {
     private String login; //unico
     private String password;
     private String nome;

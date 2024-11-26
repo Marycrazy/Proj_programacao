@@ -7,35 +7,33 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.PrintWriter;
-import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
-
 
 public class Ficheiros {
 
     public static void doUsersExist() {
+        Sistema sistema = new Sistema();
         try{
             File arquivo = new File("docs/credenciais_acesso.txt");
+            //File arquivo2 = new File("docs/dados_apl.dat");
             if (arquivo.length() > 0 && arquivo.exists()) {
                 System.out.println("O ficheiro existe");
             } else {
                 Utilizador admin = Utilizador.registerNewUser("ativado","administrador");
-                insertUserFicehiro(admin);
                 Main.pressEnterKey();
-                insertObjectFicheiro(admin);
+                sistema.adicionarUsuario(admin);
             }
         } catch (Exception e) {
                     System.out.println("Erro ao verificar se o ficheiro existe: " + e.getMessage());
                 }
     }
 
-    public static void insertUserFicehiro(Utilizador user) {
+    public static void insertUserFicehiro(List<Utilizador> utilizadores) {
         System.out.println("Inserting user into file...");
         try{
             Input.openFileWrite("docs/credenciais_acesso.txt", true);
-            Input.writeFileLine(user.getLogin() + ", " + user.getPassword());
+            Input.writeFileLine(utilizadores.get(0).getLogin() + ";" + utilizadores.get(0).getPassword() );
             System.out.println("Dados escritos com sucesso.");
             Input.closeFile();
         } catch (Exception e) {
@@ -43,33 +41,13 @@ public class Ficheiros {
         }
     }
 
-
     //inserir dados num ficheiro de objetos
-    public static void insertObjectFicheiro(Utilizador user) {
-        System.out.println("Inserting user into file...");
-        String filePath = "docs/dados_apl.dat";
-        List<Utilizador> users = new ArrayList<>();
-
-        // Tenta carregar os objetos existentes no arquivo
-        try (ObjectInputStream reader = new ObjectInputStream(new FileInputStream(filePath))) {
-            users = (List<Utilizador>) reader.readObject();
-        } catch (FileNotFoundException e) {
-            System.out.println("Arquivo não encontrado. Criando um novo arquivo.");
-        } catch (EOFException | ClassNotFoundException e) {
-            System.out.println("Arquivo vazio ou sem dados existentes.");
+    public static void insertObjectFicheiro (List<Utilizador> utilizadores) {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("docs/dados_apl.dat"))) {
+            oos.writeObject(utilizadores);
+            System.out.println("Dados da aplicação salvos com sucesso em dados_apl.dat.");
         } catch (IOException e) {
-            System.err.println("Erro ao ler o arquivo: " + e.getMessage());
-        }
-
-        // Adiciona o novo objeto `user` à lista
-        users.add(user);
-
-        // Grava a lista inteira de volta ao arquivo
-        try (ObjectOutputStream writer = new ObjectOutputStream(new FileOutputStream(filePath))) {
-            writer.writeObject(users);
-            System.out.println("Dados escritos com sucesso.");
-        } catch (IOException e) {
-            System.err.println("Erro ao escrever no ficheiro: " + e.getMessage());
+            System.err.println("Erro ao salvar dados da aplicação: " + e.getMessage());
         }
     }
 
@@ -81,6 +59,8 @@ public class Ficheiros {
 
         try (ObjectInputStream reader = new ObjectInputStream(new FileInputStream(filePath))) {
             users = (List<Utilizador>) reader.readObject();
+            System.err.println("nome: " + users.get(0).getNome());
+            System.err.println("email: " + users.get(0).getEmail());
             System.out.println("Dados lidos com sucesso.");
         } catch (FileNotFoundException e) {
             System.out.println("Arquivo não encontrado. Nenhum dado a carregar.");
@@ -91,39 +71,4 @@ public class Ficheiros {
         }
         return users;
     }
-
-
-    public static Utilizador authenticateUser(String login, String password) {
-        System.out.println("Authenticating user...");
-        try {
-            Input.openFIleReade("docs/credenciais_acesso.txt");
-            String line;
-            while ((line = Input.readFileLine()) != null) {
-                String[] credentials = line.split(", ");
-                if (credentials[0].equals(login) && credentials[1].equals(password)) {
-                    Input.closeFile();
-                    return getUserDetails(login);
-                }
-            }
-            Input.closeFile();
-            System.out.println("Login ou password incorretos.");
-            Main.pressEnterKey();
-        } catch (Exception e) {
-            System.out.println("Erro ao autenticar o utilizador: " + e.getMessage());
-        }
-        return null;
-    }
-
-    private static Utilizador getUserDetails(String login) {
-        System.out.println("Searching for user with login: " + login);
-        List<Utilizador> users = readObjectsFicheiro();
-        for (Utilizador user : users) {
-            if (user.getLogin().equals(login)) {
-                return user;
-            }
-        }
-        System.out.println("Utilizador não encontrado com login: " + login);
-        return null;
-    }
-
 }

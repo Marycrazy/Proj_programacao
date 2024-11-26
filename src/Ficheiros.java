@@ -13,28 +13,34 @@ import java.util.List;
 public class Ficheiros {
 
     public static void doUsersExist() {
-        Sistema sistema = new Sistema();
         try{
             File arquivo = new File("docs/credenciais_acesso.txt");
-            //File arquivo2 = new File("docs/dados_apl.dat");
-            if (arquivo.length() > 0 && arquivo.exists()) {
+            File arquivo2 = new File("docs/dados_apl.dat");
+            if (arquivo.length() > 0 && arquivo.exists() && arquivo2.exists() && arquivo2.length() > 0) {
                 System.out.println("O ficheiro existe");
             } else {
                 Utilizador admin = Utilizador.registerNewUser("ativado","administrador");
                 Main.pressEnterKey();
-                sistema.adicionarUsuario(admin);
+                Sistema.getInstance().adicionarUsuario(admin);
             }
         } catch (Exception e) {
                     System.out.println("Erro ao verificar se o ficheiro existe: " + e.getMessage());
                 }
     }
 
-    public static void insertUserFicehiro(List<Utilizador> utilizadores) {
+    public static void insertUserFicheiro(Sistema sistema) {
         System.out.println("Inserting user into file...");
-        try{
+        try {
             Input.openFileWrite("docs/credenciais_acesso.txt", true);
-            Input.writeFileLine(utilizadores.get(0).getLogin() + ";" + utilizadores.get(0).getPassword() );
-            System.out.println("Dados escritos com sucesso.");
+            List<Utilizador> utilizadores = sistema.getUtilizadores();
+            System.out.println("Utilizadores: " + utilizadores.get(0).getLogin());
+            if (!utilizadores.isEmpty()) {
+                Input.writeFileLine(utilizadores.get(0).getLogin() + ";" + utilizadores.get(0).getPassword());
+                System.out.println("Dados escritos com sucesso.");
+                Main.pressEnterKey();
+            } else {
+                System.out.println("Nenhum utilizador encontrado.");
+            }
             Input.closeFile();
         } catch (Exception e) {
             System.out.println("Erro ao inserir o utilizador no ficheiro: " + e.getMessage());
@@ -42,9 +48,9 @@ public class Ficheiros {
     }
 
     //inserir dados num ficheiro de objetos
-    public static void insertObjectFicheiro (List<Utilizador> utilizadores) {
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("docs/dados_apl.dat"))) {
-            oos.writeObject(utilizadores);
+    public static void insertObjectFicheiro (Sistema sistema) {
+        try (ObjectOutputStream oos = Input.openObjectWrite("docs/dados_apl.dat", false)) {
+            oos.writeObject(sistema);
             System.out.println("Dados da aplicação salvos com sucesso em dados_apl.dat.");
         } catch (IOException e) {
             System.err.println("Erro ao salvar dados da aplicação: " + e.getMessage());
@@ -59,8 +65,11 @@ public class Ficheiros {
 
         try (ObjectInputStream reader = new ObjectInputStream(new FileInputStream(filePath))) {
             users = (List<Utilizador>) reader.readObject();
-            System.err.println("nome: " + users.get(0).getNome());
-            System.err.println("email: " + users.get(0).getEmail());
+            for (int i= 0; i< users.size(); i++) {
+                System.err.println("nome: " + users.get(i).getNome());
+                System.err.println("email: " + users.get(i).getEmail());
+                System.err.println("type: " + users.get(i).getTipo());
+            }
             System.out.println("Dados lidos com sucesso.");
         } catch (FileNotFoundException e) {
             System.out.println("Arquivo não encontrado. Nenhum dado a carregar.");

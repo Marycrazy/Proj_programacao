@@ -27,12 +27,18 @@ public class Main {
             String option = Input.readLine();
             switch (option) {
                 case "1":
-
+                    //Utilizador user = loginUser();
+                    pressEnterKey();
+                   // if (user != null) {
+                     //   Utilizador.loggedUserLoop(user);
+                    //}
                     break;
                 case "2":
-
+                    registerUser();
+                    pressEnterKey();
                     break;
                 case "0":
+                    Sistema.getInstance().save();
                     clearConsole();
                     System.out.println("A sair...");
                     running = false;
@@ -43,6 +49,42 @@ public class Main {
                     pressEnterKey();
                     break;
             }
+        }
+    }
+
+
+    public static void registerUser() {
+        clearConsole();
+        Sistema sistema = new Sistema();
+        System.out.println("|-----------------|");
+        System.out.println("|Register         |");
+        System.out.println("|1. Administrator |");
+        System.out.println("|2. Tecnico       |");
+        System.out.println("|3. Cliente       |");
+        System.out.println("|4. Sair          |");
+        System.out.println("|-----------------|");
+        System.out.print("Option: ");
+        String option = Input.readLine();
+        switch (option) {
+            case "1":
+                Utilizador admin = Utilizador.registerNewUser("inativo", "administrador");
+                sistema.adicionarUsuario(admin);
+                break;
+            case "2":
+                Utilizador tecnico = Utilizador.registerNewUser("activo", "tecnico");
+                sistema.adicionarUsuario(tecnico);
+                break;
+            case "3":
+                Utilizador cliente = Utilizador.registerNewUser("inativo", "cliente");
+                sistema.adicionarUsuario(cliente);
+                break;
+            case "4":
+                System.out.println("A voltar ao menu principal.");
+                break;
+            default:
+                System.out.println("Invalid option. Please try again.");
+                pressEnterKey();
+                break;
         }
     }
 

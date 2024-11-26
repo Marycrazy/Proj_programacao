@@ -2,9 +2,11 @@ package src;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.Scanner;
 
 public class Input {
@@ -79,6 +81,7 @@ public class Input {
     public static void writeFileLine(String line) {
         try {
             if (fileWriter != null) {
+                System.out.println("hello");
                 fileWriter.write(line);
                 fileWriter.newLine(); // Adiciona nova linha após a escrita
                 fileWriter.flush(); // Força a escrita imediata no arquivo
@@ -96,6 +99,17 @@ public class Input {
             } catch (IOException e) {
                 System.out.println("Error closing file: " + e.getMessage());
             }
+        }
+    }
+
+    // Abre o arquivo para escrita (append)
+    public static ObjectOutputStream openObjectWrite(String filename, boolean append) {
+        try {
+            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filename, append));
+            return oos;
+        } catch (IOException e) {
+            System.out.println("Error opening file for writing: " + e.getMessage());
+            return null;
         }
     }
 

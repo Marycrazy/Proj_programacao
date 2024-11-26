@@ -93,3 +93,6 @@ O valor total da venda deve ser calculado automaticamente (somatório do custo d
 - (e.g. verifique se os nomes são únicos). 
 - [ ] [R68] Sempre que necessário, apresentar ao utilizador mensagens informativas adequadas.  
 - Quando um utilizador realizar uma acção sobre a aplicação, esta deve informar se acção foi realizada com sucesso ou insucesso.
+
+- utilizar a classe sistemas para guardar varios objetos do mesmo tipo dentro depois do ficheiro.
+

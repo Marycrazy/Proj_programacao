@@ -5,7 +5,7 @@ public class Main {
         try {
             Sistema.getInstance().carregarDados();
             pressEnterKey();
-            Sistema.getInstance().exibirDados();
+            //Sistema.getInstance().exibirDados();
             pressEnterKey();
             Ficheiros.doUsersExist();
             pressEnterKey();
@@ -57,7 +57,6 @@ public class Main {
 
     public static void registerUser() {
         clearConsole();
-        Sistema sistema = new Sistema();
         System.out.println("|-----------------|");
         System.out.println("|Register         |");
         System.out.println("|1. Administrator |");
@@ -70,15 +69,15 @@ public class Main {
         switch (option) {
             case "1":
                 Utilizador admin = Utilizador.registerNewUser("inativo", "administrador");
-                sistema.adicionarUsuario(admin);
+                Sistema.getInstance().adicionarUsuario(admin);
                 break;
             case "2":
                 Utilizador tecnico = Utilizador.registerNewUser("activo", "tecnico");
-                sistema.adicionarUsuario(tecnico);
+                Sistema.getInstance().adicionarUsuario(tecnico);
                 break;
             case "3":
                 Utilizador cliente = Utilizador.registerNewUser("inativo", "cliente");
-                sistema.adicionarUsuario(cliente);
+                Sistema.getInstance().adicionarUsuario(cliente);
                 break;
             case "4":
                 System.out.println("A voltar ao menu principal.");

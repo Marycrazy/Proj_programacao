@@ -3,11 +3,9 @@ import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Ficheiros {
@@ -33,9 +31,10 @@ public class Ficheiros {
         try {
             Input.openFileWrite("docs/credenciais_acesso.txt", false);
             List<Utilizador> utilizadores = sistema.getUtilizadores();
-            System.out.println("Utilizadores: " + utilizadores.get(0).getLogin());
             if (!utilizadores.isEmpty()) {
-                Input.writeFileLine(utilizadores.get(0).getLogin() + ";" + utilizadores.get(0).getPassword());
+                for (Utilizador utilizador : utilizadores) {
+                    Input.writeFileLine(utilizador.getLogin() + ";" + utilizador.getPassword());
+                }
                 System.out.println("Dados escritos com sucesso.");
                 Main.pressEnterKey();
             } else {
@@ -61,12 +60,6 @@ public class Ficheiros {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("docs/dados_apl.dat"))) {
             Sistema sistemaCarregado = (Sistema) ois.readObject();
             System.out.println("Dados carregados com sucesso de dados_apl.dat:");
-            for (Utilizador utilizador : sistemaCarregado.getUtilizadores()) {
-                System.out.println("Login: " + utilizador.getLogin() +
-                                   ", Nome: " + utilizador.getNome() +
-                                   ", Email: " + utilizador.getEmail() +
-                                   ", Tipo: " + utilizador.getTipo());
-            }
             return sistemaCarregado;
         } catch (FileNotFoundException e) {
             System.out.println("Arquivo não encontrado. Inicializando um novo sistema.");

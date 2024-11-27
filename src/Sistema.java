@@ -61,8 +61,6 @@ public class Sistema implements Serializable {
 
         if (getInstance().getUtilizadores().isEmpty()) {
             System.out.println("Nenhum utilizador encontrado no sistema.");
-        } else {
-            getInstance().exibirDados();
         }
     }
 

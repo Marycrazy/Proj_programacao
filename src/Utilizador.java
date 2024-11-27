@@ -84,4 +84,5 @@ public class Utilizador implements Serializable{
                 throw new IllegalArgumentException("Invalid user type: " + type);
         }
     }
+
 }

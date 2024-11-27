@@ -57,27 +57,25 @@ public class Ficheiros {
         }
     }
 
-    // Método de leitura de objetos do arquivo
-    public static List<Utilizador> readObjectsFicheiro() {
-        System.out.println("Reading users from file...");
-        List<Utilizador> users = new ArrayList<>();
-        String filePath = "docs/dados_apl.dat";
-
-        try (ObjectInputStream reader = new ObjectInputStream(new FileInputStream(filePath))) {
-            users = (List<Utilizador>) reader.readObject();
-            for (int i= 0; i< users.size(); i++) {
-                System.err.println("nome: " + users.get(i).getNome());
-                System.err.println("email: " + users.get(i).getEmail());
-                System.err.println("type: " + users.get(i).getTipo());
+    public static Sistema carregarDadosSistema() {
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("docs/dados_apl.dat"))) {
+            Sistema sistemaCarregado = (Sistema) ois.readObject();
+            System.out.println("Dados carregados com sucesso de dados_apl.dat:");
+            for (Utilizador utilizador : sistemaCarregado.getUtilizadores()) {
+                System.out.println("Login: " + utilizador.getLogin() +
+                                   ", Nome: " + utilizador.getNome() +
+                                   ", Email: " + utilizador.getEmail() +
+                                   ", Tipo: " + utilizador.getTipo());
             }
-            System.out.println("Dados lidos com sucesso.");
+            return sistemaCarregado;
         } catch (FileNotFoundException e) {
-            System.out.println("Arquivo não encontrado. Nenhum dado a carregar.");
+            System.out.println("Arquivo não encontrado. Inicializando um novo sistema.");
         } catch (EOFException e) {
-            System.out.println("Arquivo vazio.");
+            System.out.println("Arquivo vazio. Inicializando um novo sistema.");
         } catch (IOException | ClassNotFoundException e) {
-            System.err.println("Erro ao ler o arquivo: " + e.getMessage());
+            System.err.println("Erro ao carregar os dados: " + e.getMessage());
         }
-        return users;
+        return new Sistema(); // Retorna um novo sistema vazio em caso de erro
     }
+
 }

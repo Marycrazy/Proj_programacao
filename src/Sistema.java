@@ -2,9 +2,10 @@ package src;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.io.Serializable;
 
 public class Sistema implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     // Listas para armazenar usuários, serviços e equipamentos
     private List<Utilizador> utilizadores;
     /*private List<Servico> servicos;
@@ -16,6 +17,10 @@ public class Sistema implements Serializable {
             sistema = new Sistema();
         }
         return sistema;
+    }
+
+    public static void setInstance(Sistema sistemaCarregado) {
+        sistema = sistemaCarregado;
     }
 
     // Construtor
@@ -47,5 +52,31 @@ public class Sistema implements Serializable {
     public List<Utilizador> getUtilizadores() {
         return utilizadores;
     }
+
+    public void carregarDados() {
+        Sistema sistemaCarregado = Ficheiros.carregarDadosSistema();
+        if (sistemaCarregado != null) {
+            Sistema.setInstance(sistemaCarregado);
+        }
+
+        if (getInstance().getUtilizadores().isEmpty()) {
+            System.out.println("Nenhum utilizador encontrado no sistema.");
+        } else {
+            getInstance().exibirDados();
+        }
+    }
+
+
+
+    public void exibirDados() {
+        System.out.println("Utilizadores cadastrados:");
+        for (Utilizador utilizador : utilizadores) {
+            System.out.println("Login: " + utilizador.getLogin() +
+                               ", Nome: " + utilizador.getNome() +
+                               ", Email: " + utilizador.getEmail() +
+                               ", Tipo: " + utilizador.getTipo());
+        }
+    }
+
 }
 

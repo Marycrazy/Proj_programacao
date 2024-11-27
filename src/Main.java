@@ -3,7 +3,9 @@ package src;
 public class Main {
     public static void main(String[] args) {
         try {
-            //Ficheiros.readObjectsFicheiro();
+            Sistema.getInstance().carregarDados();
+            pressEnterKey();
+            Sistema.getInstance().exibirDados();
             pressEnterKey();
             Ficheiros.doUsersExist();
             pressEnterKey();

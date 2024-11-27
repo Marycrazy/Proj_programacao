@@ -95,4 +95,5 @@ O valor total da venda deve ser calculado automaticamente (somatório do custo d
 - Quando um utilizador realizar uma acção sobre a aplicação, esta deve informar se acção foi realizada com sucesso ou insucesso.
 
 - utilizar a classe sistemas para guardar varios objetos do mesmo tipo dentro depois do ficheiro.
+-Erro ao carregar os dados: src.Sistema; local class incompatible: stream classdesc serialVersionUID = -5152247744269242336, local class serialVersionUID = 3228776543520407799
 

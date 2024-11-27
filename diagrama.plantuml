@@ -18,6 +18,7 @@ class Utilizador {
   + setEstado(estado: String)
   + loggedUserLoop(user: Utilizador)
   + registerNewUser(estado: String, type: String): Utilizador
+  +alterarDados()
 }
 
 class Cliente extends Utilizador {
@@ -31,6 +32,9 @@ class Cliente extends Utilizador {
   + setMorada()
   + loggedUserLoop(user: Utilizador)
   + registerNewUser(estado: String, type: String): Cliente
+  + alterarDados()
+  + realizarPedido()
+  + consultarCompras()
 }
 
 class Tecnicos extends Utilizador {
@@ -44,12 +48,20 @@ class Tecnicos extends Utilizador {
   + setMorada()
   + loggedUserLoop(user: Utilizador)
   + registerNewUser(estado: String, type: String): Tecnicos
+  + alterarDados()
+  +gerirEquipamentos()
+  +gerirVendas()
+  +processarPedido()
 }
 
 class Administrador extends Utilizador {
     +Administrador()
     +loggedUserLoop()
     +registerNewUser()
+    +aprovarRegistros()
+    +aprovarPedidos()
+    +gerirVendas()
+    +associarTecnico()
 }
 
 class Main {
@@ -96,15 +108,77 @@ class Input {
 }
 
 class Sistema {
-  -List~Usuario~ usuarios
+  -List~Utilizador~ utilizadores
   -List~Servico~ servicos
   -List~Equipamento~ equipamentos
-  +autenticarUsuario()
-  +registrarLog()
-  +salvarDados()
+  +getInstance()
+  +Sistema()
+  +save()
+  +adicionarUtilizador()
+  +adicionarServico()
+  +adicionarEquipamento()
+  +getUtilizadores()
   +carregarDados()
+  +autenticarUtilizador()
+}
+class Servico {
+        -int codigo
+        -Date dataPedido
+        -String descricao
+        -EstadoServico estado
+        -double tempoProcessamento
+        -double valorTotal
+        -List~Equipamento~ equipamentos
+        -Map~Equipamento, Integer~ quantidades
+        +calcularValorTotal()
+        +adicionarEquipamento()
+        +concluirServico()
 }
 
+class Equipamento {
+    -String marca
+    -String modelo
+    -String codigoInterno
+    -Serie serie
+    -Versao versao
+    -double voltagem
+    -int quantidadeStock
+    -double precoVenda
+    -String observacoes
+    -boolean isOEM
+    -List~Fornecedor~ fornecedores
+    -List~Categoria~ categorias
+    +atualizarStock()
+    +adicionarFornecedor()
+    +adicionarCategoria()
+}
+
+class Fornecedor {
+    -String nome
+    -String morada
+    -String telefone
+}
+
+class Categoria {
+    -String designacao
+    -String familia
+}
+
+class Serie {
+    -int geracao
+    -int sequencia
+}
+
+class Versao {
+    -int unidade
+    -int valorAlfa
+    -int valorBeta
+}
+
+Sistema "1" -- "*" Usuario
+Sistema "1" -- "*" Servico
+Sistema "1" -- "*" Equipamento
+Sistema --> Ficheiros
 Main "1" -- "1" Ficheiros
 Main "1" -- "1" Input
 Main "1" -- "1" Validator
@@ -115,4 +189,11 @@ Ficheiros --> Utilizador
 Validator --> Input
 Ficheiros --> Input
 Utilizador --> Input
+Equipamento "1" -- "*" Fornecedor
+Equipamento "1" -- "*" Categoria
+Equipamento "1" -- "1" Serie
+Equipamento "1" -- "1" Versao
+Cliente "1" -- "*" Servico
+Tecnicos "1" -- "*" Servico
+Servico "*" -- "*" Equipamento
 

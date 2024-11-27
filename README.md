@@ -4,8 +4,8 @@ Neste  projecto, pretende-se a implementação  de uma aplicação completa  em 
 A aplicação tem como objectivo auxiliar o funcionamento de uma loja de informática na gestão de encomendas de equipamentos de hardware
 
 ## Descrição global da aplicação:
-- [x] [R1] Permitir os utilizadores registarem-se e autenticarem-se na aplicação.
-- [x] [R2] Permitir o acesso à aplicação por 3 tipos de utilizadores: administradores, técnicos e clientes.
+- [] [R1] Permitir os utilizadores registarem-se e autenticarem-se na aplicação.
+- [] [R2] Permitir o acesso à aplicação por 3 tipos de utilizadores: administradores, técnicos e clientes.
 - [x] [R3] Os utilizadores são caracterizados pelos atributos login, password, nome, estado (activo/inactivo), email e tipo (administradores, técnicos ou clientes).
 - [ ] [R4] Cada utilizador apenas pode alterar a sua própria informação, não podendo alterar ou visualizar dados de outros utilizadores, ou criar utilizadores.
 > [Note] mostrar ao utilizar a sua informação e pedir a informaçao que quer alterar.

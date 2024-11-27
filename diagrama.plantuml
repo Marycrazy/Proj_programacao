@@ -179,7 +179,6 @@ Sistema -- Utilizador
 Sistema -- Servico
 Sistema -- Equipamento
 Sistema --> Ficheiros
-Main -- Ficheiros
 Main -- Input
 Main -- Validator
 Tecnicos --> Validator

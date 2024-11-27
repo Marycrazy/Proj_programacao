@@ -58,8 +58,7 @@ public class Sistema implements Serializable {
         if (sistemaCarregado != null) {
             Sistema.setInstance(sistemaCarregado);
         }
-
-        if (getInstance().getUtilizadores().isEmpty()) {
+        else if (getInstance().getUtilizadores().isEmpty()) {
             System.out.println("Nenhum utilizador encontrado no sistema.");
         }
     }
@@ -73,8 +72,19 @@ public class Sistema implements Serializable {
                                ", Nome: " + utilizador.getNome() +
                                ", Email: " + utilizador.getEmail() +
                                ", Tipo: " + utilizador.getTipo());
+            if (utilizador instanceof Tecnicos) {
+                Tecnicos tecnico = (Tecnicos) utilizador;
+                System.out.println("Nif: " + tecnico.getNIF());
+                System.out.println("Morada: " + tecnico.getMorada());
+                System.out.println("Telefone: " + tecnico.getTelefone());
+            }
+            else if (utilizador instanceof Cliente) {
+                Cliente clien = (Cliente) utilizador;
+                System.out.println("Nif: " + clien.getNIF());
+                System.out.println("Morada: " + clien.getMorada());
+                System.out.println("Telefone: " + clien.getTelefone());
+            }
         }
     }
 
 }
-

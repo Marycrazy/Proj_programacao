@@ -10,20 +10,21 @@ import java.util.List;
 
 public class Ficheiros {
 
-    public static void doUsersExist() {
+    public static boolean doUsersExist() {
         try{
             File arquivo = new File("docs/credenciais_acesso.txt");
             File arquivo2 = new File("docs/dados_apl.dat");
             if (arquivo.length() > 0 && arquivo.exists() && arquivo2.exists() && arquivo2.length() > 0) {
                 System.out.println("O ficheiro existe");
+                return true;
             } else {
-                Utilizador admin = Utilizador.registerNewUser("ativado","administrador");
-                Main.pressEnterKey();
-                Sistema.getInstance().adicionarUsuario(admin);
+                System.out.println("O ficheiro não existe");
+                return false;
             }
         } catch (Exception e) {
-                    System.out.println("Erro ao verificar se o ficheiro existe: " + e.getMessage());
-                }
+            System.out.println("Erro ao verificar se o ficheiro existe: " + e.getMessage());
+            return false;
+        }
     }
 
     public static void insertUserFicheiro(Sistema sistema) {
@@ -57,18 +58,26 @@ public class Ficheiros {
     }
 
     public static Sistema carregarDadosSistema() {
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("docs/dados_apl.dat"))) {
-            Sistema sistemaCarregado = (Sistema) ois.readObject();
-            System.out.println("Dados carregados com sucesso de dados_apl.dat:");
-            return sistemaCarregado;
-        } catch (FileNotFoundException e) {
-            System.out.println("Arquivo não encontrado. Inicializando um novo sistema.");
-        } catch (EOFException e) {
-            System.out.println("Arquivo vazio. Inicializando um novo sistema.");
-        } catch (IOException | ClassNotFoundException e) {
-            System.err.println("Erro ao carregar os dados: " + e.getMessage());
+        if (doUsersExist()) {
+            try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("docs/dados_apl.dat"))) {
+                Sistema sistemaCarregado = (Sistema) ois.readObject();
+                System.out.println("Dados carregados com sucesso de dados_apl.dat:");
+                return sistemaCarregado;
+            } catch (FileNotFoundException e) {
+                System.out.println("Arquivo não encontrado. Inicializando um novo sistema.");
+            } catch (EOFException e) {
+                System.out.println("Arquivo vazio. Inicializando um novo sistema.");
+            } catch (IOException | ClassNotFoundException e) {
+                System.err.println("Erro ao carregar os dados: " + e.getMessage());
+            }
+            return new Sistema(); // Retorna um novo sistema vazio em caso de err
         }
-        return new Sistema(); // Retorna um novo sistema vazio em caso de erro
+        else{
+            Utilizador admin = Utilizador.registerNewUser("ativado","administrador");
+            Main.pressEnterKey();
+            Sistema.getInstance().adicionarUsuario(admin);
+        }
+        return null;
     }
 
 }

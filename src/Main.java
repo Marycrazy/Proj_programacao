@@ -6,9 +6,7 @@ public class Main {
             Sistema.getInstance().carregarDados();
             pressEnterKey();
             //Sistema.getInstance().exibirDados();
-            pressEnterKey();
-            Ficheiros.doUsersExist();
-            pressEnterKey();
+            //pressEnterKey();
             mainLoop();
         } catch (Exception e) {
             System.out.println("Exception: " + e);

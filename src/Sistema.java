@@ -58,8 +58,7 @@ public class Sistema implements Serializable {
         if (sistemaCarregado != null) {
             Sistema.setInstance(sistemaCarregado);
         }
-
-        if (getInstance().getUtilizadores().isEmpty()) {
+        else if (getInstance().getUtilizadores().isEmpty()) {
             System.out.println("Nenhum utilizador encontrado no sistema.");
         }
     }

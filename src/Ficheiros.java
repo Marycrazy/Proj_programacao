@@ -31,7 +31,7 @@ public class Ficheiros {
     public static void insertUserFicheiro(Sistema sistema) {
         System.out.println("Inserting user into file...");
         try {
-            Input.openFileWrite("docs/credenciais_acesso.txt", true);
+            Input.openFileWrite("docs/credenciais_acesso.txt", false);
             List<Utilizador> utilizadores = sistema.getUtilizadores();
             System.out.println("Utilizadores: " + utilizadores.get(0).getLogin());
             if (!utilizadores.isEmpty()) {

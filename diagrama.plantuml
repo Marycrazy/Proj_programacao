@@ -175,13 +175,13 @@ class Versao {
     -int valorBeta
 }
 
-Sistema "1" -- "*" Usuario
-Sistema "1" -- "*" Servico
-Sistema "1" -- "*" Equipamento
+Sistema -- Utilizador
+Sistema -- Servico
+Sistema -- Equipamento
 Sistema --> Ficheiros
-Main "1" -- "1" Ficheiros
-Main "1" -- "1" Input
-Main "1" -- "1" Validator
+Main -- Ficheiros
+Main -- Input
+Main -- Validator
 Tecnicos --> Validator
 Cliente --> Validator
 Administrador --> Validator
@@ -189,11 +189,11 @@ Ficheiros --> Utilizador
 Validator --> Input
 Ficheiros --> Input
 Utilizador --> Input
-Equipamento "1" -- "*" Fornecedor
-Equipamento "1" -- "*" Categoria
-Equipamento "1" -- "1" Serie
-Equipamento "1" -- "1" Versao
-Cliente "1" -- "*" Servico
-Tecnicos "1" -- "*" Servico
-Servico "*" -- "*" Equipamento
+Equipamento -- Fornecedor
+Equipamento -- Categoria
+Equipamento -- Serie
+Equipamento -- Versao
+Cliente -- Servico
+Tecnicos -- Servico
+Servico -- Equipamento
 

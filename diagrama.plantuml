@@ -1,4 +1,5 @@
 @startuml diagrama
+skinparam Linetype ortho
 class Utilizador {
   - login: String
   - password: String
@@ -179,12 +180,13 @@ Sistema -- Utilizador
 Sistema -- Servico
 Sistema -- Equipamento
 Sistema --> Ficheiros
-Main -- Input
+Main --> Input
 Main -- Validator
 Tecnicos --> Validator
+Tecnicos -- Servico
 Cliente --> Validator
+Cliente -- Servico
 Administrador --> Validator
-Ficheiros --> Utilizador
 Validator --> Input
 Ficheiros --> Input
 Utilizador --> Input
@@ -192,7 +194,5 @@ Equipamento -- Fornecedor
 Equipamento -- Categoria
 Equipamento -- Serie
 Equipamento -- Versao
-Cliente -- Servico
-Tecnicos -- Servico
 Servico -- Equipamento
 

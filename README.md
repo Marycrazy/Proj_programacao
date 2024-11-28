@@ -4,8 +4,8 @@ Neste  projecto, pretende-se a implementação  de uma aplicação completa  em 
 A aplicação tem como objectivo auxiliar o funcionamento de uma loja de informática na gestão de encomendas de equipamentos de hardware
 
 ## Descrição global da aplicação:
-- [] [R1] Permitir os utilizadores registarem-se e autenticarem-se na aplicação.
-- [] [R2] Permitir o acesso à aplicação por 3 tipos de utilizadores: administradores, técnicos e clientes.
+- [ ] [R1] Permitir os utilizadores registarem-se e autenticarem-se na aplicação.
+- [ ] [R2] Permitir o acesso à aplicação por 3 tipos de utilizadores: administradores, técnicos e clientes.
 - [x] [R3] Os utilizadores são caracterizados pelos atributos login, password, nome, estado (activo/inactivo), email e tipo (administradores, técnicos ou clientes).
 - [ ] [R4] Cada utilizador apenas pode alterar a sua própria informação, não podendo alterar ou visualizar dados de outros utilizadores, ou criar utilizadores.
 > [Note] mostrar ao utilizar a sua informação e pedir a informaçao que quer alterar.
@@ -35,32 +35,32 @@ contacto telefónico.
 - [ ] [R20] Um serviço de compra (encomenda), além de ter associado um técnico responsável, inclui a listagem dos produtos incluídos (equipamentos de hardware, podendo definir a quantidade), uma data de realização do pedido, uma descrição, o estado e o tempo que demorou a ser processado o valor total da venda.
 - [ ] [R21] Adicionalmente, cada serviço possui um código identificador único e sequencial.
 - [ ] [R22] O estado do serviço apresenta um dos seguintes valores:
-> [NOTE] a) se o serviço está *submetido* (cliente realizou o pedido, mas ainda não foi aceite pelo administrador); 
-- > b) se a serviço foi *aceite* (administrador aceita o serviço); 
+> [NOTE] a) se o serviço está *submetido* (cliente realizou o pedido, mas ainda não foi aceite pelo administrador);
+- > b) se a serviço foi *aceite* (administrador aceita o serviço);
 - > c) ou se já foi *concluído* (técnico responsável termina o processo).
-- [ ] [R23] Quando um técnico conclui um serviço deve indicar o tempo despendido no processamento do pedido.  
+- [ ] [R23] Quando um técnico conclui um serviço deve indicar o tempo despendido no processamento do pedido.
 O valor total da venda deve ser calculado automaticamente (somatório do custo dos vários equipamentos e respectivas quantidades).
-- [ ] [R25] O código de um equipamento deve ser único. 
+- [ ] [R25] O código de um equipamento deve ser único.
 - [ ] [R26] Cada  equipamento  deve  ter  associado  uma lista até 6 fornecedores, podendo ser introduzido um  novo fornecedor a qualquer momento.
-- [ ] [R27] Cada fornecedor é caracterizado por nome, morada e contacto telefónico. 
-- [ ] [R28] Cada  equipamento  deve  apresentar  uma  lista  até  4  categorias,  podendo  ser  introduzida  uma  nova categoria a qualquer momento.  
-- [ ] [R29] Cada categoria é caracterizada pela sua designação e família (atributos alfanuméricos). 
-- [ ] [R30] Cada série possui uma geração e sequência (atributos numéricos). 
-- [ ] [R31] Cada versão é caracterizada pela unidade, valor alfa e valor beta (atributos numéricos). 
+- [ ] [R27] Cada fornecedor é caracterizado por nome, morada e contacto telefónico.
+- [ ] [R28] Cada  equipamento  deve  apresentar  uma  lista  até  4  categorias,  podendo  ser  introduzida  uma  nova categoria a qualquer momento.
+- [ ] [R29] Cada categoria é caracterizada pela sua designação e família (atributos alfanuméricos).
+- [ ] [R30] Cada série possui uma geração e sequência (atributos numéricos).
+- [ ] [R31] Cada versão é caracterizada pela unidade, valor alfa e valor beta (atributos numéricos).
 - [ ] [R32] É possível alterar a quantidade em stock de um equipamento.
 - [ ] [R33] Sempre que um equipamento é vendido,a quantidade em stock deve ser actualizada.
 
 ## Listagem de Pesquisas
 - [ ] [R36] Deve ser possível ordenar utilizadores por ordem alfabética do nome.
 - [ ] [R37] Deve ser possível ordenar equipamentos por designação.
-- [ ] [R39] Deve ser possível listar todos os utilizadores. 
+- [ ] [R39] Deve ser possível listar todos os utilizadores.
 - [ ] [R40] Deve ser possível listar utilizadores por tipo.
-- [ ] [R41] Deve ser possível listar todos os serviços. 
-- [ ] [R42] Deve ser possível listar todos os serviços associados a um cliente. 
-- [ ] [R43] Deve ser possível listar todos os serviços por estado. 
-- [ ] [R44] Deve ser possível listar serviços com tempo despendido superior a um determinado limite (introduzido pelo utilizador no momento de pesquisa). 
-- [ ] [R45] Deve ser possível listar todos os equipamentos. 
-- [ ] [R46] Deve ser possível listar equipamentos que sejam (ou não) OEM. 
+- [ ] [R41] Deve ser possível listar todos os serviços.
+- [ ] [R42] Deve ser possível listar todos os serviços associados a um cliente.
+- [ ] [R43] Deve ser possível listar todos os serviços por estado.
+- [ ] [R44] Deve ser possível listar serviços com tempo despendido superior a um determinado limite (introduzido pelo utilizador no momento de pesquisa).
+- [ ] [R45] Deve ser possível listar todos os equipamentos.
+- [ ] [R46] Deve ser possível listar equipamentos que sejam (ou não) OEM.
 - [ ] [R47] Deve  ser  possível  listar  equipamentos  com  uma  quantidade  de  stock  abaixo  de  um  determinado  limite 
 (introduzido pelo utilizador no momento de pesquisa).
 - [ ] [R49] Deve ser possível pesquisar utilizadores por login ou nome.
@@ -75,25 +75,46 @@ O valor total da venda deve ser calculado automaticamente (somatório do custo d
 - [ ] [R56] Os administradores podem listar e pesquisar todos os serviços.
 
 ## Manipulação e armazenamento de dados persistente
-- [ ] [R57] O  acesso  à  aplicação  deve  ser  restringido  com  credenciais  (login/password),  informação  que  deverá ser armazenada num ficheiro de texto “credenciais_acesso.txt”. 
-- [ ] [R58] Durante  o encerramento da aplicação, os dados devem ser  automaticamente guardados num ficheiro de objectos “dados_apl.dat”. 
-- [ ] [R59] A aplicação, no arranque, deve automaticamente ler os dados do ficheiro de objectos “dados_apl.dat”,  caso este exista, e informar o utilizador que os dados foram lidos com sucesso. 
+- [ ] [R57] O  acesso  à  aplicação  deve  ser  restringido  com  credenciais  (login/password),  informação  que  deverá ser armazenada num ficheiro de texto “credenciais_acesso.txt”.
+- [ ] [R58] Durante  o encerramento da aplicação, os dados devem ser  automaticamente guardados num ficheiro de objectos “dados_apl.dat”.
+- [ ] [R59] A aplicação, no arranque, deve automaticamente ler os dados do ficheiro de objectos “dados_apl.dat”,  caso este exista, e informar o utilizador que os dados foram lidos com sucesso.
 - Caso o ficheiro esteja indisponível deve surgir uma mensagem a informar a situação
 
 ## Gestão geral da aplicação
-### Interacção com o utilizador 
+### Interacção com o utilizador
 - [ ] [R61] Disponibilizar uma interface em modo texto onde o utilizador possa interagir e controlar a aplicação.
 
 ### Programação Orientada a Objectos
 - [ ] [R65] A aplicação deve estar correctamente  estruturada, tendo em conta o paradigma Orientado a Objectos e recorrendo à linguagem Java.
 - [ ] [R66] Implemente as estruturas de armazenamento necessárias, procurando optimizar os recursos utilizados.
 
-### Validação de dados e notificações 
-- [ ] [R67] Valide todas as leituras de dados do utilizador 
-- (e.g. verifique se os nomes são únicos). 
-- [ ] [R68] Sempre que necessário, apresentar ao utilizador mensagens informativas adequadas.  
+### Validação de dados e notificações
+- [ ] [R67] Valide todas as leituras de dados do utilizador
+- (e.g. verifique se os nomes são únicos).
+- [ ] [R68] Sempre que necessário, apresentar ao utilizador mensagens informativas adequadas.
 - Quando um utilizador realizar uma acção sobre a aplicação, esta deve informar se acção foi realizada com sucesso ou insucesso.
 
 - utilizar a classe sistemas para guardar varios objetos do mesmo tipo dentro depois do ficheiro.
 -Erro ao carregar os dados: src.Sistema; local class incompatible: stream classdesc serialVersionUID = -5152247744269242336, local class serialVersionUID = 3228776543520407799
+
+
+### Referências
+https://www.oracle.com/br/technical-resources/articles/java/serialversionuid.html
+https://pt.stackoverflow.com/questions/408183/o-serialversionuid-de-tem-que-ser-o-mesmo-em-todas-as-classes-serializ%C3%A1veis
+// GraalVM 21 Documentation
+https://www.graalvm.org/jdk21/docs/introduction/
+https://www.graalvm.org/21.3/docs/introduction/
+
+// Java 21 API Specification
+https://docs.oracle.com/en/java/javase/21/docs/api/index.html
+
+// Why BigDecimals and Duration
+https://www.geeksforgeeks.org/bigdecimal-class-java/
+https://www.geeksforgeeks.org/java-time-duration-class-in-java/
+
+// Java I/O (why nio2 and not java.io)
+https://docs.oracle.com/javase/tutorial/essential/io/file.html
+https://dev.java/learn/java-io/reading-writing/buffered-text/
+https://medium.com/@vusal.guliyev.313/writing-files-with-nio-and-io-in-java-bc60b06a413a
+https://www.geeksforgeeks.org/read-and-write-files-using-the-new-i-o-nio-2-api-in-java/
 

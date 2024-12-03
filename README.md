@@ -9,7 +9,7 @@ A aplicação tem como objectivo auxiliar o funcionamento de uma loja de inform�
 - [x] [R3] Os utilizadores são caracterizados pelos atributos login, password, nome, estado (activo/inactivo), email e tipo (administradores, técnicos ou clientes).
 - [ ] [R4] Cada utilizador apenas pode alterar a sua própria informação, não podendo alterar ou visualizar dados de outros utilizadores, ou criar utilizadores.
 > [Note] mostrar ao utilizar a sua informação e pedir a informaçao que quer alterar.
-- [ ] [R5] O login e email devem ser únicos.
+- [x] [R5] O login e email devem ser únicos.
 - [x] [R6] Os clientes e técnicos caracterizam-se adicionalmente por número de identificação fiscal (NIF), morada e
 contacto telefónico.
 > [NOTE] O NIF e contacto telefónico são únicos.

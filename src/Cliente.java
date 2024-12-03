@@ -6,7 +6,7 @@ public class Cliente extends Utilizador {
     private String telefone;
 
     //construtor
-    public Cliente(String login, String password, String nome, String estado, String email, String tipo, String NIF, String morada, String telefone) {
+    public Cliente(String login, String password, String nome, boolean estado, String email, String tipo, String NIF, String morada, String telefone) {
         super(login, password, nome, estado, email, tipo);
         this.NIF = NIF;
         this.morada = morada;
@@ -37,7 +37,7 @@ public class Cliente extends Utilizador {
         Main.pressEnterKey();
     }
 
-    public static Cliente registerNewUser(String estado, String type) {
+    public static Cliente registerNewUser(boolean estado, String type) {
         Main.clearConsole();
         String login = Validator.validateInput("Login");
         String password = Validator.validatePassword("Password");

@@ -5,12 +5,12 @@ public class Utilizador implements Serializable{
     private String login; //unico
     private String password;
     private String nome;
-    private String estado;
+    private boolean estado;
     private String email; //unico
     private String tipo;
 
     //construtor
-    public Utilizador(String login, String password, String nome, String estado, String email, String tipo) {
+    public Utilizador(String login, String password, String nome, boolean estado, String email, String tipo) {
         this.login = login;
         this.password = password;
         this.nome = nome;
@@ -32,7 +32,7 @@ public class Utilizador implements Serializable{
         return nome;
     }
 
-    public String getEstado() {
+    public boolean getEstado() {
         return estado;
     }
 
@@ -52,7 +52,7 @@ public class Utilizador implements Serializable{
         this.nome = Validator.validateInput("Name");
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(boolean estado) {
         this.estado = estado;
     }
 
@@ -72,7 +72,7 @@ public class Utilizador implements Serializable{
         }
     }
 
-    public static Utilizador registerNewUser(String estado, String type) {
+    public static Utilizador registerNewUser(boolean estado, String type) {
         switch (type) {
             case "administrador":
                return Administrador.registerNewUser(estado, type);

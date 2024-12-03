@@ -58,9 +58,12 @@ public class Validator {
                 System.out.println("Invalid " + type + ". Please try again.");
                 continue;
             }
-            else{
+            else if(Sistema.isValueUnique(type, input)) {
                 check = true;
                 System.out.println("Valid " + type + ".");
+            }
+            else {
+                System.out.println(type + " already exists. Please try again.");
             }
         } while (!check);
         return input;

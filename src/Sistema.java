@@ -2,6 +2,8 @@ package src;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
 
 public class Sistema implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -38,11 +40,15 @@ public class Sistema implements Serializable {
     }
 
     public void adicionarUsuario(Utilizador utilizador) {
+        if (utilizador == null) {
+            System.out.println("Tentativa de adicionar um utilizador nulo!");
+            return;
+        }
         this.utilizadores.add(utilizador);
+        System.out.println("Usuário adicionado: " + utilizador.getLogin());
     }
-
     /*public void adicionarServico(Servico servico) {
-        this.servicos.add(servico);
+        this.servicos.add(servico); Marycrazy 
     }
 
     public void adicionarEquipamento(Equipamento equipamento) {
@@ -63,8 +69,64 @@ public class Sistema implements Serializable {
         }
     }
 
+    public boolean isLoginUnique(String login) {
+        System.out.println("Verificando se o login " + login + " é único...");
+        System.out.println("Utilizadores atuais: " + utilizadores.size());
+        boolean isUnique = utilizadores.stream().noneMatch(u -> {
+            System.out.println("Comparando com: " + u.getLogin());
+            return u.getLogin().equalsIgnoreCase(login);
+        });
+        System.out.println("Login " + login + " é único? " + isUnique);
+        return isUnique;
+    }
+
+    public boolean isEmailUnique(String email) {
+        return utilizadores.stream().noneMatch(u -> u.getEmail().equalsIgnoreCase(email));
+    }
+
+    public boolean isNifUnique(String nif) {
+        return utilizadores.stream()
+            .filter(u -> u instanceof Cliente || u instanceof Tecnicos)
+            .noneMatch(u -> {
+                if (u instanceof Cliente) {
+                    return ((Cliente) u).getNIF().equals(nif);
+                } else if (u instanceof Tecnicos) {
+                    return ((Tecnicos) u).getNIF().equals(nif);
+                }
+                return false;
+            });
+    }
+
+    public boolean isPhoneNumberUnique(String phoneNumber) {
+        return utilizadores.stream()
+            .filter(u -> u instanceof Cliente || u instanceof Tecnicos)
+            .noneMatch(u -> {
+                if (u instanceof Cliente) {
+                    return ((Cliente) u).getTelefone().equals(phoneNumber);
+                } else if (u instanceof Tecnicos) {
+                    return ((Tecnicos) u).getTelefone().equals(phoneNumber);
+                }
+                return false;
+            });
+    }
 
 
+    public static boolean isValueUnique(String type, String value) {
+        switch (type) {
+            case "login":
+                return sistema.isLoginUnique(value);
+            case "email":
+                return sistema.isEmailUnique(value);
+            case "nif":
+                return sistema.isNifUnique(value);
+            case "telefone":
+                return sistema.isPhoneNumberUnique(value);
+            default:
+                return true;
+        }
+    }
+
+//eliminar no final esta função
     public void exibirDados() {
         System.out.println("Utilizadores cadastrados:");
         for (Utilizador utilizador : utilizadores) {

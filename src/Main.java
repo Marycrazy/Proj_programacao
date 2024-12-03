@@ -66,15 +66,15 @@ public class Main {
         String option = Input.readLine();
         switch (option) {
             case "1":
-                Utilizador admin = Utilizador.registerNewUser("inativo", "administrador");
+                Utilizador admin = Utilizador.registerNewUser(false, "administrador");
                 Sistema.getInstance().adicionarUsuario(admin);
                 break;
             case "2":
-                Utilizador tecnico = Utilizador.registerNewUser("activo", "tecnico");
+                Utilizador tecnico = Utilizador.registerNewUser(false, "tecnico");
                 Sistema.getInstance().adicionarUsuario(tecnico);
                 break;
             case "3":
-                Utilizador cliente = Utilizador.registerNewUser("inativo", "cliente");
+                Utilizador cliente = Utilizador.registerNewUser(false, "cliente");
                 Sistema.getInstance().adicionarUsuario(cliente);
                 break;
             case "4":

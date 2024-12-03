@@ -2,8 +2,6 @@ package src;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.function.Function;
 
 public class Sistema implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -102,7 +100,6 @@ public class Sistema implements Serializable {
                 return false;
             });
     }
-
 
     public static boolean isValueUnique(String type, String value) {
         switch (type) {

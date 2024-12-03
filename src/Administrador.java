@@ -3,13 +3,13 @@ package src;
 public class Administrador extends Utilizador {
 
     // Constructor
-    public Administrador(String login, String password, String nome, String estado, String email, String tipo) {
+    public Administrador(String login, String password, String nome, boolean estado, String email, String tipo) {
         super(login, password, nome, estado, email, tipo);
     }
 
 
 
-    public static Administrador registerNewUser(String estado, String type) {
+    public static Administrador registerNewUser(boolean estado, String type) {
         Main.clearConsole();
         String login = Validator.validateInput("Login");
         String password = Validator.validatePassword("Password");

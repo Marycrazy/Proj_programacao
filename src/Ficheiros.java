@@ -73,7 +73,7 @@ public class Ficheiros {
             return new Sistema(); // Retorna um novo sistema vazio em caso de err
         }
         else{
-            Utilizador admin = Utilizador.registerNewUser("ativado","administrador");
+            Utilizador admin = Utilizador.registerNewUser(true,"administrador");
             Main.pressEnterKey();
             Sistema.getInstance().adicionarUsuario(admin);
         }

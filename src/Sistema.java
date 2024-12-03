@@ -70,14 +70,7 @@ public class Sistema implements Serializable {
     }
 
     public boolean isLoginUnique(String login) {
-        System.out.println("Verificando se o login " + login + " é único...");
-        System.out.println("Utilizadores atuais: " + utilizadores.size());
-        boolean isUnique = utilizadores.stream().noneMatch(u -> {
-            System.out.println("Comparando com: " + u.getLogin());
-            return u.getLogin().equalsIgnoreCase(login);
-        });
-        System.out.println("Login " + login + " é único? " + isUnique);
-        return isUnique;
+        return utilizadores.stream().noneMatch(u -> u.getLogin().equalsIgnoreCase(login));
     }
 
     public boolean isEmailUnique(String email) {

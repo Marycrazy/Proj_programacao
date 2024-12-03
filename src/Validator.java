@@ -63,7 +63,7 @@ public class Validator {
                 System.out.println("Valid " + type + ".");
             }
             else {
-                System.out.println(type + " already exists. Please try again.");
+                System.out.println(type + " já existe. Por favor intruduza outro.");
             }
         } while (!check);
         return input;

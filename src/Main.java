@@ -52,6 +52,28 @@ public class Main {
         }
     }
 
+    /*public static Utilizador loginUser() {
+        clearConsole();
+        System.out.print("Login: ");
+        String login = Input.readLine();
+        System.out.print("Password: ");
+        String password = Validator.encryptPassword(Input.readLine());
+        //boolean user = Sistema.authenticateUser(login, password);
+        if (user) {
+            if(user.getEstado()){
+                System.out.println(user.getNome() + " está inativo, ainda não pode aceder a aplicação.");
+                pressEnterKey();
+                return null;
+            }
+            else{
+                System.out.println("Bem-vindo " + user.getNome());
+                pressEnterKey();
+                return user;
+            }
+        }
+        return null;
+    }*/
+
 
     public static void registerUser() {
         clearConsole();

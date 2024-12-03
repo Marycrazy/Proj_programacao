@@ -46,7 +46,7 @@ public class Sistema implements Serializable {
         System.out.println("Usuário adicionado: " + utilizador.getLogin());
     }
     /*public void adicionarServico(Servico servico) {
-        this.servicos.add(servico); Marycrazy 
+        this.servicos.add(servico);
     }
 
     public void adicionarEquipamento(Equipamento equipamento) {
@@ -113,6 +113,17 @@ public class Sistema implements Serializable {
                 return sistema.isPhoneNumberUnique(value);
             default:
                 return true;
+        }
+    }
+
+    public Utilizador autenticarUtilizador(String login, String password) {
+        boolean authenticated = Ficheiros.authenticateUser(login, password);
+        if (authenticated) {
+            System.out.println("Utilizador autenticado com sucesso.");
+            //return Ficheiros.getUserDetails(login);
+        } else {
+            System.out.println("Falha na autenticação do utilizador.");
+            return null;
         }
     }
 

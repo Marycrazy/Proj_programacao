@@ -93,7 +93,6 @@ class Ficheiros {
   + insertObjectFicheiro(user: Utilizador)
   + showObjectFileContents()
   + authenticateUser(login: String, password: String): Utilizador
-  - getUserDetails(login: String): Utilizador
 }
 
 class Input {

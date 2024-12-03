@@ -75,9 +75,9 @@ O valor total da venda deve ser calculado automaticamente (somatório do custo d
 - [ ] [R56] Os administradores podem listar e pesquisar todos os serviços.
 
 ## Manipulação e armazenamento de dados persistente
-- [ ] [R57] O  acesso  à  aplicação  deve  ser  restringido  com  credenciais  (login/password),  informação  que  deverá ser armazenada num ficheiro de texto “credenciais_acesso.txt”.
-- [ ] [R58] Durante  o encerramento da aplicação, os dados devem ser  automaticamente guardados num ficheiro de objectos “dados_apl.dat”.
-- [ ] [R59] A aplicação, no arranque, deve automaticamente ler os dados do ficheiro de objectos “dados_apl.dat”,  caso este exista, e informar o utilizador que os dados foram lidos com sucesso.
+- [x] [R57] O  acesso  à  aplicação  deve  ser  restringido  com  credenciais  (login/password),  informação  que  deverá ser armazenada num ficheiro de texto “credenciais_acesso.txt”.
+- [x] [R58] Durante  o encerramento da aplicação, os dados devem ser  automaticamente guardados num ficheiro de objectos “dados_apl.dat”.
+- [x] [R59] A aplicação, no arranque, deve automaticamente ler os dados do ficheiro de objectos “dados_apl.dat”,  caso este exista, e informar o utilizador que os dados foram lidos com sucesso.
 - Caso o ficheiro esteja indisponível deve surgir uma mensagem a informar a situação
 
 ## Gestão geral da aplicação
@@ -95,7 +95,7 @@ O valor total da venda deve ser calculado automaticamente (somatório do custo d
 - Quando um utilizador realizar uma acção sobre a aplicação, esta deve informar se acção foi realizada com sucesso ou insucesso.
 
 - utilizar a classe sistemas para guardar varios objetos do mesmo tipo dentro depois do ficheiro.
--Erro ao carregar os dados: src.Sistema; local class incompatible: stream classdesc serialVersionUID = -5152247744269242336, local class serialVersionUID = 3228776543520407799
+- Erro ao carregar os dados: src.Sistema; local class incompatible: stream classdesc serialVersionUID = -5152247744269242336, local class serialVersionUID = 3228776543520407799
 
 
 ### Referências

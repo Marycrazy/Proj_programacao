@@ -61,6 +61,7 @@ public class Main {
         Utilizador user = Sistema.getInstance().autenticarUtilizador(login, password);
         if (user != null) {
             if(user.getEstado()){
+                clearConsole();
                 System.out.println("Bem-vindo " + user.getNome());
                 return user;
             }
@@ -74,36 +75,40 @@ public class Main {
 
 
     public static void registerUser() {
-        clearConsole();
-        System.out.println("|-----------------|");
-        System.out.println("|Register         |");
-        System.out.println("|1. Administrator |");
-        System.out.println("|2. Tecnico       |");
-        System.out.println("|3. Cliente       |");
-        System.out.println("|4. Sair          |");
-        System.out.println("|-----------------|");
-        System.out.print("Option: ");
-        String option = Input.readLine();
-        switch (option) {
-            case "1":
-                Utilizador admin = Utilizador.registerNewUser(false, "administrador");
-                Sistema.getInstance().adicionarutilizador(admin);
-                break;
-            case "2":
-                Utilizador tecnico = Utilizador.registerNewUser(false, "tecnico");
-                Sistema.getInstance().adicionarutilizador(tecnico);
-                break;
-            case "3":
-                Utilizador cliente = Utilizador.registerNewUser(false, "cliente");
-                Sistema.getInstance().adicionarutilizador(cliente);
-                break;
-            case "4":
-                System.out.println("A voltar ao menu principal.");
-                break;
-            default:
-                System.out.println("Invalid option. Please try again.");
-                pressEnterKey();
-                break;
+        boolean running = true;
+        while (running) {
+            clearConsole();
+            System.out.println("|-----------------|");
+            System.out.println("|Register         |");
+            System.out.println("|1. Administrator |");
+            System.out.println("|2. Tecnico       |");
+            System.out.println("|3. Cliente       |");
+            System.out.println("|4. Sair          |");
+            System.out.println("|-----------------|");
+            System.out.print("Option: ");
+            String option = Input.readLine();
+            switch (option) {
+                case "1":
+                    Utilizador admin = Utilizador.registerNewUser(false, "administrador");
+                    Sistema.getInstance().adicionarutilizador(admin);
+                    break;
+                case "2":
+                    Utilizador tecnico = Utilizador.registerNewUser(false, "tecnico");
+                    Sistema.getInstance().adicionarutilizador(tecnico);
+                    break;
+                case "3":
+                    Utilizador cliente = Utilizador.registerNewUser(false, "cliente");
+                    Sistema.getInstance().adicionarutilizador(cliente);
+                    break;
+                case "4":
+                    System.out.println("A voltar ao menu principal.");
+                    running = false;
+                    break;
+                default:
+                    System.out.println("Invalid option. Please try again.");
+                    pressEnterKey();
+                    break;
+            }
         }
     }
 

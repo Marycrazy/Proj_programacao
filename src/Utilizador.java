@@ -3,7 +3,6 @@ import java.io.Serializable;
 
 public class Utilizador implements Serializable{
     private static final long serialVersionUID = 1L;
-    private static Utilizador loggedUser; // Utilizador logado
     private String login; //unico
     private String password;
     private String nome;
@@ -46,6 +45,10 @@ public class Utilizador implements Serializable{
         return tipo;
     }
 
+    public void setLogin() {
+        this.login = Validator.validateInput("Login");
+    }
+
     public void setPassword() {
         this.password = Validator.validatePassword("Password");
     }
@@ -58,12 +61,8 @@ public class Utilizador implements Serializable{
         this.estado = estado;
     }
 
-    public static Utilizador getLoggedUser() {
-        return loggedUser;
-    }
-
-    public static void setLoggedUser(Utilizador utilizador) {
-        loggedUser = utilizador;
+    public void setEmail() {
+        this.email = Validator.validateInput("Email");
     }
 
     public static void loggedUserLoop(Utilizador user) {

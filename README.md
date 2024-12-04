@@ -16,7 +16,7 @@ contacto telefónico.
 - [x] [R7]  Caso não existam utilizadores criados, a aplicação deve solicitar a criação de um utilizador (administrador).
 - [x] [R8]  Após a autenticação, a aplicação deve apresentar a mensagem
 `“Bem-vindo [nome utilizador]”`.
-- [ ] [R9] Quando a aplicação estiver a encerrar, deve apresentar a mensagem
+- [x] [R9] Quando a aplicação estiver a encerrar, deve apresentar a mensagem
 `“Adeus [nome utilizador]”`.
 
 ### Funções

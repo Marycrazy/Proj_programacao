@@ -1,7 +1,10 @@
 package src;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Enumeration;
 import java.util.List;
+import java.util.Vector;
 
 public class Sistema implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -68,8 +71,41 @@ public class Sistema implements Serializable {
     }
 
     public boolean isLoginUnique(String login) {
-        return utilizadores.stream().noneMatch(u -> u.getLogin().equalsIgnoreCase(login));
+        long startTime = System.nanoTime();
+        boolean valid = utilizadores.stream().noneMatch(u -> u.getLogin().equalsIgnoreCase(login));
+        long endTime = System.nanoTime();
+        long executionTime = endTime - startTime;
+        System.out.println("Tempo de execução do Stream: " + executionTime + " nanoseconds");
+        return valid;
     }
+
+    public boolean isLoginUniqueenumeration(String login) {
+        long startTime = System.nanoTime();
+        Enumeration<Utilizador> enumUtilizadores = Collections.enumeration(utilizadores);
+        
+        while (enumUtilizadores.hasMoreElements()) {
+            Utilizador u = enumUtilizadores.nextElement();
+            if (u.getLogin().equalsIgnoreCase(login)) {
+                long endTime = System.nanoTime();
+                long executionTime = endTime - startTime;
+                System.out.println("Tempo de execução do Enumeration: " + executionTime + " nanoseconds");
+                return false; // Login não é único
+            }
+        }
+        
+        long endTime = System.nanoTime();
+        long executionTime = endTime - startTime;
+        System.out.println("Tempo de execução do Enumeration: " + executionTime + " nanoseconds");
+        return true; // Login é único
+    }
+
+    public Utilizador buscarUtilizadorPorLogin(String login) {
+        return utilizadores.stream()
+            .filter(u -> u.getLogin().equals(login))
+            .findFirst()
+            .orElse(null); // Retorna null se não encontrar
+    }
+
 
     public boolean isEmailUnique(String email) {
         return utilizadores.stream().noneMatch(u -> u.getEmail().equalsIgnoreCase(email));
@@ -120,7 +156,7 @@ public class Sistema implements Serializable {
         boolean authenticated = Ficheiros.authenticateUser(login, password);
         if (authenticated) {
             System.out.println("Utilizador autenticado com sucesso.");
-            //return Ficheiros.getUserDetails(login);
+            return buscarUtilizadorPorLogin(login);
         } else {
             System.out.println("Falha na autenticação do utilizador.");
             return null;

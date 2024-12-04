@@ -2,6 +2,7 @@ package src;
 import java.io.Serializable;
 
 public class Utilizador implements Serializable{
+    private static Utilizador loggedUser; // Utilizador logado
     private String login; //unico
     private String password;
     private String nome;
@@ -54,6 +55,14 @@ public class Utilizador implements Serializable{
 
     public void setEstado(boolean estado) {
         this.estado = estado;
+    }
+
+    public static Utilizador getLoggedUser() {
+        return loggedUser;
+    }
+
+    public static void setLoggedUser(Utilizador utilizador) {
+        loggedUser = utilizador;
     }
 
     public static void loggedUserLoop(Utilizador user) {

@@ -57,6 +57,26 @@ public class Ficheiros {
         }
     }
 
+    public static boolean authenticateUser(String login, String password) {
+        System.out.println("Authenticating user...");
+        try {
+            Input.openFIleReade("docs/credenciais_acesso.txt");
+            String line;
+            while ((line = Input.readFileLine()) != null) {
+                String[] credentials = line.split(", ");
+                if (credentials[0].equals(login) && credentials[1].equals(password)) {
+                    Input.closeFile();
+                    return true;
+                }
+            }
+            Input.closeFile();
+            System.out.println("Login ou password incorretos.");
+        } catch (Exception e) {
+            System.out.println("Erro ao autenticar o utilizador: " + e.getMessage());
+        }
+        return false;
+    }
+
     public static Sistema carregarDadosSistema() {
         if (doUsersExist()) {
             try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("docs/dados_apl.dat"))) {

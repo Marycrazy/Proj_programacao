@@ -118,3 +118,17 @@ https://dev.java/learn/java-io/reading-writing/buffered-text/
 https://medium.com/@vusal.guliyev.313/writing-files-with-nio-and-io-in-java-bc60b06a413a
 https://www.geeksforgeeks.org/read-and-write-files-using-the-new-i-o-nio-2-api-in-java/
 
+Eumeration vs Stream
+https://medium.com/@rrmartins/understanding-the-difference-between-enum-and-stream-in-elixir-ebd8615e0879
+https://www.geeksforgeeks.org/stream-nonematch-method-java-examples/
+https://www.geeksforgeeks.org/stream-filter-java-examples/
+https://stackoverflow.com/questions/71888924/how-to-filter-element-from-a-list-using-java-8-streams
+https://www.oracle.com/br/technical-resources/articles/java/processing-streams-java-se-8.html
+https://stackoverflow.com/questions/39432699/what-is-the-difference-between-streams-and-collections-in-java-8/39432937
+https://piotrminkowski.com/2024/04/25/interesting-facts-about-java-streams-and-collections/
+https://mballem.com/post/java-8-filtrando-dados-com-stream/
+https://rinaldo.dev/java-8-streams-pare-de-usar-for-e-simplifique-seu-codigo/
+https://pt.linkedin.com/advice/1/how-do-you-choose-between-java-stream-collection-data-processing?lang=pt
+https://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html
+https://mmarcosab.medium.com/usando-streams-no-java-b85d98d9cf17
+

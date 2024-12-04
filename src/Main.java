@@ -27,7 +27,7 @@ public class Main {
             String option = Input.readLine();
             switch (option) {
                 case "1":
-                    //Utilizador user = loginUser();
+                    Utilizador user = loginUser();
                     pressEnterKey();
                    // if (user != null) {
                      //   Utilizador.loggedUserLoop(user);
@@ -52,14 +52,15 @@ public class Main {
         }
     }
 
-    /*public static Utilizador loginUser() {
+    public static Utilizador loginUser() {
         clearConsole();
         System.out.print("Login: ");
         String login = Input.readLine();
         System.out.print("Password: ");
         String password = Validator.encryptPassword(Input.readLine());
-        //boolean user = Sistema.authenticateUser(login, password);
-        if (user) {
+        Utilizador user = Sistema.getInstance().autenticarUtilizador(login, password);
+        if (user != null) {
+            Utilizador.setLoggedUser(user);
             if(user.getEstado()){
                 System.out.println(user.getNome() + " está inativo, ainda não pode aceder a aplicação.");
                 pressEnterKey();
@@ -72,7 +73,7 @@ public class Main {
             }
         }
         return null;
-    }*/
+    }
 
 
     public static void registerUser() {

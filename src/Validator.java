@@ -58,7 +58,7 @@ public class Validator {
                 System.out.println("Invalid " + type + ". Please try again.");
                 continue;
             }
-            else if(Sistema.isValueUnique(type, input)) {
+            else if(isValueUnique(type, input)) {
                 check = true;
                 System.out.println("Valid " + type + ".");
             }
@@ -82,6 +82,55 @@ public class Validator {
             return hexString.toString();
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    public static boolean isLoginUnique(String login) {
+        return Sistema.getInstance().getUtilizadores().stream().noneMatch(u -> u.getLogin().equalsIgnoreCase(login));
+    }
+
+    public static boolean isEmailUnique(String email) {
+        return Sistema.getInstance().getUtilizadores().stream().noneMatch(u -> u.getEmail().equalsIgnoreCase(email));
+    }
+
+    public static boolean isNifUnique(String nif) {
+        return Sistema.getInstance().getUtilizadores().stream()
+            .filter(u -> u instanceof Cliente || u instanceof Tecnicos)
+            .noneMatch(u -> {
+                if (u instanceof Cliente) {
+                    return ((Cliente) u).getNIF().equals(nif);
+                } else if (u instanceof Tecnicos) {
+                    return ((Tecnicos) u).getNIF().equals(nif);
+                }
+                return false;
+            });
+    }
+
+    public static boolean isPhoneNumberUnique(String phoneNumber) {
+        return Sistema.getInstance().getUtilizadores().stream()
+            .filter(u -> u instanceof Cliente || u instanceof Tecnicos)
+            .noneMatch(u -> {
+                if (u instanceof Cliente) {
+                    return ((Cliente) u).getTelefone().equals(phoneNumber);
+                } else if (u instanceof Tecnicos) {
+                    return ((Tecnicos) u).getTelefone().equals(phoneNumber);
+                }
+                return false;
+            });
+    }
+
+    public static boolean isValueUnique(String type, String value) {
+        switch (type) {
+            case "login":
+                return isLoginUnique(value);
+            case "email":
+                return isEmailUnique(value);
+            case "nif":
+                return isNifUnique(value);
+            case "telefone":
+                return isPhoneNumberUnique(value);
+            default:
+                return true;
         }
     }
 }

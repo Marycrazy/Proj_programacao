@@ -2,6 +2,7 @@ package src;
 import java.io.Serializable;
 
 public class Utilizador implements Serializable{
+    private static final long serialVersionUID = 1L;
     private static Utilizador loggedUser; // Utilizador logado
     private String login; //unico
     private String password;

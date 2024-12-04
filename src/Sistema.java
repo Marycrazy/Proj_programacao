@@ -70,86 +70,11 @@ public class Sistema implements Serializable {
         }
     }
 
-    public boolean isLoginUnique(String login) {
-        long startTime = System.nanoTime();
-        boolean valid = utilizadores.stream().noneMatch(u -> u.getLogin().equalsIgnoreCase(login));
-        long endTime = System.nanoTime();
-        long executionTime = endTime - startTime;
-        System.out.println("Tempo de execução do Stream: " + executionTime + " nanoseconds");
-        return valid;
-    }
-
-    public boolean isLoginUniqueenumeration(String login) {
-        long startTime = System.nanoTime();
-        Enumeration<Utilizador> enumUtilizadores = Collections.enumeration(utilizadores);
-        
-        while (enumUtilizadores.hasMoreElements()) {
-            Utilizador u = enumUtilizadores.nextElement();
-            if (u.getLogin().equalsIgnoreCase(login)) {
-                long endTime = System.nanoTime();
-                long executionTime = endTime - startTime;
-                System.out.println("Tempo de execução do Enumeration: " + executionTime + " nanoseconds");
-                return false; // Login não é único
-            }
-        }
-        
-        long endTime = System.nanoTime();
-        long executionTime = endTime - startTime;
-        System.out.println("Tempo de execução do Enumeration: " + executionTime + " nanoseconds");
-        return true; // Login é único
-    }
-
     public Utilizador buscarUtilizadorPorLogin(String login) {
         return utilizadores.stream()
             .filter(u -> u.getLogin().equals(login))
             .findFirst()
             .orElse(null); // Retorna null se não encontrar
-    }
-
-
-    public boolean isEmailUnique(String email) {
-        return utilizadores.stream().noneMatch(u -> u.getEmail().equalsIgnoreCase(email));
-    }
-
-    public boolean isNifUnique(String nif) {
-        return utilizadores.stream()
-            .filter(u -> u instanceof Cliente || u instanceof Tecnicos)
-            .noneMatch(u -> {
-                if (u instanceof Cliente) {
-                    return ((Cliente) u).getNIF().equals(nif);
-                } else if (u instanceof Tecnicos) {
-                    return ((Tecnicos) u).getNIF().equals(nif);
-                }
-                return false;
-            });
-    }
-
-    public boolean isPhoneNumberUnique(String phoneNumber) {
-        return utilizadores.stream()
-            .filter(u -> u instanceof Cliente || u instanceof Tecnicos)
-            .noneMatch(u -> {
-                if (u instanceof Cliente) {
-                    return ((Cliente) u).getTelefone().equals(phoneNumber);
-                } else if (u instanceof Tecnicos) {
-                    return ((Tecnicos) u).getTelefone().equals(phoneNumber);
-                }
-                return false;
-            });
-    }
-
-    public static boolean isValueUnique(String type, String value) {
-        switch (type) {
-            case "login":
-                return sistema.isLoginUnique(value);
-            case "email":
-                return sistema.isEmailUnique(value);
-            case "nif":
-                return sistema.isNifUnique(value);
-            case "telefone":
-                return sistema.isPhoneNumberUnique(value);
-            default:
-                return true;
-        }
     }
 
     public Utilizador autenticarUtilizador(String login, String password) {

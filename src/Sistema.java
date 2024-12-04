@@ -9,7 +9,7 @@ import java.util.Vector;
 public class Sistema implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    // Listas para armazenar usuários, serviços e equipamentos
+    // Listas para armazenar utilizadores, serviços e equipamentos
     private List<Utilizador> utilizadores;
     /*private List<Servico> servicos;
     private List<Equipamento> equipamentos;*/
@@ -40,13 +40,13 @@ public class Sistema implements Serializable {
         Main.pressEnterKey();
     }
 
-    public void adicionarUsuario(Utilizador utilizador) {
+    public void adicionarutilizador(Utilizador utilizador) {
         if (utilizador == null) {
             System.out.println("Tentativa de adicionar um utilizador nulo!");
             return;
         }
         this.utilizadores.add(utilizador);
-        System.out.println("Usuário adicionado: " + utilizador.getLogin());
+        System.out.println("utilizador adicionado: " + utilizador.getLogin());
     }
     /*public void adicionarServico(Servico servico) {
         this.servicos.add(servico);
@@ -72,7 +72,7 @@ public class Sistema implements Serializable {
 
     public Utilizador buscarUtilizadorPorLogin(String login) {
         return utilizadores.stream()
-            .filter(u -> u.getLogin().equals(login))
+            .filter(u -> u.getLogin().equalsIgnoreCase(login))
             .findFirst()
             .orElse(null); // Retorna null se não encontrar
     }
@@ -81,6 +81,7 @@ public class Sistema implements Serializable {
         boolean authenticated = Ficheiros.authenticateUser(login, password);
         if (authenticated) {
             System.out.println("Utilizador autenticado com sucesso.");
+            Main.pressEnterKey();
             return buscarUtilizadorPorLogin(login);
         } else {
             System.out.println("Falha na autenticação do utilizador.");

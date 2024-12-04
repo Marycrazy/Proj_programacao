@@ -29,9 +29,9 @@ public class Main {
                 case "1":
                     Utilizador user = loginUser();
                     pressEnterKey();
-                   // if (user != null) {
-                     //   Utilizador.loggedUserLoop(user);
-                    //}
+                    if (user != null) {
+                        Utilizador.loggedUserLoop(user);
+                    }
                     break;
                 case "2":
                     registerUser();
@@ -60,16 +60,13 @@ public class Main {
         String password = Validator.encryptPassword(Input.readLine());
         Utilizador user = Sistema.getInstance().autenticarUtilizador(login, password);
         if (user != null) {
-            Utilizador.setLoggedUser(user);
             if(user.getEstado()){
-                System.out.println(user.getNome() + " está inativo, ainda não pode aceder a aplicação.");
-                pressEnterKey();
-                return null;
+                System.out.println("Bem-vindo " + user.getNome());
+                return user;
             }
             else{
-                System.out.println("Bem-vindo " + user.getNome());
-                pressEnterKey();
-                return user;
+                System.out.println(user.getNome() + " está inativo, ainda não pode aceder a aplicação.");
+                return null;
             }
         }
         return null;
@@ -90,15 +87,15 @@ public class Main {
         switch (option) {
             case "1":
                 Utilizador admin = Utilizador.registerNewUser(false, "administrador");
-                Sistema.getInstance().adicionarUsuario(admin);
+                Sistema.getInstance().adicionarutilizador(admin);
                 break;
             case "2":
                 Utilizador tecnico = Utilizador.registerNewUser(false, "tecnico");
-                Sistema.getInstance().adicionarUsuario(tecnico);
+                Sistema.getInstance().adicionarutilizador(tecnico);
                 break;
             case "3":
                 Utilizador cliente = Utilizador.registerNewUser(false, "cliente");
-                Sistema.getInstance().adicionarUsuario(cliente);
+                Sistema.getInstance().adicionarutilizador(cliente);
                 break;
             case "4":
                 System.out.println("A voltar ao menu principal.");

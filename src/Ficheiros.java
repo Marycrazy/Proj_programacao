@@ -63,8 +63,8 @@ public class Ficheiros {
             Input.openFIleReade("docs/credenciais_acesso.txt");
             String line;
             while ((line = Input.readFileLine()) != null) {
-                String[] credentials = line.split(", ");
-                if (credentials[0].equals(login) && credentials[1].equals(password)) {
+                String[] credentials = line.split(";");
+                if (credentials[0].equalsIgnoreCase(login) && credentials[1].equals(password)) {
                     Input.closeFile();
                     return true;
                 }
@@ -95,7 +95,7 @@ public class Ficheiros {
         else{
             Utilizador admin = Utilizador.registerNewUser(true,"administrador");
             Main.pressEnterKey();
-            Sistema.getInstance().adicionarUsuario(admin);
+            Sistema.getInstance().adicionarutilizador(admin);
         }
         return null;
     }

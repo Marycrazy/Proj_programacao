@@ -110,11 +110,13 @@ public class Administrador extends Utilizador {
         boolean running = true;
         while (running) {
             Main.clearConsole();
-            System.out.println("|-------------------|");
-            System.out.println("|1. Editar perfil   |");
-            System.out.println("|2. Aprovar Registo |");
-            System.out.println("|4. Sair            |");
-            System.out.println("|-------------------|");
+            System.out.println("|-------------------------------------|");
+            System.out.println("|Tens "+ (Sistema.getInstance().getUtilizadoresInativos() != null ? Sistema.getInstance().getUtilizadoresInativos().size() : 0) + " pedidos de registo por aprovar|");
+            System.out.println("|-------------------------------------|");
+            System.out.println("|1. Editar perfil                     |");
+            System.out.println("|2. Aprovar Registo                   |");
+            System.out.println("|4. Sair                              |");
+            System.out.println("|-------------------------------------|");
             System.out.print("Option: ");
             String option = Input.readLine();
             switch (option) {

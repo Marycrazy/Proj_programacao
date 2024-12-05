@@ -20,7 +20,7 @@ contacto telefónico.
 `“Adeus [nome utilizador]”`.
 
 ### Funções
-- [ ] [R10] Os  administradores  aprovam  os  pedidos  de  registo  dos  utilizadores.  Todos  os  pedidos  devem  ser  aprovados antes de poderem ser usados para autenticação.
+- [x] [R10] Os  administradores  aprovam  os  pedidos  de  registo  dos  utilizadores.  Todos  os  pedidos  devem  ser  aprovados antes de poderem ser usados para autenticação.
 - [ ] [R11] Os administradores  aprovam e encerram os  pedidos de serviço  (encomenda),  bem como  associam um técnico responsável a cada serviço.
 - [ ] [R12] Os técnicos introduzem equipamentos, categorias e fornecedores.
 - [ ] [R13] Os clientes realizam pedidos de compras de equipamentos, que devem ser aprovadas pelos técnicos.

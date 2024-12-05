@@ -31,6 +31,16 @@ public class Input {
         }
     }
 
+    public static int readInt() {
+        try {
+            return getScanner().nextInt();
+        } catch (Exception e) {
+            System.out.println("Error reading input.");
+            System.out.println("Exception: " + e);
+            return -1;
+        }
+    }
+
     public static boolean hasNextInt() {
         try {
             return getScanner().hasNextInt();

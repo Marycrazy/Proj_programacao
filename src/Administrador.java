@@ -1,5 +1,7 @@
 package src;
 
+import java.util.List;
+
 public class Administrador extends Utilizador {
 
     // Constructor
@@ -20,11 +22,49 @@ public class Administrador extends Utilizador {
 
     private static void perfilUtilizador(Utilizador user) {
         System.out.println("*******************");
-        System.out.println("Perfil           *");
+        System.out.println("Perfil           ");
         System.out.println("Login: " + user.getLogin());
         System.out.println("Nome: " + user.getNome());
         System.out.println("Email: " + user.getEmail());
         System.out.println("******************* \n");
+    }
+
+    private static void utilizadoresRegeditados(List<Utilizador> inativos) {
+        if (inativos == null) {
+            System.out.println("Nenhum utilizador inativo encontrado.");
+            return;
+        }
+        else {
+            System.out.println("\nUtilizadores inativos:");
+            for (int i = 0; i < inativos.size(); i++) {
+                System.out.println((i + 1) + ". \nLogin: " + inativos.get(i).getLogin() + "\nNome:" + 
+                inativos.get(i).getNome() + "\nEmail: " + inativos.get(i).getEmail() + "\nTipo: " + 
+                inativos.get(i).getTipo() + "\n");
+            }
+        }
+    }
+
+    private static void aprovarRegisto() {
+        List<Utilizador> inativos = Sistema.getInstance().getUtilizadoresInativos();
+        utilizadoresRegeditados(inativos);
+        boolean running = true;
+        do {
+            System.out.print("Selecione o utilizador a aprovar (ou 0 para cancelar): ");
+            int escolha = Input.readInt();
+            if (escolha==0) {
+                System.out.println("A voltar ao menu principal.");
+                running = false;
+                break;
+            }
+            else {
+                Utilizador utilizador = inativos.get(escolha - 1);
+                utilizador.setEstado(true);
+                System.out.println("Utilizador " + utilizador.getLogin() + " aprovado com sucesso!");
+                running = false;
+                Main.pressEnterKey();
+            }
+        } while (running);
+        Main.pressEnterKey();
     }
 
     private static void editperfil(Utilizador user) {
@@ -59,7 +99,6 @@ public class Administrador extends Utilizador {
                 case "5":
                     System.out.println("A voltar ao menu principal.");
                     running = false;
-                    loggedUserLoop(user);
                     break;
                 default:
                     System.out.println("Invalid option. Please try again.");
@@ -73,10 +112,11 @@ public class Administrador extends Utilizador {
         boolean running = true;
         while (running) {
             Main.clearConsole();
-            System.out.println("|-----------------|");
-            System.out.println("|1. Editar perfil |");
-            System.out.println("|4. Sair          |");
-            System.out.println("|-----------------|");
+            System.out.println("|-------------------|");
+            System.out.println("|1. Editar perfil   |");
+            System.out.println("|2. Aprovar Registo |");
+            System.out.println("|4. Sair            |");
+            System.out.println("|-------------------|");
             System.out.print("Option: ");
             String option = Input.readLine();
             switch (option) {
@@ -84,6 +124,7 @@ public class Administrador extends Utilizador {
                     editperfil(user);
                     break;
                 case "2":
+                    aprovarRegisto();
                     break;
                 case "3":
                     break;

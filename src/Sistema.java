@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.Vector;
+import java.util.stream.Collectors;
 
 public class Sistema implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -77,6 +78,16 @@ public class Sistema implements Serializable {
             .orElse(null); // Retorna null se não encontrar
     }
 
+    public List<Utilizador> getUtilizadoresInativos() {
+        List<Utilizador> inativos = utilizadores.stream().filter(u -> !u.getEstado()).toList();
+        if (inativos.isEmpty()) {
+            return null;
+        }
+        else {
+            return inativos;
+        }
+    }
+
     public Utilizador autenticarUtilizador(String login, String password) {
         boolean authenticated = Ficheiros.authenticateUser(login, password);
         if (authenticated) {
@@ -96,7 +107,8 @@ public class Sistema implements Serializable {
             System.out.println("Login: " + utilizador.getLogin() +
                                ", Nome: " + utilizador.getNome() +
                                ", Email: " + utilizador.getEmail() +
-                               ", Tipo: " + utilizador.getTipo());
+                               ", Tipo: " + utilizador.getTipo() +
+                               ", Estado: " + utilizador.getEstado());
             if (utilizador instanceof Tecnicos) {
                 Tecnicos tecnico = (Tecnicos) utilizador;
                 System.out.println("Nif: " + tecnico.getNIF());

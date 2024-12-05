@@ -1,11 +1,7 @@
 package src;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Enumeration;
 import java.util.List;
-import java.util.Vector;
-import java.util.stream.Collectors;
 
 public class Sistema implements Serializable {
     private static final long serialVersionUID = 1L;

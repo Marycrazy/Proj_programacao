@@ -4,22 +4,23 @@ class Utilizador {
   - login: String
   - password: String
   - nome: String
-  - estado: String
+  - estado: boolean
   - email: String
   - tipo: String
-  + Utilizador(login: String, password: String, nome: String, estado: String, email: String, tipo: String)
+  + Utilizador(login: String, password: String, nome: String, estado: boolean, email: String, tipo: String)
   + getLogin(): String
   + getPassword(): String
   + getNome(): String
   + getEstado(): String
   + getEmail(): String
   + getTipo(): String
+  + setLogin()
   + setPassword()
   + setNome()
-  + setEstado(estado: String)
+  + setEstado()
+  + setEstado(estado: boolean)
   + loggedUserLoop(user: Utilizador)
   + registerNewUser(estado: String, type: String): Utilizador
-  +alterarDados()
 }
 
 class Cliente extends Utilizador {
@@ -30,10 +31,13 @@ class Cliente extends Utilizador {
   + getNIF(): String
   + getMorada(): String
   + getTelefone(): String
+  + setNIF()
   + setMorada()
+  + setTelefone()
   + loggedUserLoop(user: Utilizador)
   + registerNewUser(estado: String, type: String): Cliente
-  + alterarDados()
+  + editperfil(Utilizador user)
+  + perfilUtilizador(Utilizador user)
   + realizarPedido()
   + consultarCompras()
 }
@@ -46,20 +50,26 @@ class Tecnicos extends Utilizador {
   + getNIF(): String
   + getMorada(): String
   + getTelefone(): String
+  + setNIF()
   + setMorada()
+  + setTelefone()
   + loggedUserLoop(user: Utilizador)
   + registerNewUser(estado: String, type: String): Tecnicos
-  + alterarDados()
-  +gerirEquipamentos()
-  +gerirVendas()
-  +processarPedido()
+  + editperfil(Utilizador user)
+  + perfilUtilizador(Utilizador user)
+  + gerirEquipamentos()
+  + gerirVendas()
+  + processarPedido()
 }
 
 class Administrador extends Utilizador {
     +Administrador()
     +loggedUserLoop()
     +registerNewUser()
-    +aprovarRegistros()
+    +aprovarRegisto()
+    +perfilUtilizador(Utilizador user)
+    +utilizadoresRegeditados()
+    editperfil(Utilizador user)
     +aprovarPedidos()
     +gerirVendas()
     +associarTecnico()
@@ -85,40 +95,52 @@ class Validator {
   + validatePassword(type: String): String
   + validateInput(typeString: String): String
   - encryptPassword(password: String): String
+  + isLoginUnique(String login): boolean
+  + isEmailUnique(String email): boolean
+  + isNIFUnique(String nif): boolean
+  + isPhoneNumberUnique(String phoneNumber): boolean
+  + isValueUnique(String type, String value): boolean
 }
 
 class Ficheiros {
   + doUsersExist()
-  + insertUserFicehiro(user: Utilizador)
-  + insertObjectFicheiro(user: Utilizador)
-  + showObjectFileContents()
-  + authenticateUser(login: String, password: String): Utilizador
+  + insertUserFicehiro(Sistema sistema)
+  + insertObjectFicheiro(Sistema sistema)
+  + authenticateUser(String login, String password)
+  + carregarDadosSistema()
 }
 
 class Input {
   - scanner: Scanner
   - fileReader: BufferedReader
+  -fileWriter: BufferedWriter
   - getScanner(): Scanner
   + readLine(): String
+  + readInt(): int
   + hasNextInt(): boolean
   + closeScanner()
   + openFIleReade(filename: String)
   + readFileLine(): String
+  + writeFileLine(String line)
   + closeFile()
+  + openFileWriter(filename: String) : ObjectOutputStream
 }
 
 class Sistema {
   -List~Utilizador~ utilizadores
   -List~Servico~ servicos
   -List~Equipamento~ equipamentos
+  - static Sistema sistema
   +getInstance()
+  +setInstance()
   +Sistema()
   +save()
   +adicionarUtilizador()
   +adicionarServico()
   +adicionarEquipamento()
-  +getUtilizadores()
   +carregarDados()
+  +buscarUtilizadorPorLogin()
+  +getUtilizadoresInativos()
   +autenticarUtilizador()
 }
 class Servico {
@@ -183,9 +205,12 @@ Main --> Input
 Main -- Validator
 Tecnicos --> Validator
 Tecnicos -- Servico
+Tecnicos --> Sistema
 Cliente --> Validator
 Cliente -- Servico
+Cliente -- Sistema
 Administrador --> Validator
+Administrador --> Sistema
 Validator --> Input
 Ficheiros --> Input
 Utilizador --> Input

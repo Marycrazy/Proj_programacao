@@ -25,7 +25,6 @@ public class Validator {
         return login.matches("^[A-Za-z0-9_-]{3,20}$");
     }
 
-
     private static boolean isValidAddress(String address) {
         return address.matches("^[\\w\\s,\\.]{2,100}$");
     }

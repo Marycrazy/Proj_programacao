@@ -45,6 +45,7 @@ public class Sistema implements Serializable {
         this.utilizadores.add(utilizador);
         System.out.println("utilizador adicionado: " + utilizador.getLogin());
     }
+
     /*public void adicionarServico(Servico servico) {
         this.servicos.add(servico);
     }

@@ -9,8 +9,6 @@ public class Administrador extends Utilizador {
         super(login, password, nome, estado, email, tipo);
     }
 
-
-
     public static Administrador registerNewUser(boolean estado, String type) {
         Main.clearConsole();
         String login = Validator.validateInput("Login");

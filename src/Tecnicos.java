@@ -1,6 +1,7 @@
 package src;
 
 public class Tecnicos extends Utilizador{
+    private static final long serialVersionUID = 1L;
     private String NIF;
     private String morada;
     private String telefone;
@@ -25,17 +26,114 @@ public class Tecnicos extends Utilizador{
         return telefone;
     }
 
+    public void setNIF(){
+        this.NIF = Validator.validateInput("NIF");
+    }
+
     public void setMorada(){
         this.morada = Validator.validateInput("Morada");
     }
 
-    public static void loggedUserLoop(Utilizador user) {
-        Main.clearConsole();
-        System.out.println("hi " + user.getNome());
-        System.out.println("tipo " + user.getTipo());
-        System.out.println("NIF: " + ((Tecnicos) user).getNIF());
-        Main.pressEnterKey();
+    public void setTelefone(){
+        this.telefone = Validator.validateInput("Telefone");
+    }
 
+    private static void perfilUtilizador(Utilizador user) {
+        System.out.println("*******************");
+        System.out.println("Perfil           ");
+        System.out.println("Login: " + user.getLogin());
+        System.out.println("Password: **********");
+        System.out.println("Nome: " + user.getNome());
+        System.out.println("Email: " + user.getEmail());
+        System.out.println("NIF: " + ((Tecnicos) user).getNIF());
+        System.out.println("Morada: " + ((Tecnicos) user).getMorada());
+        System.out.println("Telefone: " + ((Tecnicos) user).getTelefone());
+        System.out.println("******************* \n");
+    }
+
+    private static void editperfil(Utilizador user) {
+        boolean running = true;
+        while (running) {
+            Main.clearConsole();
+            perfilUtilizador(user);
+            Main.pressEnterKey();
+            System.out.println("|------------------|");
+            System.out.println("|Editar perfil     |");
+            System.out.println("|1. Editar Login   |");
+            System.out.println("|2. Editar password|");
+            System.out.println("|3. Editar nome    |");
+            System.out.println("|4. Editar email   |");
+            System.out.println("|5. Editar NIF     |");
+            System.out.println("|6. Editar morada  |");
+            System.out.println("|7. Editar telefone|");
+            System.out.println("|8. Sair           |");
+            System.out.println("|------------------|");
+            System.out.print("Option: ");
+            String option = Input.readLine();
+            switch (option) {
+                case "1":
+                    user.setLogin();
+                    break;
+                case "2":
+                    user.setPassword();
+                    break;
+                case "3":
+                    user.setNome();
+                    break;
+                case "4":
+                    user.setEmail();
+                    break;
+                case "5":
+                    ((Tecnicos) user).setNIF();
+                    break;
+                case "6":
+                    ((Tecnicos) user).setMorada();
+                    break;
+                case "7":
+                    ((Tecnicos) user).setTelefone();
+                    break;
+                case "8":
+                    System.out.println("A voltar ao menu principal.");
+                    running = false;
+                    break;
+                default:
+                    System.out.println("Invalid option. Please try again.");
+                    Main.pressEnterKey();
+                    break;
+            }
+        }
+    }
+
+    public static void loggedUserLoop(Utilizador user) {
+        boolean running = true;
+        while (running) {
+            Main.clearConsole();
+            System.out.println("|-------------------|");
+            System.out.println("|1. Editar perfil   |");
+            System.out.println("|4. Sair            |");
+            System.out.println("|-------------------|");
+            System.out.print("Option: ");
+            String option = Input.readLine();
+            switch (option) {
+                case "1":
+                    editperfil(user);
+                    break;
+                case "2":
+                    break;
+                case "3":
+                    break;
+                case "4":
+                    Main.clearConsole();
+                    System.out.println("Adeus " + user.getNome());
+                    Main.pressEnterKey();
+                    running = false;
+                    break;
+                default:
+                    System.out.println("Invalid option. Please try again.");
+                    Main.pressEnterKey();
+                    break;
+            }
+        }
     }
 
     public static Tecnicos registerNewUser(boolean estado, String type) {

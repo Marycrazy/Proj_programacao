@@ -73,7 +73,6 @@ public class Main {
         return null;
     }
 
-
     public static void registerUser() {
         boolean running = true;
         while (running) {

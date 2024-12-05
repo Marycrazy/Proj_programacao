@@ -132,3 +132,11 @@ https://pt.linkedin.com/advice/1/how-do-you-choose-between-java-stream-collectio
 https://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html
 https://mmarcosab.medium.com/usando-streams-no-java-b85d98d9cf17
 
+count and size:
+https://rameshfadatare.medium.com/java-stream-count-method-with-examples-7e65a8edadc0
+https://www.geeksforgeeks.org/java-util-stream-collectors-counting-method-examples/
+https://howtodoinjava.com/java8/stream-count-elements-example/
+https://www.geeksforgeeks.org/stream-count-method-java/
+https://www.geeksforgeeks.org/list-size-method-in-java-with-examples/#:~:text=The%20size()%20method%20of,present%20in%20this%20list%20container.
+https://www.scaler.com/topics/java-list-size/
+https://www.javatpoint.com/java-list-size-method

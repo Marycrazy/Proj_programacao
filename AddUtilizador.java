@@ -1,6 +1,12 @@
-package src;
+
 
 import java.util.Random;
+
+import src.Cliente;
+import src.Sistema;
+import src.Tecnicos;
+import src.Utilizador;
+import src.Validator;
 
 public class AddUtilizador {
     public static void main(String[] args) {

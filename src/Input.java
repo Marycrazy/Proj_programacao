@@ -91,7 +91,7 @@ public class Input {
     public static void writeFileLine(String line) {
         try {
             if (fileWriter != null) {
-                System.out.println("hello");
+                //System.out.println("hello");
                 fileWriter.write(line);
                 fileWriter.newLine(); // Adiciona nova linha após a escrita
                 fileWriter.flush(); // Força a escrita imediata no arquivo

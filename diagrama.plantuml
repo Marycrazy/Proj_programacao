@@ -1,5 +1,5 @@
 @startuml diagrama
-skinparam Linetype ortho
+
 class Utilizador {
   - login: String
   - password: String

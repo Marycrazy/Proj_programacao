@@ -8,8 +8,11 @@ public class Sistema implements Serializable {
 
     // Listas para armazenar utilizadores, serviços e equipamentos
     private List<Utilizador> utilizadores;
-    /*private List<Servico> servicos;
-    private List<Equipamento> equipamentos;*/
+    //private List<Servico> servicos;
+    private List<Equipamentos> equipamentos;
+    private List<Categoria> categorias;
+    private List<Fornecedor> fornecedores;
+    
     private static Sistema sistema;
 
     public static Sistema getInstance() {
@@ -26,8 +29,10 @@ public class Sistema implements Serializable {
     // Construtor
     public Sistema() {
         this.utilizadores = new ArrayList<>();
-        /*this.servicos = new ArrayList<>();
-        this.equipamentos = new ArrayList<>();*/
+        //this.servicos = new ArrayList<>();
+        this.equipamentos = new ArrayList<>();
+        this.categorias = new ArrayList<>();
+        this.fornecedores = new ArrayList<>(); // Inicializando a lista de fornecedores
     }
 
     public void save() {
@@ -48,14 +53,36 @@ public class Sistema implements Serializable {
 
     /*public void adicionarServico(Servico servico) {
         this.servicos.add(servico);
+    }*/
+
+    public void adicionarEquipamento(Equipamentos equipamento) {
+        this.equipamentos.add(equipamento);
     }
 
-    public void adicionarEquipamento(Equipamento equipamento) {
-        this.equipamentos.add(equipamento);
-    }*/
+    public void adicionarCategoria(Categoria categoria) {
+        this.categorias.add(categoria);
+        System.out.println("Categoria adicionada com sucesso!");
+    }
+
+    public void adicionarFornecedor(Fornecedor fornecedor) {
+        this.fornecedores.add(fornecedor);
+        System.out.println("Fornecedor adicionado com sucesso!");
+    }
 
     public List<Utilizador> getUtilizadores() {
         return utilizadores;
+    }
+
+    public List<Equipamentos> getEquipamentos() {
+        return equipamentos;
+    }
+
+    public List<Categoria> getCategorias() {
+        return categorias;
+    }
+
+    public List<Fornecedor> getFornecedores() {
+        return fornecedores;
     }
 
     public void carregarDados() {
@@ -118,6 +145,17 @@ public class Sistema implements Serializable {
                 System.out.println("Morada: " + clien.getMorada());
                 System.out.println("Telefone: " + clien.getTelefone());
             }
+        }
+        System.out.println("Fornecedores cadastrados:");
+        for (Fornecedor fornecedor : fornecedores) {
+            System.out.println("Nome: " + fornecedor.getNome() +
+                               ", Morada: " + fornecedor.getMorada() +
+                               ", Telefone: " + fornecedor.getContacto());
+        }
+        System.out.println("Categorias cadastradas:");
+        for (Categoria categoria : categorias) {
+            System.out.println("Designação: " + categoria.getDesignacao() +
+                               ", Família: " + categoria.getFamilia());
         }
     }
 

@@ -101,42 +101,42 @@ O valor total da venda deve ser calculado automaticamente (somatório do custo d
 ### Referências
 https://www.oracle.com/br/technical-resources/articles/java/serialversionuid.html
 https://pt.stackoverflow.com/questions/408183/o-serialversionuid-de-tem-que-ser-o-mesmo-em-todas-as-classes-serializ%C3%A1veis
-// GraalVM 21 Documentation
-https://www.graalvm.org/jdk21/docs/introduction/
-https://www.graalvm.org/21.3/docs/introduction/
+- // GraalVM 21 Documentation
+- https://www.graalvm.org/jdk21/docs/introduction/
+- https://www.graalvm.org/21.3/docs/introduction/
 
-// Java 21 API Specification
-https://docs.oracle.com/en/java/javase/21/docs/api/index.html
+- // Java 21 API Specification
+- https://docs.oracle.com/en/java/javase/21/docs/api/index.html
 
-// Why BigDecimals and Duration
-https://www.geeksforgeeks.org/bigdecimal-class-java/
-https://www.geeksforgeeks.org/java-time-duration-class-in-java/
+- // Why BigDecimals and Duration
+- https://www.geeksforgeeks.org/bigdecimal-class-java/
+- https://www.geeksforgeeks.org/java-time-duration-class-in-java/
 
-// Java I/O (why nio2 and not java.io)
-https://docs.oracle.com/javase/tutorial/essential/io/file.html
-https://dev.java/learn/java-io/reading-writing/buffered-text/
-https://medium.com/@vusal.guliyev.313/writing-files-with-nio-and-io-in-java-bc60b06a413a
-https://www.geeksforgeeks.org/read-and-write-files-using-the-new-i-o-nio-2-api-in-java/
+- // Java I/O (why nio2 and not java.io)
+- https://docs.oracle.com/javase/tutorial/essential/io/file.html
+- https://dev.java/learn/java-io/reading-writing/buffered-text/
+- https://medium.com/@vusal.guliyev.313/writing-files-with-nio-and-io-in-java-bc60b06a413a
+- https://www.geeksforgeeks.org/read-and-write-files-using-the-new-i-o-nio-2-api-in-java/
 
 Eumeration vs Stream
-https://medium.com/@rrmartins/understanding-the-difference-between-enum-and-stream-in-elixir-ebd8615e0879
-https://www.geeksforgeeks.org/stream-nonematch-method-java-examples/
-https://www.geeksforgeeks.org/stream-filter-java-examples/
-https://stackoverflow.com/questions/71888924/how-to-filter-element-from-a-list-using-java-8-streams
-https://www.oracle.com/br/technical-resources/articles/java/processing-streams-java-se-8.html
-https://stackoverflow.com/questions/39432699/what-is-the-difference-between-streams-and-collections-in-java-8/39432937
-https://piotrminkowski.com/2024/04/25/interesting-facts-about-java-streams-and-collections/
-https://mballem.com/post/java-8-filtrando-dados-com-stream/
-https://rinaldo.dev/java-8-streams-pare-de-usar-for-e-simplifique-seu-codigo/
-https://pt.linkedin.com/advice/1/how-do-you-choose-between-java-stream-collection-data-processing?lang=pt
-https://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html
-https://mmarcosab.medium.com/usando-streams-no-java-b85d98d9cf17
+- https://medium.com/@rrmartins/understanding-the-difference-between-enum-and-stream-in-elixir-ebd8615e0879
+- https://www.geeksforgeeks.org/stream-nonematch-method-java-examples/
+- https://www.geeksforgeeks.org/stream-filter-java-examples/
+- https://stackoverflow.com/questions/71888924/how-to-filter-element-from-a-list-using-java-8-streams
+- https://www.oracle.com/br/technical-resources/articles/java/processing-streams-java-se-8.html
+- https://stackoverflow.com/questions/39432699/what-is-the-difference-between-streams-and-collections-in-java-8/39432937
+- https://piotrminkowski.com/2024/04/25/interesting-facts-about-java-streams-and-collections/
+- https://mballem.com/post/java-8-filtrando-dados-com-stream/
+- https://rinaldo.dev/java-8-streams-pare-de-usar-for-e-simplifique-seu-codigo/
+- https://pt.linkedin.com/advice/1/how-do-you-choose-between-java-stream-collection-data-processing?lang=pt
+- https://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html
+- https://mmarcosab.medium.com/usando-streams-no-java-b85d98d9cf17
 
 count and size:
-https://rameshfadatare.medium.com/java-stream-count-method-with-examples-7e65a8edadc0
-https://www.geeksforgeeks.org/java-util-stream-collectors-counting-method-examples/
-https://howtodoinjava.com/java8/stream-count-elements-example/
-https://www.geeksforgeeks.org/stream-count-method-java/
-https://www.geeksforgeeks.org/list-size-method-in-java-with-examples/#:~:text=The%20size()%20method%20of,present%20in%20this%20list%20container.
-https://www.scaler.com/topics/java-list-size/
-https://www.javatpoint.com/java-list-size-method
+- https://rameshfadatare.medium.com/java-stream-count-method-with-examples-7e65a8edadc0
+- https://www.geeksforgeeks.org/java-util-stream-collectors-counting-method-examples/
+- https://howtodoinjava.com/java8/stream-count-elements-example/
+- https://www.geeksforgeeks.org/stream-count-method-java/
+- https://www.geeksforgeeks.org/list-size-method-in-java-with-examples/#:~:text=The%20size()%20method%20of,present%20in%20this%20list%20container.
+- https://www.scaler.com/topics/java-list-size/
+- https://www.javatpoint.com/java-list-size-method

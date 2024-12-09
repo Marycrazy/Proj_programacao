@@ -5,8 +5,6 @@ public class Main {
         try {
             Sistema.getInstance().carregarDados();
             pressEnterKey();
-            Sistema.getInstance().exibirDados();
-            pressEnterKey();
             mainLoop();
         } catch (Exception e) {
             System.out.println("Exception: " + e);

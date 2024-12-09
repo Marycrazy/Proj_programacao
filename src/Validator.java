@@ -132,4 +132,9 @@ public class Validator {
                 return true;
         }
     }
+
+    public boolean isCodigoEquipamentoUnico(String codigo) {
+        return Sistema.getInstance().getEquipamentos().stream().noneMatch(e -> e.getCodigoInterno().equalsIgnoreCase(codigo));
+    }
+
 }

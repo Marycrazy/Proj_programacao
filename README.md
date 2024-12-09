@@ -23,6 +23,7 @@ contacto telefónico.
 - [x] [R10] Os  administradores  aprovam  os  pedidos  de  registo  dos  utilizadores.  Todos  os  pedidos  devem  ser  aprovados antes de poderem ser usados para autenticação.
 - [ ] [R11] Os administradores  aprovam e encerram os  pedidos de serviço  (encomenda),  bem como  associam um técnico responsável a cada serviço.
 - [ ] [R12] Os técnicos introduzem equipamentos, categorias e fornecedores.
+>[NOTE] vou assumir que quando for para intruduzir os equipamentos, já existam categoria e fornecedores criados e sendo assim ele tera de associar
 - [ ] [R13] Os clientes realizam pedidos de compras de equipamentos, que devem ser aprovadas pelos técnicos.
 - [ ] [R14] Os administradores podem gerir todas as vendas realizadas.
 - [ ] [R15] Os técnicos apenas podem gerir as suas vendas.
@@ -40,11 +41,15 @@ contacto telefónico.
 - > c) ou se já foi *concluído* (técnico responsável termina o processo).
 - [ ] [R23] Quando um técnico conclui um serviço deve indicar o tempo despendido no processamento do pedido.
 O valor total da venda deve ser calculado automaticamente (somatório do custo dos vários equipamentos e respectivas quantidades).
-- [ ] [R25] O código de um equipamento deve ser único.
+- [ ] [R24] A aplicação deve permitir introduzir e gerir equipamentos de hardware.
+Os equipamentos de hardware são caracterizados por uma marca, modelo, código interno, série, versão,
+voltagem, quantidade em stock, preço de venda, observações e se o equipamento é OEM (Original
+Equipment Manufacturer).
+- [x] [R25] O código de um equipamento deve ser único.
 - [ ] [R26] Cada  equipamento  deve  ter  associado  uma lista até 6 fornecedores, podendo ser introduzido um  novo fornecedor a qualquer momento.
-- [ ] [R27] Cada fornecedor é caracterizado por nome, morada e contacto telefónico.
+- [x] [R27] Cada fornecedor é caracterizado por nome, morada e contacto telefónico.
 - [ ] [R28] Cada  equipamento  deve  apresentar  uma  lista  até  4  categorias,  podendo  ser  introduzida  uma  nova categoria a qualquer momento.
-- [ ] [R29] Cada categoria é caracterizada pela sua designação e família (atributos alfanuméricos).
+- [x] [R29] Cada categoria é caracterizada pela sua designação e família (atributos alfanuméricos).
 - [ ] [R30] Cada série possui uma geração e sequência (atributos numéricos).
 - [ ] [R31] Cada versão é caracterizada pela unidade, valor alfa e valor beta (atributos numéricos).
 - [ ] [R32] É possível alterar a quantidade em stock de um equipamento.

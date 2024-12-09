@@ -108,10 +108,13 @@ public class Tecnicos extends Utilizador{
         boolean running = true;
         while (running) {
             Main.clearConsole();
-            System.out.println("|-------------------|");
-            System.out.println("|1. Editar perfil   |");
-            System.out.println("|4. Sair            |");
-            System.out.println("|-------------------|");
+            System.out.println("|-----------------------------|");
+            System.out.println("|1. Editar perfil             |");
+            System.out.println("|2. Adicionar equipamento     |");
+            System.out.println("|3. Adicionar fornecedor      |");
+            System.out.println("|4. Adicionar categoria       |");
+            System.out.println("|5. Sair                      |");
+            System.out.println("|-----------------------------|");
             System.out.print("Option: ");
             String option = Input.readLine();
             switch (option) {
@@ -121,8 +124,26 @@ public class Tecnicos extends Utilizador{
                 case "2":
                     break;
                 case "3":
+                    Fornecedor forne = Fornecedor.adicionarFornecedor();
+                    if (forne != null) {
+                        Sistema.getInstance().adicionarFornecedor(forne);
+                        Main.pressEnterKey();
+                    }
+                    else{
+                        System.out.println("Fornecedor não adicionado.");
+                    }
                     break;
                 case "4":
+                    Categoria cat = Categoria.adicionarCategoria();
+                    if(cat != null){
+                        Sistema.getInstance().adicionarCategoria(cat);
+                        Main.pressEnterKey();
+                    }
+                    else{
+                        System.out.println("Categoria não adicionada.");
+                    }
+                    break;
+                case "5":
                     Main.clearConsole();
                     System.out.println("Adeus " + user.getNome());
                     Main.pressEnterKey();

@@ -14,10 +14,8 @@ public class Serie implements Serializable {
 
     public static Serie adicionarSerie(){
         System.out.print("Adicionar série: \n");
-        System.out.print("Geração: ");
-        int geracao = Input.readInt();
-        System.out.print("Sequência: ");
-        int sequencia = Input.readInt();
+        int geracao =Integer.parseInt(Validator.validateInput("Geração"));
+        int sequencia = Integer.parseInt(Validator.validateInput("Sequência"));
 
         return new Serie(geracao, sequencia);
     }

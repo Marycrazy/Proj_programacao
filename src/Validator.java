@@ -13,6 +13,14 @@ public class Validator {
         return nif.matches("^[0-9]{9}$");
     }
 
+    private static boolean isValidIntegerNumeric(String num) {
+        return num.matches("^-?\\d+$");
+    }
+
+    private static boolean isValidFloatNumeric(String num) {
+        return num.matches("^-?\\d+(\\.\\d+)?$");
+    }
+
     private static boolean isValidPhoneNumber(String phoneNumber) {
         return phoneNumber.matches("^(9|2|3)\\d{8}$");
     }
@@ -29,13 +37,29 @@ public class Validator {
         return address.matches("^[\\w\\s,\\.]{2,100}$");
     }
 
+    private static boolean isValiddefault(String password) {
+        return true;
+    }
+
     private static final Map<String, Function<String, Boolean>> validators = Map.ofEntries(
         Map.entry("email", Validator::isValidEmail),
         Map.entry("nif", Validator::isValidNIF),
         Map.entry("telefone", Validator::isValidPhoneNumber),
         Map.entry("name", Validator::isValidName),
         Map.entry("login", Validator::isValidLogin),
-        Map.entry("morada", Validator::isValidAddress)
+        Map.entry("morada", Validator::isValidAddress),
+        Map.entry("marca", Validator::isValiddefault),
+        Map.entry("modelo", Validator::isValiddefault),
+        Map.entry("código interno", Validator::isValiddefault),
+        Map.entry("geração", Validator::isValidIntegerNumeric),
+        Map.entry("sequência", Validator::isValidIntegerNumeric),
+        Map.entry("unidade", Validator::isValidIntegerNumeric),
+        Map.entry("valor alfa", Validator::isValidIntegerNumeric),
+        Map.entry("valor beta", Validator::isValidIntegerNumeric),
+        Map.entry("voltagem", Validator::isValidFloatNumeric),
+        Map.entry("quantidade de stock", Validator::isValidIntegerNumeric),
+        Map.entry("preço de venda", Validator::isValidFloatNumeric),
+        Map.entry("observações", Validator::isValiddefault)
     );
 
     public static String validatePassword(String type) {
@@ -116,6 +140,10 @@ public class Validator {
                 }
                 return false;
             });
+        }
+
+    public static boolean isCodigoEquipamentoUnico(String codigo) {
+        return Sistema.getInstance().getEquipamentos().stream().noneMatch(e -> e.getCodigoInterno().equalsIgnoreCase(codigo));
     }
 
     public static boolean isValueUnique(String type, String value) {
@@ -128,13 +156,12 @@ public class Validator {
                 return isNifUnique(value);
             case "telefone":
                 return isPhoneNumberUnique(value);
+            case "código interno":
+                return isCodigoEquipamentoUnico(value);
             default:
                 return true;
         }
     }
 
-    public boolean isCodigoEquipamentoUnico(String codigo) {
-        return Sistema.getInstance().getEquipamentos().stream().noneMatch(e -> e.getCodigoInterno().equalsIgnoreCase(codigo));
-    }
 
 }

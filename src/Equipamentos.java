@@ -139,22 +139,16 @@ public class Equipamentos implements Serializable {
 
     public static Equipamentos adEquipamentos(){
         System.out.print("Adicionar equipamento: \n");
-        System.out.print("Marca: ");
-        String marca = Input.readLine();
-        System.out.print("Modelo: ");
-        String modelo = Input.readLine();
-        System.out.print("Código Interno: ");
-        String codigoInterno = Input.readLine();
+        String marca = Validator.validateInput("Marca");
+        String modelo = Validator.validateInput("Modelo");
+        String codigoInterno = Validator.validateInput("Código Interno");
         Serie serie = Serie.adicionarSerie();
         Versao versao = Versao.adicionarVersao();
-        System.out.print("Voltagem: ");
-        float voltagem = Input.readFloat();
-        System.out.print("Quantidade em Stock: ");
-        int quantidadeStock = Input.readInt();
-        System.out.print("Preço de Venda: ");
-        float precoVenda = Input.readFloat();
+        float voltagem = Float.parseFloat(Validator.validateInput("Voltagem"));
+        int quantidadeStock = Integer.parseInt(Validator.validateInput("Quantidade de Stock"));
+        float precoVenda = Float.parseFloat(Validator.validateInput("Preço de Venda"));
         System.out.print("Observações: ");
-        String observacoes = Input.readLine();
+        String observacoes = Validator.validateInput("Observações");
         System.out.print("OEM (Sim/Não): ");
         boolean isOEM = Input.readLine().equalsIgnoreCase("sim");
         Equipamentos equipamento = new Equipamentos(marca, modelo, codigoInterno, serie, versao, voltagem, quantidadeStock, precoVenda, observacoes, isOEM);
@@ -162,8 +156,6 @@ public class Equipamentos implements Serializable {
         equipamento.adicionarCategoria();
         return equipamento;
     }
-
-
 
     public String toString() {
         return "Equipamento: " + marca + " " + modelo + ", Código: " + codigoInterno + ", Preço: " + precoVenda +

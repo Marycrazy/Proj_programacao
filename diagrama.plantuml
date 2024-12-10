@@ -129,15 +129,18 @@ class Input {
 class Sistema {
   -List~Utilizador~ utilizadores
   -List~Servico~ servicos
-  -List~Equipamento~ equipamentos
+  -List~Equipamentos~ equipamentos
+  -List~Categoria~ categorias
+  -List~Fornecedor~ fornecedores
   - static Sistema sistema
   +getInstance()
   +setInstance()
   +Sistema()
   +save()
   +adicionarUtilizador()
-  +adicionarServico()
   +adicionarEquipamento()
+  +adicionarCategoria()
+  +adicionarServico()
   +carregarDados()
   +buscarUtilizadorPorLogin()
   +getUtilizadoresInativos()

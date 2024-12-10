@@ -122,6 +122,14 @@ public class Tecnicos extends Utilizador{
                     editperfil(user);
                     break;
                 case "2":
+                    Equipamentos equip = Equipamentos.adEquipamentos();
+                    if (equip != null) {
+                        Sistema.getInstance().adicionarEquipamento(equip);
+                        Main.pressEnterKey();
+                    }
+                    else{
+                        System.out.println("Equipamento não adicionado.");
+                    }
                     break;
                 case "3":
                     Fornecedor forne = Fornecedor.adicionarFornecedor();

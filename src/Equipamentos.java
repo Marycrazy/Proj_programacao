@@ -12,15 +12,15 @@ public class Equipamentos implements Serializable {
     private String codigoInterno;
     private Serie serie;
     private Versao versao;
-    private double voltagem;
+    private float voltagem;
     private int quantidadeStock;
-    private double precoVenda;
+    private float precoVenda;
     private String observacoes;
     private boolean isOEM;
     private List<Fornecedor> fornecedores; // Até 6 fornecedores
     private List<Categoria> categorias; // Até 4 categorias
 
-    public Equipamentos(String marca, String modelo, String codigoInterno, Serie serie, Versao versao, double voltagem, int quantidadeStock, double precoVenda, String observacoes, boolean isOEM) {
+    public Equipamentos(String marca, String modelo, String codigoInterno, Serie serie, Versao versao, float voltagem, int quantidadeStock, float precoVenda, String observacoes, boolean isOEM) {
         this.marca = marca;
         this.modelo = modelo;
         this.codigoInterno = codigoInterno;
@@ -83,74 +83,87 @@ public class Equipamentos implements Serializable {
         return categorias;
     }
 
-    public void setMarca(String marca) {
-        this.marca = marca;
-    }
-
-    public void setModelo(String modelo) {
-        this.modelo = modelo;
-    }
-
-    public void setSerie(Serie serie) {
-        this.serie = serie;
-    }
-
-    public void setVersao(Versao versao) {
-        this.versao = versao;
-    }
-
-    public void setVoltagem(double voltagem) {
-        this.voltagem = voltagem;
-    }
-
     public void setQuantidadeStock(int quantidadeStock) {
         this.quantidadeStock = quantidadeStock;
     }
 
-    public void setPrecoVenda(double precoVenda) {
-        this.precoVenda = precoVenda;
-    }
-
-    public void setObservacoes(String observacoes) {
-        this.observacoes = observacoes;
-    }
-
-    public void setOEM(boolean OEM) {
-        isOEM = OEM;
-    }
-
-    private static final Map<String, Function<Equipamentos, String>> getters = Map.of(
-        "marca", Equipamentos::getMarca,
-        "modelo", Equipamentos::getModelo,
-        "codigoInterno", Equipamentos::getCodigoInterno,
-        "serie", e -> e.getSerie() != null ? e.getSerie().toString() : null,
-        "versao", e -> e.getVersao() != null ? e.getVersao().toString() : null,
-        "voltagem", e -> String.valueOf(e.getVoltagem()),
-        "quantidadeStock", e -> String.valueOf(e.getQuantidadeStock()),
-        "precoVenda", e -> String.valueOf(e.getPrecoVenda()),
-        "observacoes", Equipamentos::getObservacoes,
-        "isOEM", e -> String.valueOf(e.isOEM())
-    );
-
-
-    public boolean adicionarFornecedor(Fornecedor fornecedor) {
+    private void adicionarFornecedor() {
         if (fornecedores.size() >= 6) {
-            System.out.println("Já existem 6 fornecedores associados a este equipamento.");
-            return false;
+            System.out.println("Já atingiu o limite de fornecedores.");
+            return;
         }
-        fornecedores.add(fornecedor);
-        return true;
+        else{
+            List<Fornecedor> forne = Sistema.getInstance().getFornecedores();
+            Fornecedor.listarfornecedores(forne);
+            boolean running = true;
+            do {
+                System.out.print("Selecione o fornecedor a aprovar (ou 0 para cancelar): ");
+                int escolha = Input.readInt();
+                if (escolha==0 && fornecedores.size() > 0) {
+                    System.out.println("A voltar ao menu principal.");
+                    running = false;
+                }
+                else {
+                    fornecedores.add(forne.get(escolha - 1));
+                    System.out.println("Fornecedor " + forne.get(escolha - 1).getNome() + " Adicionado");
+                    running = false;
+                }
+            } while (running);
+        }
     }
-
-    public boolean adicionarCategoria(Categoria categoria) {
+    private void adicionarCategoria() {
         if (categorias.size() >= 4) {
-            System.out.println("Já existem 4 categorias associadas a este equipamento.");
-            return false;
+            System.out.println("Já atingiu o limite de categorias.");
+            return;
         }
-        categorias.add(categoria);
-        return true;
+        else{
+            List<Categoria> cat = Sistema.getInstance().getCategorias();
+            Categoria.listarCategorias(cat);
+            boolean running = true;
+            do {
+                System.out.print("Selecione o fornecedor a aprovar (ou 0 para cancelar): ");
+                int escolha = Input.readInt();
+                if (escolha==0 && categorias.size() > 0) {
+                    System.out.println("A voltar ao menu principal.");
+                    running = false;
+                }
+                else {
+                    categorias.add(cat.get(escolha - 1));
+                    System.out.println("Categoria da familia " + cat.get(escolha - 1).getFamilia() + " Adicionado");
+                    running = false;
+                }
+            } while (running);
+        }
 
     }
+
+    public static Equipamentos adEquipamentos(){
+        System.out.print("Adicionar equipamento: \n");
+        System.out.print("Marca: ");
+        String marca = Input.readLine();
+        System.out.print("Modelo: ");
+        String modelo = Input.readLine();
+        System.out.print("Código Interno: ");
+        String codigoInterno = Input.readLine();
+        Serie serie = Serie.adicionarSerie();
+        Versao versao = Versao.adicionarVersao();
+        System.out.print("Voltagem: ");
+        float voltagem = Input.readFloat();
+        System.out.print("Quantidade em Stock: ");
+        int quantidadeStock = Input.readInt();
+        System.out.print("Preço de Venda: ");
+        float precoVenda = Input.readFloat();
+        System.out.print("Observações: ");
+        String observacoes = Input.readLine();
+        System.out.print("OEM (Sim/Não): ");
+        boolean isOEM = Input.readLine().equalsIgnoreCase("sim");
+        Equipamentos equipamento = new Equipamentos(marca, modelo, codigoInterno, serie, versao, voltagem, quantidadeStock, precoVenda, observacoes, isOEM);
+        equipamento.adicionarFornecedor();
+        equipamento.adicionarCategoria();
+        return equipamento;
+    }
+
+
 
     public String toString() {
         return "Equipamento: " + marca + " " + modelo + ", Código: " + codigoInterno + ", Preço: " + precoVenda +

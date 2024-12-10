@@ -28,8 +28,7 @@ public class Categoria implements Serializable {
         System.out.print("Adicionar categoria: \n");
         System.out.print("Designação: ");
         String designacao = Input.readLine();
-        System.out.print("Família: ");
-        String familia = Input.readLine();
+        String familia = Validator.validateInput("Familia");
 
         return new Categoria(designacao, familia);
     }

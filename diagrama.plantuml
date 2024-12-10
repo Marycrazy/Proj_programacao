@@ -170,20 +170,61 @@ class Equipamento {
     -boolean isOEM
     -List~Fornecedor~ fornecedores
     -List~Categoria~ categorias
-    +atualizarStock()
+    +Equipamento(marca: String, modelo: String, codigoInterno: String, serie: Serie, versao: Versao, voltagem: double, quantidadeStock: int, precoVenda: double, observacoes: String, isOEM: boolean)
+    +getMarca(): String
+    +getModelo(): String
+    +getCodigoInterno(): String
+    +getSerie(): Serie
+    +getVersao(): Versao
+    +getVoltagem(): double
+    +getQuantidadeStock(): int
+    +getPrecoVenda(): double
+    +getObservacoes(): String
+    +getIsOEM(): boolean
+    +getFornecedores(): List~Fornecedor~
+    +getCategorias(): List~Categoria~
+    +setMarca()
+    +setModelo()
+    +setCodigoInterno()
+    +setSerie()
+    +setVersao()
+    +setVoltagem()
+    +setQuantidadeStock()
+    +setPrecoVenda()
+    +setObservacoes()
+    +setIsOEM()
+    +getters():Map<String, Function<Equipamentos, String>>
     +adicionarFornecedor()
     +adicionarCategoria()
+    +toString(): String
+    +atualizarStock()
 }
 
 class Fornecedor {
     -String nome
     -String morada
     -String telefone
+    +Fornecedor(nome: String, morada: String, telefone: String)
+    +getNome(): String
+    +getMorada(): String
+    +getTelefone(): String
+    +setNome()
+    +setMorada()
+    +setTelefone()
+    +adicionarFornecedor():Fornecedor
+    +toString(): String
 }
 
 class Categoria {
     -String designacao
     -String familia
+    +Categoria(designacao: String, familia: String)
+    +getDesignacao(): String
+    +getFamilia(): String
+    +setDesignacao()
+    +setFamilia()
+    +adicionarCategoria():Categoria
+    +toString(): String
 }
 
 class Serie {
@@ -219,4 +260,9 @@ Equipamento -- Categoria
 Equipamento -- Serie
 Equipamento -- Versao
 Servico -- Equipamento
+categorias -- Equipamentos
+categorias -- Sistema
+Fornecedor -- Equipamentos
+Fornecedor -- Input
+Fornecedor -- Sistema
 

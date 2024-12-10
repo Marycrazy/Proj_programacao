@@ -84,15 +84,15 @@ public class Validator {
         }
     }
 
-    public static boolean isLoginUnique(String login) {
+    private static boolean isLoginUnique(String login) {
         return Sistema.getInstance().getUtilizadores().stream().noneMatch(u -> u.getLogin().equalsIgnoreCase(login));
     }
 
-    public static boolean isEmailUnique(String email) {
+    private static boolean isEmailUnique(String email) {
         return Sistema.getInstance().getUtilizadores().stream().noneMatch(u -> u.getEmail().equalsIgnoreCase(email));
     }
 
-    public static boolean isNifUnique(String nif) {
+    private static boolean isNifUnique(String nif) {
         return Sistema.getInstance().getUtilizadores().stream()
             .filter(u -> u instanceof Cliente || u instanceof Tecnicos)
             .noneMatch(u -> {
@@ -105,7 +105,7 @@ public class Validator {
             });
     }
 
-    public static boolean isPhoneNumberUnique(String phoneNumber) {
+    private static boolean isPhoneNumberUnique(String phoneNumber) {
         return Sistema.getInstance().getUtilizadores().stream()
             .filter(u -> u instanceof Cliente || u instanceof Tecnicos)
             .noneMatch(u -> {

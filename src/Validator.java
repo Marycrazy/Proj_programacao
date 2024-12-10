@@ -35,7 +35,8 @@ public class Validator {
         Map.entry("telefone", Validator::isValidPhoneNumber),
         Map.entry("name", Validator::isValidName),
         Map.entry("login", Validator::isValidLogin),
-        Map.entry("morada", Validator::isValidAddress)
+        Map.entry("morada", Validator::isValidAddress),
+        Map.entry("familia", Validator::isValidName)
     );
 
     public static String validatePassword(String type) {

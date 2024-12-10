@@ -12,7 +12,7 @@ public class Sistema implements Serializable {
     private List<Equipamentos> equipamentos;
     private List<Categoria> categorias;
     private List<Fornecedor> fornecedores;
-    
+
     private static Sistema sistema;
 
     public static Sistema getInstance() {

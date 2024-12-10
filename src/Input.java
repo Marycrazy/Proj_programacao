@@ -41,6 +41,16 @@ public class Input {
         }
     }
 
+    public static float readFloat() {
+        try {
+            return getScanner().nextFloat();
+        } catch (Exception e) {
+            System.out.println("Error reading input.");
+            System.out.println("Exception: " + e);
+            return -1;
+        }
+    }
+
     public static boolean hasNextInt() {
         try {
             return getScanner().hasNextInt();

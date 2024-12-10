@@ -157,6 +157,25 @@ public class Sistema implements Serializable {
             System.out.println("Designação: " + categoria.getDesignacao() +
                                ", Família: " + categoria.getFamilia());
         }
+        System.out.println("Equipamentos cadastrados:");
+        for (Equipamentos equipamento : equipamentos) {
+            System.out.println("Marca: " + equipamento.getMarca() +
+                               ", Modelo: " + equipamento.getModelo() +
+                                 ", Código Interno: " + equipamento.getCodigoInterno() +
+                                    ", Série: " + equipamento.getSerie() +
+                                    ", Versão: " + equipamento.getVersao() +
+                                    ", Voltagem: " + equipamento.getVoltagem() +
+                                    ", Quantidade em Stock: " + equipamento.getQuantidadeStock() +
+                                    ", Preço de Venda: " + equipamento.getPrecoVenda() +
+                                    ", Observações: " + equipamento.getObservacoes() +
+                                    ", OEM: " + equipamento.isOEM());
+                                    for (Fornecedor fornecedor : equipamento.getFornecedores()) {
+                                        System.out.println("Fornecedor: " + fornecedor.getNome());
+                                    }
+                                    for (Categoria categoria : equipamento.getCategorias()) {
+                                        System.out.println("Categoria: " + categoria.getDesignacao());
+                                    }
+        }
     }
 
 }

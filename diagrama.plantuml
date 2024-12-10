@@ -113,7 +113,7 @@ class Ficheiros {
 class Input {
   - scanner: Scanner
   - fileReader: BufferedReader
-  -fileWriter: BufferedWriter
+  - fileWriter: BufferedWriter
   - getScanner(): Scanner
   + readLine(): String
   + readInt(): int
@@ -166,9 +166,9 @@ class Equipamento {
     -String codigoInterno
     -Serie serie
     -Versao versao
-    -double voltagem
+    -float voltagem
     -int quantidadeStock
-    -double precoVenda
+    -float precoVenda
     -String observacoes
     -boolean isOEM
     -List~Fornecedor~ fornecedores

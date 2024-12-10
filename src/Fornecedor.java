@@ -1,5 +1,6 @@
 package src;
 import java.io.Serializable;
+import java.util.List;
 
 public class Fornecedor implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -31,6 +32,13 @@ public class Fornecedor implements Serializable {
     }
     public void setContacto(String contacto) {
         this.telefone = contacto;
+    }
+
+    public static void listarfornecedores(List<Fornecedor> fornecedor) {
+        System.out.println("\n Fornecedores:");
+        for (int i = 0; i < fornecedor.size(); i++) {
+            System.out.println((i + 1) + ". \n Nome: " + fornecedor.get(i).getNome() + "\n Morada: " + fornecedor.get(i).getMorada() + "\n Contacto: " + fornecedor.get(i).getContacto() + "\n");
+        }
     }
 
     //adicionar fornecedor

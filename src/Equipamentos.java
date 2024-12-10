@@ -1,8 +1,6 @@
 package src;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.function.Function;
 import java.io.Serializable;
 
 public class Equipamentos implements Serializable {
@@ -83,11 +81,11 @@ public class Equipamentos implements Serializable {
         return categorias;
     }
 
-    public void setQuantidadeStock(int quantidadeStock) {
-        this.quantidadeStock = quantidadeStock;
+    public void setQuantidadeStock() {
+        this.quantidadeStock = Integer.parseInt(Validator.validateInput("Quantidade de Stock"));
     }
 
-    private void adicionarFornecedor() {
+    private static void addFornecedor(List<Fornecedor> fornecedores) {
         if (fornecedores.size() >= 6) {
             System.out.println("Já atingiu o limite de fornecedores.");
             return;
@@ -111,7 +109,8 @@ public class Equipamentos implements Serializable {
             } while (running);
         }
     }
-    private void adicionarCategoria() {
+
+    private static void addCategoria(List<Categoria> categorias) {
         if (categorias.size() >= 4) {
             System.out.println("Já atingiu o limite de categorias.");
             return;
@@ -134,10 +133,49 @@ public class Equipamentos implements Serializable {
                 }
             } while (running);
         }
+    }
+
+    private static void addinforEquipamento(String type){
+        List<Equipamentos> equipamentos = Sistema.getInstance().getEquipamentos();
+        listarEquipamentos(equipamentos);
+        int escolha = select(type);
+        if (escolha == 0) {
+            return;
+        }
+        else {
+            if (type.equals("fornecedor")) {
+                addFornecedor(equipamentos.get(escolha - 1).getFornecedores());
+                System.out.println("Fornecedor adicionado com sucesso!");
+            }
+            else if (type.equals("categoria")) {
+                addCategoria(equipamentos.get(escolha - 1).getCategorias());
+                System.out.println("Categoria adicionada com sucesso!");
+            }
+            Main.pressEnterKey();
+        }
 
     }
 
-    public static Equipamentos adEquipamentos(){
+    private static int select(String type){
+        if (type.equals("stock")){
+            System.out.print("Selecione o equipamento a atualizar o"+ type + "(ou 0 para cancelar): ");
+        }
+        else{
+            System.out.print("Selecione "+ type +" a adicionar o fornecedor (ou 0 para cancelar): ");
+        }
+        int escolha = Input.readInt();
+        if (escolha == 0) {
+            System.out.println("A voltar ao menu principal.");
+            Main.pressEnterKey();
+            return escolha;
+        }
+        else {
+            return escolha;
+        }
+    }
+
+    public static Equipamentos addEquipamentos(){
+        Main.clearConsole();
         System.out.print("Adicionar equipamento: \n");
         String marca = Validator.validateInput("Marca");
         String modelo = Validator.validateInput("Modelo");
@@ -147,14 +185,83 @@ public class Equipamentos implements Serializable {
         float voltagem = Float.parseFloat(Validator.validateInput("Voltagem"));
         int quantidadeStock = Integer.parseInt(Validator.validateInput("Quantidade de Stock"));
         float precoVenda = Float.parseFloat(Validator.validateInput("Preço de Venda"));
-        System.out.print("Observações: ");
         String observacoes = Validator.validateInput("Observações");
         System.out.print("OEM (Sim/Não): ");
         boolean isOEM = Input.readLine().equalsIgnoreCase("sim");
         Equipamentos equipamento = new Equipamentos(marca, modelo, codigoInterno, serie, versao, voltagem, quantidadeStock, precoVenda, observacoes, isOEM);
-        equipamento.adicionarFornecedor();
-        equipamento.adicionarCategoria();
+        addFornecedor(Sistema.getInstance().getFornecedores());
+        addCategoria(Sistema.getInstance().getCategorias());
         return equipamento;
+    }
+
+    private static void listarEquipamentos(List<Equipamentos> equipamentos) {
+        System.out.println("Equipamentos:\n");
+        for (int i = 0; i < equipamentos.size(); i++) {
+            System.out.println((i + 1) + ". \n"+ "Marca: " + equipamentos.get(i).getMarca() + "Modelo: " + equipamentos.get(i).getModelo() + 
+            "\nCódigo Interno: " + equipamentos.get(i).getCodigoInterno() + "Preço de Venda: " + equipamentos.get(i).getPrecoVenda() + 
+            "\nOEM: " + (equipamentos.get(i).isOEM() ? "Sim" : "Não") + "Quantidade de Stock: " + equipamentos.get(i).getQuantidadeStock() + 
+            "\n");
+        }
+    }
+
+    public static void atualizarStock() {
+        Main.clearConsole();
+        List<Equipamentos> equipamentos = Sistema.getInstance().getEquipamentos();
+        listarEquipamentos(equipamentos);
+        int escolha = select("stock");
+        if (escolha == 0) {
+            return;
+        }
+        else {
+            equipamentos.get(escolha - 1).setQuantidadeStock();
+            System.out.println("Stock atualizado com sucesso!");
+            Main.pressEnterKey();
+        }
+    }
+
+    public static void equipamentosLoop() {
+        boolean running = true;
+        while (running) {
+            Main.clearConsole();
+            System.out.println("|----------------------------------------|");
+            System.out.println("|1. Adicionar equipamento                |");
+            System.out.println("|2. Adicionar fornecedor a equipamento   |");
+            System.out.println("|3. Adicionar categoria a equipamento    |");
+            System.out.println("|4. Atualizar Stock                      |");
+            System.out.println("|5. Sair                                 |");
+            System.out.println("|----------------------------------------|");
+            System.out.print("Option: ");
+            String option = Input.readLine();
+            switch (option) {
+                case "1":
+                    Equipamentos equip = addEquipamentos();
+                    if (equip != null) {
+                        Sistema.getInstance().adicionarEquipamento(equip);
+                        Main.pressEnterKey();
+                    }
+                    else{
+                        System.out.println("Equipamento não adicionado.");
+                    }
+                    break;
+                case "2":
+                    addinforEquipamento("fornecedor");
+                    break;
+                case "3":
+                    addinforEquipamento("categoria");
+                    break;
+                case "4":
+                    atualizarStock();
+                    break;
+                case "5":
+                    System.out.println("A voltar ao menu principal.");
+                    running = false;
+                    break;
+                default:
+                    System.out.println("Invalid option. Please try again.");
+                    Main.pressEnterKey();
+                    break;
+            }
+        }
     }
 
     public String toString() {

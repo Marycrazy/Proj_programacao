@@ -186,17 +186,7 @@ class Equipamento {
     +getIsOEM(): boolean
     +getFornecedores(): List~Fornecedor~
     +getCategorias(): List~Categoria~
-    +setMarca()
-    +setModelo()
-    +setCodigoInterno()
-    +setSerie()
-    +setVersao()
-    +setVoltagem()
     +setQuantidadeStock()
-    +setPrecoVenda()
-    +setObservacoes()
-    +setIsOEM()
-    +getters():Map<String, Function<Equipamentos, String>>
     +adicionarFornecedor()
     +adicionarCategoria()
     +toString(): String

@@ -110,7 +110,7 @@ public class Tecnicos extends Utilizador{
             Main.clearConsole();
             System.out.println("|-----------------------------|");
             System.out.println("|1. Editar perfil             |");
-            System.out.println("|2. Adicionar equipamento     |");
+            System.out.println("|2. Gerir equipamento         |");
             System.out.println("|3. Adicionar fornecedor      |");
             System.out.println("|4. Adicionar categoria       |");
             System.out.println("|5. Sair                      |");
@@ -122,14 +122,7 @@ public class Tecnicos extends Utilizador{
                     editperfil(user);
                     break;
                 case "2":
-                    Equipamentos equip = Equipamentos.adEquipamentos();
-                    if (equip != null) {
-                        Sistema.getInstance().adicionarEquipamento(equip);
-                        Main.pressEnterKey();
-                    }
-                    else{
-                        System.out.println("Equipamento não adicionado.");
-                    }
+                    Equipamentos.equipamentosLoop();
                     break;
                 case "3":
                     Fornecedor forne = Fornecedor.adicionarFornecedor();

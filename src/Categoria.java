@@ -26,6 +26,7 @@ public class Categoria implements Serializable {
     }
 
     public static Categoria adicionarCategoria() {
+        Main.clearConsole();
         System.out.print("Adicionar categoria: \n");
         System.out.print("Designação: ");
         String designacao = Input.readLine();

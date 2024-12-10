@@ -128,7 +128,7 @@ public class Sistema implements Serializable {
     public void exibirDados() {
         System.out.println("Utilizadores cadastrados:");
         for (Utilizador utilizador : utilizadores) {
-            System.out.println("Login: " + utilizador.getLogin() +
+            System.out.println("\nLogin: " + utilizador.getLogin() +
                                ", Nome: " + utilizador.getNome() +
                                ", Email: " + utilizador.getEmail() +
                                ", Tipo: " + utilizador.getTipo() +
@@ -146,20 +146,20 @@ public class Sistema implements Serializable {
                 System.out.println("Telefone: " + clien.getTelefone());
             }
         }
-        System.out.println("Fornecedores cadastrados:");
+        System.out.println("\nFornecedores cadastrados:");
         for (Fornecedor fornecedor : fornecedores) {
             System.out.println("Nome: " + fornecedor.getNome() +
                                ", Morada: " + fornecedor.getMorada() +
                                ", Telefone: " + fornecedor.getContacto());
         }
-        System.out.println("Categorias cadastradas:");
+        System.out.println("\nCategorias cadastradas:");
         for (Categoria categoria : categorias) {
             System.out.println("Designação: " + categoria.getDesignacao() +
                                ", Família: " + categoria.getFamilia());
         }
-        System.out.println("Equipamentos cadastrados:");
+        System.out.println("\nEquipamentos cadastrados:");
         for (Equipamentos equipamento : equipamentos) {
-            System.out.println("Marca: " + equipamento.getMarca() +
+            System.out.println("\nMarca: " + equipamento.getMarca() +
                                ", Modelo: " + equipamento.getModelo() +
                                  ", Código Interno: " + equipamento.getCodigoInterno() +
                                     ", Série: " + equipamento.getSerie() +

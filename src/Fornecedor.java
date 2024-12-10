@@ -43,7 +43,7 @@ public class Fornecedor implements Serializable {
 
     //adicionar fornecedor
     public static Fornecedor adicionarFornecedor() {
-
+        Main.clearConsole();
         System.out.print("Adicionar fornecedor: \n");
         String nome = Validator.validateInput("Name");
         String morada = Validator.validateInput("Morada");

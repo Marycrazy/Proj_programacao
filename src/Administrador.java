@@ -58,8 +58,8 @@ public class Administrador extends Utilizador {
                 Utilizador utilizador = inativos.get(escolha - 1);
                 utilizador.setEstado(true);
                 System.out.println("Utilizador " + utilizador.getLogin() + " aprovado com sucesso!");
+                Input.clearBuffer();
                 running = false;
-                Main.pressEnterKey();
             }
         } while (running);
         Main.pressEnterKey();
@@ -71,31 +71,36 @@ public class Administrador extends Utilizador {
             Main.clearConsole();
             perfilUtilizador(user);
             Main.pressEnterKey();
-            System.out.println("|-----------------|");
-            System.out.println("|Editar perfil    |");
-            System.out.println("|1. Editar Login   |");
-            System.out.println("|2. Editar password|");
-            System.out.println("|3. Editar nome    |");
-            System.out.println("|4. Editar email   |");
-            System.out.println("|5. Sair          |");
-            System.out.println("|-----------------|");
+            System.out.println("|-------------------|");
+            System.out.println("|Editar perfil      |");
+            System.out.println("|1. Editar Login    |");
+            System.out.println("|2. Editar password |");
+            System.out.println("|3. Editar nome     |");
+            System.out.println("|4. Editar email    |");
+            System.out.println("|5. Sair            |");
+            System.out.println("|-------------------|");
             System.out.print("Option: ");
             String option = Input.readLine();
             switch (option) {
                 case "1":
                     user.setLogin();
+                    Main.pressEnterKey();
                     break;
                 case "2":
                     user.setPassword();
+                    Main.pressEnterKey();
                     break;
                 case "3":
                     user.setNome();
+                    Main.pressEnterKey();
                     break;
                 case "4":
                     user.setEmail();
+                    Main.pressEnterKey();
                     break;
                 case "5":
                     System.out.println("A voltar ao menu principal.");
+                    Main.pressEnterKey();
                     running = false;
                     break;
                 default:

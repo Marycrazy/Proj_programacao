@@ -73,27 +73,35 @@ public class Tecnicos extends Utilizador{
             switch (option) {
                 case "1":
                     user.setLogin();
+                    Main.pressEnterKey();
                     break;
                 case "2":
                     user.setPassword();
+                    Main.pressEnterKey();
                     break;
                 case "3":
                     user.setNome();
+                    Main.pressEnterKey();
                     break;
                 case "4":
                     user.setEmail();
+                    Main.pressEnterKey();
                     break;
                 case "5":
                     ((Tecnicos) user).setNIF();
+                    Main.pressEnterKey();
                     break;
                 case "6":
                     ((Tecnicos) user).setMorada();
+                    Main.pressEnterKey();
                     break;
                 case "7":
                     ((Tecnicos) user).setTelefone();
+                    Main.pressEnterKey();
                     break;
                 case "8":
                     System.out.println("A voltar ao menu principal.");
+                    Main.pressEnterKey();
                     running = false;
                     break;
                 default:

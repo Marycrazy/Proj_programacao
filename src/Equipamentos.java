@@ -103,19 +103,23 @@ public class Equipamentos implements Serializable {
             } else if (escolha < 1 || escolha > forne.size()) {
                 System.out.println("Opção inválida. Tente novamente.");
             } else {
-                Fornecedor fornecedorSelecionado = forne.get(escolha - 1);
-                if (!fornecedores.contains(fornecedorSelecionado)) {
-                    fornecedores.add(fornecedorSelecionado);
-                    System.out.println("Fornecedor " + fornecedorSelecionado.getNome() + " associado com sucesso!");
-
-                } else {
-                    System.out.println("Este fornecedor já está associado ao equipamento.");
-
-                }
+                handleFornecedorSelection(fornecedores, forne, escolha);
                 running = false;
             }
         } while (running);
         Main.pressEnterKey();
+    }
+
+    private static void handleFornecedorSelection(List<Fornecedor> fornecedores, List<Fornecedor> forne, int escolha) {
+        Fornecedor fornecedorSelecionado = forne.get(escolha - 1);
+        if (!fornecedores.contains(fornecedorSelecionado)) {
+            fornecedores.add(fornecedorSelecionado);
+            System.out.println("Fornecedor " + fornecedorSelecionado.getNome() + " associado com sucesso!");
+
+        } else {
+            System.out.println("Este fornecedor já está associado ao equipamento.");
+
+        }
     }
 
     private static void addCategoria(List<Categoria> categorias) {
@@ -132,22 +136,29 @@ public class Equipamentos implements Serializable {
             int escolha = Input.readInt();
             if (escolha == 0) {
                 System.out.println("A voltar ao menu principal.");
+                Input.clearBuffer();
                 running = false;
             } else if (escolha < 1 || escolha > cat.size()) {
                 System.out.println("Opção inválida. Tente novamente.");
+                Input.clearBuffer();
             } else {
                 // Adiciona somente se não estiver na lista
-                Categoria categoriaSelecionada = cat.get(escolha - 1);
-                if (!categorias.contains(categoriaSelecionada)) {
-                    categorias.add(categoriaSelecionada);
-                    System.out.println("Categoria " + categoriaSelecionada.getDesignacao() + " associada com sucesso!");
-                } else {
-                    System.out.println("Esta categoria já está associada ao equipamento.");
-                }
+                handleCategoriaSelection(categorias, cat, escolha);
+                Input.clearBuffer();
                 running = false;
             }
         } while (running);
         Main.pressEnterKey();
+    }
+
+    private static void handleCategoriaSelection(List<Categoria> categorias, List<Categoria> cat, int escolha) {
+        Categoria categoriaSelecionada = cat.get(escolha - 1);
+        if (!categorias.contains(categoriaSelecionada)) {
+            categorias.add(categoriaSelecionada);
+            System.out.println("Categoria " + categoriaSelecionada.getDesignacao() + " associada com sucesso!");
+        } else {
+            System.out.println("Esta categoria já está associada ao equipamento.");
+        }
     }
 
     private static void addinforEquipamento(String type){
@@ -164,7 +175,6 @@ public class Equipamentos implements Serializable {
             else if (type.equals("categoria")) {
                 addCategoria(equipamentos.get(escolha - 1).getCategorias());
             }
-            Main.pressEnterKey();
         }
 
     }

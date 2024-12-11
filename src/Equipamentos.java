@@ -86,53 +86,68 @@ public class Equipamentos implements Serializable {
     }
 
     private static void addFornecedor(List<Fornecedor> fornecedores) {
+        // Verifica a lista específica do equipamento
         if (fornecedores.size() >= 6) {
-            System.out.println("Já atingiu o limite de fornecedores.");
+            System.out.println("Já atingiu o limite de fornecedores para este equipamento.");
             return;
         }
-        else{
-            List<Fornecedor> forne = Sistema.getInstance().getFornecedores();
-            Fornecedor.listarfornecedores(forne);
-            boolean running = true;
-            do {
-                System.out.print("Selecione o fornecedor a aprovar (ou 0 para cancelar): ");
-                int escolha = Input.readInt();
-                if (escolha==0 && fornecedores.size() > 0) {
-                    System.out.println("A voltar ao menu principal.");
-                    running = false;
+        List<Fornecedor> forne = Sistema.getInstance().getFornecedores();
+        Fornecedor.listarfornecedores(forne);
+        boolean running = true;
+        do {
+            System.out.print("Selecione o fornecedor a associar (ou 0 para cancelar): ");
+            int escolha = Input.readInt();
+            if (escolha == 0) {
+                System.out.println("A voltar ao menu principal.");
+                running = false;
+            } else if (escolha < 1 || escolha > forne.size()) {
+                System.out.println("Opção inválida. Tente novamente.");
+            } else {
+                Fornecedor fornecedorSelecionado = forne.get(escolha - 1);
+                if (!fornecedores.contains(fornecedorSelecionado)) {
+                    fornecedores.add(fornecedorSelecionado);
+                    System.out.println("Fornecedor " + fornecedorSelecionado.getNome() + " associado com sucesso!");
+
+                } else {
+                    System.out.println("Este fornecedor já está associado ao equipamento.");
+
                 }
-                else {
-                    fornecedores.add(forne.get(escolha - 1));
-                    System.out.println("Fornecedor " + forne.get(escolha - 1).getNome() + " Adicionado");
-                    running = false;
-                }
-            } while (running);
-        }
+                running = false;
+            }
+        } while (running);
+        Main.pressEnterKey();
     }
 
     private static void addCategoria(List<Categoria> categorias) {
+        // Verifica a lista específica do equipamento
         if (categorias.size() >= 4) {
-            System.out.println("Já atingiu o limite de categorias.");
+            System.out.println("Já atingiu o limite de categorias para este equipamento.");
             return;
         }
-        else{
-            List<Categoria> cat = Sistema.getInstance().getCategorias();
-            Categoria.listarCategorias(cat);
-            boolean running = true;
-            do {
-                System.out.print("Selecione o fornecedor a aprovar (ou 0 para cancelar): ");
-                int escolha = Input.readInt();
-                if (escolha==0 && categorias.size() > 0) {
-                    System.out.println("A voltar ao menu principal.");
-                    running = false;
+        List<Categoria> cat = Sistema.getInstance().getCategorias();
+        Categoria.listarCategorias(cat);
+        boolean running = true;
+        do {
+            System.out.print("Selecione a categoria a associar (ou 0 para cancelar): ");
+            int escolha = Input.readInt();
+            if (escolha == 0) {
+                System.out.println("A voltar ao menu principal.");
+                running = false;
+            } else if (escolha < 1 || escolha > cat.size()) {
+                System.out.println("Opção inválida. Tente novamente.");
+            } else {
+                // Adiciona somente se não estiver na lista
+                Categoria categoriaSelecionada = cat.get(escolha - 1);
+                if (!categorias.contains(categoriaSelecionada)) {
+                    categorias.add(categoriaSelecionada);
+                    System.out.println("Categoria " + categoriaSelecionada.getDesignacao() + " associada com sucesso!");
+                } else {
+                    System.out.println("Esta categoria já está associada ao equipamento.");
                 }
-                else {
-                    categorias.add(cat.get(escolha - 1));
-                    System.out.println("Categoria da familia " + cat.get(escolha - 1).getFamilia() + " Adicionado");
-                    running = false;
-                }
-            } while (running);
-        }
+                running = false;
+            }
+        } while (running);
+        Main.pressEnterKey();
     }
 
     private static void addinforEquipamento(String type){
@@ -145,11 +160,9 @@ public class Equipamentos implements Serializable {
         else {
             if (type.equals("fornecedor")) {
                 addFornecedor(equipamentos.get(escolha - 1).getFornecedores());
-                System.out.println("Fornecedor adicionado com sucesso!");
             }
             else if (type.equals("categoria")) {
                 addCategoria(equipamentos.get(escolha - 1).getCategorias());
-                System.out.println("Categoria adicionada com sucesso!");
             }
             Main.pressEnterKey();
         }
@@ -160,7 +173,7 @@ public class Equipamentos implements Serializable {
         if (type.equals("stock")){
             System.out.print("Selecione o equipamento a atualizar o"+ type + "(ou 0 para cancelar): ");
         }
-        else{
+        else if (type.equals("fornecedor") || type.equals("categoria")){
             System.out.print("Selecione "+ type +" a adicionar o fornecedor (ou 0 para cancelar): ");
         }
         int escolha = Input.readInt();
@@ -188,9 +201,18 @@ public class Equipamentos implements Serializable {
         String observacoes = Validator.validateInput("Observações");
         System.out.print("OEM (Sim/Não): ");
         boolean isOEM = Input.readLine().equalsIgnoreCase("sim");
-        Equipamentos equipamento = new Equipamentos(marca, modelo, codigoInterno, serie, versao, voltagem, quantidadeStock, precoVenda, observacoes, isOEM);
-        addFornecedor(Sistema.getInstance().getFornecedores());
-        addCategoria(Sistema.getInstance().getCategorias());
+        Equipamentos equipamento = new Equipamentos(marca, modelo, codigoInterno, serie, versao, voltagem,
+                                             quantidadeStock, precoVenda, observacoes, isOEM);
+
+        // Associar fornecedores ao equipamento
+        System.out.println("\nAssociar Fornecedores:");
+        addFornecedor(equipamento.getFornecedores());
+
+        // Associar categorias ao equipamento
+        System.out.println("\nAssociar Categorias:");
+        addCategoria(equipamento.getCategorias());
+
+        // Retornar o equipamento configurado
         return equipamento;
     }
 
@@ -213,6 +235,7 @@ public class Equipamentos implements Serializable {
             return;
         }
         else {
+            Input.clearBuffer();
             equipamentos.get(escolha - 1).setQuantidadeStock();
             System.out.println("Stock atualizado com sucesso!");
             Main.pressEnterKey();

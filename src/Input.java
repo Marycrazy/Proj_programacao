@@ -68,6 +68,10 @@ public class Input {
         }
     }
 
+    public static void clearBuffer() {
+        getScanner().nextLine(); // Consome a linha restante no buffer
+    }
+
     public static void openFIleReade(String filename) {
         try {
             fileReader = new BufferedReader(new FileReader(filename));

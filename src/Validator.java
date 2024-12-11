@@ -37,8 +37,16 @@ public class Validator {
         return address.matches("^[\\w\\s,\\.]{2,100}$");
     }
 
-    private static boolean isValiddefault(String password) {
-        return true;
+    private static boolean isValidMarca(String marca) {
+        return marca.matches("^[A-Za-zÀ-ÿ0-9 .-]{2,50}$");
+    }
+
+    private static boolean isValidModelo(String modelo){
+        return modelo.matches("^[A-Za-zÀ-ÿ0-9 .-]{2,100}$");
+    }
+
+    private static boolean isValidObs(String observacoes) {
+        return observacoes.length() <= 500;
     }
 
     private static final Map<String, Function<String, Boolean>> validators = Map.ofEntries(
@@ -48,9 +56,9 @@ public class Validator {
         Map.entry("name", Validator::isValidName),
         Map.entry("login", Validator::isValidLogin),
         Map.entry("morada", Validator::isValidAddress),
-        Map.entry("marca", Validator::isValiddefault),
-        Map.entry("modelo", Validator::isValiddefault),
-        Map.entry("código interno", Validator::isValiddefault),
+        Map.entry("marca", Validator::isValidMarca),
+        Map.entry("modelo", Validator::isValidModelo),
+        Map.entry("código interno", Validator::isValidLogin),
         Map.entry("geração", Validator::isValidIntegerNumeric),
         Map.entry("sequência", Validator::isValidIntegerNumeric),
         Map.entry("unidade", Validator::isValidIntegerNumeric),
@@ -59,7 +67,7 @@ public class Validator {
         Map.entry("voltagem", Validator::isValidFloatNumeric),
         Map.entry("quantidade de stock", Validator::isValidIntegerNumeric),
         Map.entry("preço de venda", Validator::isValidFloatNumeric),
-        Map.entry("observações", Validator::isValiddefault)
+        Map.entry("observações", Validator::isValidObs)
     );
 
     public static String validatePassword(String type) {
@@ -162,6 +170,5 @@ public class Validator {
                 return true;
         }
     }
-
 
 }

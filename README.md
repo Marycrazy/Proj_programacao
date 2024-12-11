@@ -41,7 +41,7 @@ contacto telefónico.
 - > c) ou se já foi *concluído* (técnico responsável termina o processo).
 - [ ] [R23] Quando um técnico conclui um serviço deve indicar o tempo despendido no processamento do pedido.
 O valor total da venda deve ser calculado automaticamente (somatório do custo dos vários equipamentos e respectivas quantidades).
-- [ ] [R24] A aplicação deve permitir introduzir e gerir equipamentos de hardware.
+- [x] [R24] A aplicação deve permitir introduzir e gerir equipamentos de hardware.
 Os equipamentos de hardware são caracterizados por uma marca, modelo, código interno, série, versão,
 voltagem, quantidade em stock, preço de venda, observações e se o equipamento é OEM (Original
 Equipment Manufacturer).
@@ -52,7 +52,7 @@ Equipment Manufacturer).
 - [x] [R29] Cada categoria é caracterizada pela sua designação e família (atributos alfanuméricos).
 - [x] [R30] Cada série possui uma geração e sequência (atributos numéricos).
 - [x] [R31] Cada versão é caracterizada pela unidade, valor alfa e valor beta (atributos numéricos).
-- [ ] [R32] É possível alterar a quantidade em stock de um equipamento.
+- [x] [R32] É possível alterar a quantidade em stock de um equipamento.
 - [ ] [R33] Sempre que um equipamento é vendido,a quantidade em stock deve ser actualizada.
 
 ## Listagem de Pesquisas

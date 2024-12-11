@@ -88,10 +88,15 @@ class Validator {
   - validators: Map<String, Function<String, Boolean>>
   + isValidEmail(email: String): boolean
   + isValidNIF(nif: String): boolean
+  + isValidIntegerNumeric(value: String): boolean
+  + isValidFloatNumeric(value: String): boolean
   + isValidPhoneNumber(phoneNumber: String): boolean
   + isValidName(name: String): boolean
   + isValidLogin(login: String): boolean
   + isValidAddress(address: String): boolean
+  + isValidMarca(marca: String): boolean
+  + isValidModelo(modelo: String): boolean
+  + isValidObs(observacoes: String): boolean
   + validatePassword(type: String): String
   + validateInput(typeString: String): String
   - encryptPassword(password: String): String
@@ -99,6 +104,7 @@ class Validator {
   + isEmailUnique(String email): boolean
   + isNIFUnique(String nif): boolean
   + isPhoneNumberUnique(String phoneNumber): boolean
+  + isCodigoEquipamentoUnico(String codigo): boolean
   + isValueUnique(String type, String value): boolean
 }
 
@@ -119,6 +125,7 @@ class Input {
   + readInt(): int
   + hasNextInt(): boolean
   + closeScanner()
+  + clearBuffer()
   + openFIleReade(filename: String)
   + readFileLine(): String
   + writeFileLine(String line)
@@ -187,8 +194,15 @@ class Equipamento {
     +getFornecedores(): List~Fornecedor~
     +getCategorias(): List~Categoria~
     +setQuantidadeStock()
-    +adicionarFornecedor()
-    +adicionarCategoria()
+    +addrFornecedor()
+    +handleFornecedorSelection()
+    +addCategoria()
+    +handleCategoriaSelection()
+    +addinforEquipamento()
+    +select(): int
+    +addEquipamentos(): Equipamento
+    +listarEquipamentos()
+    +equipamentosLoop()
     +toString(): String
     +atualizarStock()
 }
@@ -204,6 +218,7 @@ class Fornecedor {
     +setNome()
     +setMorada()
     +setTelefone()
+    +listarfornecedores()
     +adicionarFornecedor():Fornecedor
     +toString(): String
 }
@@ -217,45 +232,51 @@ class Categoria {
     +setDesignacao()
     +setFamilia()
     +adicionarCategoria():Categoria
+    +listarCategorias()
     +toString(): String
 }
 
 class Serie {
     -int geracao
     -int sequencia
+    +Serie(geracao: int, sequencia: int)
+    +adicionarSerie():Serie
+    +toString(): String
 }
 
 class Versao {
     -int unidade
     -int valorAlfa
     -int valorBeta
+    +versao(unidade: int, valorAlfa: int, valorBeta: int)
+    +adicionarVersao():Versao
+    +toString(): String
 }
 
 Sistema -- Utilizador
 Sistema -- Servico
 Sistema -- Equipamento
-Sistema --> Ficheiros
+Sistema <-- Ficheiros
 Main --> Input
 Main -- Validator
 Tecnicos --> Validator
 Tecnicos -- Servico
 Tecnicos --> Sistema
 Cliente --> Validator
-Cliente -- Servico
+Cliente --> Servico
 Cliente -- Sistema
 Administrador --> Validator
 Administrador --> Sistema
 Validator --> Input
 Ficheiros --> Input
 Utilizador --> Input
-Equipamento -- Fornecedor
-Equipamento -- Categoria
-Equipamento -- Serie
-Equipamento -- Versao
+Equipamento --> Fornecedor
+Equipamento --> Categoria
+Equipamento --> Serie
+Equipamento --> Versao
 Servico -- Equipamento
-Categoria -- Equipamento
-Categoria -- Sistema
-Fornecedor -- Equipamento
+Categoria <-- Sistema
+Fornecedor <-- Equipamento
 Fornecedor -- Input
-Fornecedor -- Sistema
+Fornecedor <-- Sistema
 

@@ -68,7 +68,7 @@ Equipment Manufacturer).
 - [ ] [R46] Deve ser possível listar equipamentos que sejam (ou não) OEM.
 - [ ] [R47] Deve  ser  possível  listar  equipamentos  com  uma  quantidade  de  stock  abaixo  de  um  determinado  limite 
 (introduzido pelo utilizador no momento de pesquisa).
-- [ ] [R49] Deve ser possível pesquisar utilizadores por login ou nome.
+- [x] [R49] Deve ser possível pesquisar utilizadores por login ou nome.
 - [ ] [R50] Deve ser possível pesquisar serviços por código ou uma palavra que surja na descrição.
 - [ ] [R51] Deve ser possível pesquisar equipamentos por marca ou código.
 - [ ] [R52] Deve ser possível pesquisar equipamentos que possuem uma determinada categoria.

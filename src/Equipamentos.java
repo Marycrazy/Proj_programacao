@@ -99,11 +99,13 @@ public class Equipamentos implements Serializable {
             int escolha = Input.readInt();
             if (escolha == 0) {
                 System.out.println("A voltar ao menu principal.");
+                Input.clearBuffer();
                 running = false;
             } else if (escolha < 1 || escolha > forne.size()) {
                 System.out.println("Opção inválida. Tente novamente.");
             } else {
                 handleFornecedorSelection(fornecedores, forne, escolha);
+                Input.clearBuffer();
                 running = false;
             }
         } while (running);

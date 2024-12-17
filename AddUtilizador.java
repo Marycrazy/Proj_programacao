@@ -28,6 +28,12 @@ public class AddUtilizador {
         "Praça da República", "Rua do Comércio", "Estrada Nacional 1"
     };
 
+    private static final String[] Nomes = {
+        "Maria Flor", "Angie Saramago", "Kelly Silva",
+        "Antonio Dinis", "Francisco Figueiras", "Andre Santos",
+        "Afonso Silva", "Ricardo Pereira", "João Santos"
+    };
+
     public static String generateNIF() {
         Random random = new Random();
         
@@ -78,7 +84,7 @@ public class AddUtilizador {
         Utilizador user = new Utilizador("admin", Validator.encryptPassword(Integer.toString(123456789)), "Admin", true, "admin@gmail.com", "administrador");
             Sistema.getInstance().adicionarutilizador(user);
             for (int i = 1; i <= 2; i++) {
-                user = new Utilizador("admin" + i, Validator.encryptPassword(Integer.toString(123456789)), "Admin" + i, false, "admin" + i + "@gmail.com", "administrador");
+                user = new Utilizador("admin" + i, Validator.encryptPassword(Integer.toString(123456789)), Nomes[i-1], false, "admin" + i + "@gmail.com", "administrador");
                 Sistema.getInstance().adicionarutilizador(user);
             }
     }
@@ -86,14 +92,14 @@ public class AddUtilizador {
     public static void cliente(Random random) {
         //3 clientes
         for (int i = 1; i <= 3; i++) {
-            Utilizador user = new Cliente("cliente" + i, Validator.encryptPassword(Integer.toString(123456789)), "Cliente" + i, false, "cliente" + i + "@gmail.com", "cliente" , generateNIF() , RUAS[random.nextInt(RUAS.length)], generateTelemovel());
+            Utilizador user = new Cliente("cliente" + i, Validator.encryptPassword(Integer.toString(123456789)), Nomes[i+1], false, "cliente" + i + "@gmail.com", "cliente" , generateNIF() , RUAS[random.nextInt(RUAS.length)], generateTelemovel());
             Sistema.getInstance().adicionarutilizador(user);
         }
     }
 
     public static void tecnicos(Random random) {
         for (int i = 1; i <= 3; i++) {
-            Utilizador user = new Tecnicos("tecnico" + i, Validator.encryptPassword(Integer.toString(123456789)), "Tecnico" + i, false, "tecnico" + i + "@gmail.com", "tecnico", generateNIF(), RUAS[random.nextInt(RUAS.length)], generateTelemovel());
+            Utilizador user = new Tecnicos("tecnico" + i, Validator.encryptPassword(Integer.toString(123456789)), Nomes[i+4], false, "tecnico" + i + "@gmail.com", "tecnico", generateNIF(), RUAS[random.nextInt(RUAS.length)], generateTelemovel());
             Sistema.getInstance().adicionarutilizador(user);
         }
     }

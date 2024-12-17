@@ -132,6 +132,7 @@ public class Administrador extends Utilizador {
             System.out.println("|1. ordem alfabética do nome        |");
             System.out.println("|2. listar todos os utilizadores    |");
             System.out.println("|3. listar utilizadores por tipo.   |");
+            System.out.println("|4. Pesquisar por nome ou login     |");
             System.out.println("|5. Sair                            |");
             System.out.println("|-----------------------------------|");
             System.out.print("Option: ");
@@ -163,6 +164,17 @@ public class Administrador extends Utilizador {
                     System.out.println("Utilizadores do tipo " + tipo + ":");
                     for (int i = 0; i < utilizadoresPorTipo.size(); i++) {
                         perfilUtilizador(utilizadoresPorTipo.get(i));
+                    }
+                    Main.pressEnterKey();
+                    break;
+                case "4":
+                    System.out.print("Nome ou login a pesquisar: ");
+                    String pesquisa = Input.readLine();
+                    List<Utilizador> utilizadoresPesquisados = Sistema.getInstance().getUtilizadores().stream().filter(u -> u.getNome().contains(pesquisa) || u.getLogin().contains(pesquisa)).toList();
+                    Main.clearConsole();
+                    System.out.println("Utilizadores encontrados:");
+                    for (int i = 0; i < utilizadoresPesquisados.size(); i++) {
+                        perfilUtilizador(utilizadoresPesquisados.get(i));
                     }
                     Main.pressEnterKey();
                     break;

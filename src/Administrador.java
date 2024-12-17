@@ -1,5 +1,6 @@
 package src;
 
+import java.util.Comparator;
 import java.util.List;
 
 public class Administrador extends Utilizador {
@@ -18,12 +19,23 @@ public class Administrador extends Utilizador {
         return new Administrador(login, password, name, estado, email, type);
     }
 
+    private static List<Utilizador> getUtilizadoresInativos() {
+        List<Utilizador> inativos = Sistema.getInstance().getUtilizadores().stream().filter(u -> !u.getEstado()).toList();
+        if (inativos.isEmpty()) {
+            return null;
+        }
+        else {
+            return inativos;
+        }
+    }
+
     private static void perfilUtilizador(Utilizador user) {
         System.out.println("*******************");
         System.out.println("Perfil           ");
         System.out.println("Login: " + user.getLogin());
         System.out.println("Nome: " + user.getNome());
         System.out.println("Email: " + user.getEmail());
+        System.out.println("Tipo: " + user.getTipo());
         System.out.println("******************* \n");
     }
 
@@ -43,7 +55,7 @@ public class Administrador extends Utilizador {
     }
 
     private static void aprovarRegisto() {
-        List<Utilizador> inativos = Sistema.getInstance().getUtilizadoresInativos();
+        List<Utilizador> inativos = getUtilizadoresInativos();
         utilizadoresRegeditados(inativos);
         boolean running = true;
         do {
@@ -111,16 +123,74 @@ public class Administrador extends Utilizador {
         }
     }
 
+    private static void listagemUtilizadores(){
+        boolean running = true;
+        while (running) {
+            Main.clearConsole();
+            System.out.println("|-----------------------------------|");
+            System.out.println("|Listar Utilizadores                |");
+            System.out.println("|1. ordem alfabética do nome        |");
+            System.out.println("|2. listar todos os utilizadores    |");
+            System.out.println("|3. listar utilizadores por tipo.   |");
+            System.out.println("|5. Sair                            |");
+            System.out.println("|-----------------------------------|");
+            System.out.print("Option: ");
+            String option = Input.readLine();
+            switch (option) {
+                case "1":
+                    List<Utilizador> oredemAlfabetica = Sistema.getInstance().getUtilizadores().stream().sorted(Comparator.comparing(Utilizador::getNome)).toList();
+                    Main.clearConsole();
+                    System.out.println("Utilizadores por ordem alfabética:");
+                    for (int i = 0; i < oredemAlfabetica.size(); i++) {
+                        perfilUtilizador(oredemAlfabetica.get(i));
+                    }
+                    Main.pressEnterKey();
+                    break;
+                case "2":
+                    List<Utilizador> todosUtilizadores = Sistema.getInstance().getUtilizadores();
+                    Main.clearConsole();
+                    System.out.println("Todos os utilizadores:");
+                    for (int i = 0; i < todosUtilizadores.size(); i++) {
+                        perfilUtilizador(todosUtilizadores.get(i));
+                    }
+                    Main.pressEnterKey();
+                    break;
+                case "3":
+                    System.out.println("Tipo de utilizador a listar: ");
+                    String tipo = Input.readLine();
+                    List<Utilizador> utilizadoresPorTipo = Sistema.getInstance().getUtilizadores().stream().filter(u -> u.getTipo().equalsIgnoreCase(tipo)).toList();
+                    Main.clearConsole();
+                    System.out.println("Utilizadores do tipo " + tipo + ":");
+                    for (int i = 0; i < utilizadoresPorTipo.size(); i++) {
+                        perfilUtilizador(utilizadoresPorTipo.get(i));
+                    }
+                    Main.pressEnterKey();
+                    break;
+                case "5":
+                    System.out.println("A voltar ao menu principal.");
+                    Main.pressEnterKey();
+                    running = false;
+                    break;
+                default:
+                    System.out.println("Invalid option. Please try again.");
+                    Main.pressEnterKey();
+                    break;
+            }
+        }
+    }
+
+
     public static void loggedUserLoop(Utilizador user) {
         boolean running = true;
         while (running) {
             Main.clearConsole();
             System.out.println("|-------------------------------------|");
-            System.out.println("|Tens "+ (Sistema.getInstance().getUtilizadoresInativos() != null ? Sistema.getInstance().getUtilizadoresInativos().size() : 0) + " pedidos de registo por aprovar|");
+            System.out.println("|Tens "+ (getUtilizadoresInativos() != null ? getUtilizadoresInativos().size() : 0) + " pedidos de registo por aprovar|");
             System.out.println("|-------------------------------------|");
             System.out.println("|1. Editar perfil                     |");
             System.out.println("|2. Aprovar Registo                   |");
-            System.out.println("|4. Sair                              |");
+            System.out.println("|4. Listagem de utilizadores          |");
+            System.out.println("|5. Sair                              |");
             System.out.println("|-------------------------------------|");
             System.out.print("Option: ");
             String option = Input.readLine();
@@ -134,6 +204,9 @@ public class Administrador extends Utilizador {
                 case "3":
                     break;
                 case "4":
+                    listagemUtilizadores();
+                    break;
+                case "5":
                     Main.clearConsole();
                     System.out.println("Adeus " + user.getNome());
                     Main.pressEnterKey();

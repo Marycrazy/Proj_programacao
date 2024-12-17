@@ -67,9 +67,11 @@ class Administrador extends Utilizador {
     +loggedUserLoop()
     +registerNewUser()
     +aprovarRegisto()
+    +List<Utilizador> getUtilizadoresInativos()
     +perfilUtilizador(Utilizador user)
     +utilizadoresRegeditados()
-    editperfil(Utilizador user)
+    +editperfil(Utilizador user)
+    +listagemUtilizadores()
     +aprovarPedidos()
     +gerirVendas()
     +associarTecnico()
@@ -150,7 +152,6 @@ class Sistema {
   +adicionarServico()
   +carregarDados()
   +buscarUtilizadorPorLogin()
-  +getUtilizadoresInativos()
   +autenticarUtilizador()
 }
 class Servico {

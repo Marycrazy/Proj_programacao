@@ -102,16 +102,6 @@ public class Sistema implements Serializable {
             .orElse(null); // Retorna null se não encontrar
     }
 
-    public List<Utilizador> getUtilizadoresInativos() {
-        List<Utilizador> inativos = utilizadores.stream().filter(u -> !u.getEstado()).toList();
-        if (inativos.isEmpty()) {
-            return null;
-        }
-        else {
-            return inativos;
-        }
-    }
-
     public Utilizador autenticarUtilizador(String login, String password) {
         boolean authenticated = Ficheiros.authenticateUser(login, password);
         if (authenticated) {

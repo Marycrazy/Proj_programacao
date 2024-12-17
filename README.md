@@ -56,10 +56,10 @@ Equipment Manufacturer).
 - [ ] [R33] Sempre que um equipamento é vendido,a quantidade em stock deve ser actualizada.
 
 ## Listagem de Pesquisas
-- [ ] [R36] Deve ser possível ordenar utilizadores por ordem alfabética do nome.
+- [x] [R36] Deve ser possível ordenar utilizadores por ordem alfabética do nome.
 - [ ] [R37] Deve ser possível ordenar equipamentos por designação.
-- [ ] [R39] Deve ser possível listar todos os utilizadores.
-- [ ] [R40] Deve ser possível listar utilizadores por tipo.
+- [x] [R39] Deve ser possível listar todos os utilizadores.
+- [x] [R40] Deve ser possível listar utilizadores por tipo.
 - [ ] [R41] Deve ser possível listar todos os serviços.
 - [ ] [R42] Deve ser possível listar todos os serviços associados a um cliente.
 - [ ] [R43] Deve ser possível listar todos os serviços por estado.

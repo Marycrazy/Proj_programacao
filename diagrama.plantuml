@@ -168,7 +168,7 @@ class Servico {
         +concluirServico()
 }
 
-class Equipamento {
+class Equipamentos {
     -String marca
     -String modelo
     -String codigoInterno
@@ -181,7 +181,7 @@ class Equipamento {
     -boolean isOEM
     -List~Fornecedor~ fornecedores
     -List~Categoria~ categorias
-    +Equipamento(marca: String, modelo: String, codigoInterno: String, serie: Serie, versao: Versao, voltagem: double, quantidadeStock: int, precoVenda: double, observacoes: String, isOEM: boolean)
+    +Equipamentos(marca: String, modelo: String, codigoInterno: String, serie: Serie, versao: Versao, voltagem: double, quantidadeStock: int, precoVenda: double, observacoes: String, isOEM: boolean)
     +getMarca(): String
     +getModelo(): String
     +getCodigoInterno(): String
@@ -206,6 +206,7 @@ class Equipamento {
     +equipamentosLoop()
     +toString(): String
     +atualizarStock()
+    +listarEquipamentosLoop()
 }
 
 class Fornecedor {
@@ -256,7 +257,7 @@ class Versao {
 
 Sistema -- Utilizador
 Sistema -- Servico
-Sistema -- Equipamento
+Sistema -- Equipamentos
 Sistema <-- Ficheiros
 Main --> Input
 Main -- Validator
@@ -271,13 +272,13 @@ Administrador --> Sistema
 Validator --> Input
 Ficheiros --> Input
 Utilizador --> Input
-Equipamento --> Fornecedor
-Equipamento --> Categoria
-Equipamento --> Serie
-Equipamento --> Versao
-Servico -- Equipamento
+Equipamentos --> Fornecedor
+Equipamentos --> Categoria
+Equipamentos --> Serie
+Equipamentos --> Versao
+Servico -- Equipamentos
 Categoria <-- Sistema
-Fornecedor <-- Equipamento
+Fornecedor <-- Equipamentos
 Fornecedor -- Input
 Fornecedor <-- Sistema
 

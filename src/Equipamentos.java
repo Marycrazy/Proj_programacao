@@ -201,7 +201,7 @@ public class Equipamentos implements Serializable {
         }
     }
 
-    public static Equipamentos addEquipamentos(){
+    private static Equipamentos addEquipamentos(){
         Main.clearConsole();
         System.out.print("Adicionar equipamento: \n");
         String marca = Validator.validateInput("Marca");
@@ -233,14 +233,14 @@ public class Equipamentos implements Serializable {
     private static void listarEquipamentos(List<Equipamentos> equipamentos) {
         System.out.println("Equipamentos:\n");
         for (int i = 0; i < equipamentos.size(); i++) {
-            System.out.println((i + 1) + ". \n"+ "Marca: " + equipamentos.get(i).getMarca() + "Modelo: " + equipamentos.get(i).getModelo() + 
-            "\nCódigo Interno: " + equipamentos.get(i).getCodigoInterno() + "Preço de Venda: " + equipamentos.get(i).getPrecoVenda() + 
-            "\nOEM: " + (equipamentos.get(i).isOEM() ? "Sim" : "Não") + "Quantidade de Stock: " + equipamentos.get(i).getQuantidadeStock() + 
+            System.out.println((i + 1) + ". \n"+ "Marca: " + equipamentos.get(i).getMarca() + " Modelo: " + equipamentos.get(i).getModelo() + 
+            "\nCódigo Interno: " + equipamentos.get(i).getCodigoInterno() + " Preço de Venda: " + equipamentos.get(i).getPrecoVenda() + 
+            "\nOEM: " + (equipamentos.get(i).isOEM() ? "Sim" : "Não") + " Quantidade de Stock: " + equipamentos.get(i).getQuantidadeStock() + 
             "\n");
         }
     }
 
-    public static void atualizarStock() {
+    private static void atualizarStock() {
         Main.clearConsole();
         List<Equipamentos> equipamentos = Sistema.getInstance().getEquipamentos();
         listarEquipamentos(equipamentos);
@@ -265,7 +265,8 @@ public class Equipamentos implements Serializable {
             System.out.println("|2. Adicionar fornecedor a equipamento   |");
             System.out.println("|3. Adicionar categoria a equipamento    |");
             System.out.println("|4. Atualizar Stock                      |");
-            System.out.println("|5. Sair                                 |");
+            System.out.println("|5. Listar Equipamentos                   |");
+            System.out.println("|6. Sair                                 |");
             System.out.println("|----------------------------------------|");
             System.out.print("Option: ");
             String option = Input.readLine();
@@ -290,7 +291,76 @@ public class Equipamentos implements Serializable {
                     atualizarStock();
                     break;
                 case "5":
+                    listarEquipamentosLoop();
+                    break;
+                case "6":
                     System.out.println("A voltar ao menu principal.");
+                    running = false;
+                    break;
+                default:
+                    System.out.println("Invalid option. Please try again.");
+                    Main.pressEnterKey();
+                    break;
+            }
+        }
+    }
+
+    public static void listarEquipamentosLoop() {
+        boolean running = true;
+        while (running) {
+            Main.clearConsole();
+            System.out.println("|-----------------------------------------------|");
+            System.out.println("|Listar Equipamentos                            |");
+            System.out.println("|1. Listar equipamentos por designação          |");
+            System.out.println("|2. Listar todos os equipamentos                |");
+            System.out.println("|3. Listar que sejam OEM ou não                 |");
+            System.out.println("|4. Listar equipamentos por stock               |");
+            System.out.println("|5. Listar equipamentos por marca ou codigo     |");
+            System.out.println("|6. Listar equipamentos por categoria           |");
+            System.out.println("|7. Sair                                        |");
+            System.out.println("|-----------------------------------------------|");
+            System.out.print("Option: ");
+            String option = Input.readLine();
+            switch (option) {
+                case "1":
+
+                    Main.pressEnterKey();
+                    break;
+                case "2":
+                    listarEquipamentos(Sistema.getInstance().getEquipamentos());
+                    Main.pressEnterKey();
+                    break;
+                case "3":
+                    System.out.println("Listar equipamentos OEM ou não OEM (sim/não):");
+                    String input = Input.readLine();
+                    if (input.equalsIgnoreCase("sim")) {
+                        List<Equipamentos> equipamentos = Sistema.getInstance().getEquipamentos().stream().filter(e -> e.isOEM()).toList();
+                        listarEquipamentos(equipamentos);
+                    }
+                    else{
+                        List<Equipamentos> equipamentos = Sistema.getInstance().getEquipamentos().stream().filter(e -> !e.isOEM()).toList();
+                        listarEquipamentos(equipamentos);
+                    }
+                    Main.pressEnterKey();
+                    break;
+                case "4":
+                    System.out.print("Limite de Stock: ");
+                    int limiteEstoque = Input.readInt();
+                    List<Equipamentos> stockList = Sistema.getInstance().getEquipamentos().stream().filter(e -> e.getQuantidadeStock() <= limiteEstoque).toList();
+                    listarEquipamentos(stockList);
+                    Input.clearBuffer();
+                    Main.pressEnterKey();
+                    break;
+                case "5":
+                    System.out.print("Marca ou Código Interno: ");
+                    String marcaOuCodigo = Input.readLine();
+                    List<Equipamentos> marcaOuCodigoList = Sistema.getInstance().getEquipamentos().stream().filter(e -> e.getMarca().contains(marcaOuCodigo) || e.getCodigoInterno().contains(marcaOuCodigo)).toList();
+                    listarEquipamentos(marcaOuCodigoList);
+                    Main.pressEnterKey();
+                    break;
+                case "7":
+                    System.out.println("A voltar ao menu principal.");
+                    Main.pressEnterKey();
                     running = false;
                     break;
                 default:

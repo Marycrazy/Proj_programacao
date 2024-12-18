@@ -65,15 +65,15 @@ Equipment Manufacturer).
 - [ ] [R42] Deve ser possível listar todos os serviços associados a um cliente.
 - [ ] [R43] Deve ser possível listar todos os serviços por estado.
 - [ ] [R44] Deve ser possível listar serviços com tempo despendido superior a um determinado limite (introduzido pelo utilizador no momento de pesquisa).
-- [ ] [R45] Deve ser possível listar todos os equipamentos.
-- [ ] [R46] Deve ser possível listar equipamentos que sejam (ou não) OEM.
-- [ ] [R47] Deve  ser  possível  listar  equipamentos  com  uma  quantidade  de  stock  abaixo  de  um  determinado  limite
+- [x] [R45] Deve ser possível listar todos os equipamentos.
+- [x] [R46] Deve ser possível listar equipamentos que sejam (ou não) OEM.
+- [x] [R47] Deve  ser  possível  listar  equipamentos  com  uma  quantidade  de  stock  abaixo  de  um  determinado  limite
 (introduzido pelo utilizador no momento de pesquisa).
 - [x] [R49] Deve ser possível pesquisar utilizadores por login ou nome.
 - [ ] [R50] Deve ser possível pesquisar serviços por código ou uma palavra que surja na descrição.
-- [ ] [R51] Deve ser possível pesquisar equipamentos por marca ou código.
+- [x] [R51] Deve ser possível pesquisar equipamentos por marca ou código.
 - [ ] [R52] Deve ser possível pesquisar equipamentos que possuem uma determinada categoria.
-- [ ] [R53] Deve ser possível realizar pesquisas avançadas, ou seja, apresentar todos os registos que apresentem um termo de pesquisa, mesmo que parcialmente
+- [x] [R53] Deve ser possível realizar pesquisas avançadas, ou seja, apresentar todos os registos que apresentem um termo de pesquisa, mesmo que parcialmente
 - (e.g. termo de pesquisa “Ana” deve apresentar como resultado “Ana Sousa”, “Ana Silva” e “Anabela”).
 
 - [ ] [R54] Os clientes podem listar e pesquisar os seus serviços que realizaram.

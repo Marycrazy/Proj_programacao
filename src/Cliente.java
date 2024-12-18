@@ -117,10 +117,11 @@ public class Cliente extends Utilizador {
         boolean running = true;
         while (running) {
             Main.clearConsole();
-            System.out.println("|-------------------|");
-            System.out.println("|1. Editar perfil   |");
-            System.out.println("|4. Sair            |");
-            System.out.println("|-------------------|");
+            System.out.println("|------------------------|");
+            System.out.println("|1. Editar perfil        |");
+            System.out.println("|2. Listar equipamentos  |");
+            System.out.println("|4. Sair                 |");
+            System.out.println("|------------------------|");
             System.out.print("Option: ");
             String option = Input.readLine();
             switch (option) {
@@ -128,6 +129,7 @@ public class Cliente extends Utilizador {
                     editperfil(user);
                     break;
                 case "2":
+                    Equipamentos.listarEquipamentosLoop();
                     break;
                 case "3":
                     break;

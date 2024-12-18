@@ -3,6 +3,7 @@ import java.io.Serializable;
 import java.util.List;
 
 public class Categoria implements Serializable {
+    private static final long serialVersionUID = 1L;
     private String designacao;
     private String familia;
 
@@ -36,14 +37,15 @@ public class Categoria implements Serializable {
         return new Categoria(designacao, familia);
     }
 
-    public static void listarCategorias(List<Categoria> categoria) {
-        System.out.println("\n Categorias:");
+    public static void listarCategorias(List<Categoria> categoria, boolean mostrar) {
+        System.out.println("Categorias:");
         for (int i = 0; i < categoria.size(); i++) {
-            System.out.println((i + 1) + ". \n Designação: " + categoria.get(i).getDesignacao() + "\n Família: " + categoria.get(i).getFamilia() + "\n");
+            if (mostrar) {
+                System.out.println((i + 1) + ". \n Designação: " + categoria.get(i).getDesignacao() + "\n Família: " + categoria.get(i).getFamilia() + "\n");
+            } else {
+                System.out.println("Designação: " + categoria.get(i).getDesignacao() + "\nFamília: " + categoria.get(i).getFamilia() + "\n");
+            }
         }
     }
 
-    public String toString() {
-        return "Categoria: " + designacao + " (Família: " + familia + ")";
-    }
 }

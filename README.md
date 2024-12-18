@@ -58,7 +58,8 @@ Equipment Manufacturer).
 
 ## Listagem de Pesquisas
 - [x] [R36] Deve ser possível ordenar utilizadores por ordem alfabética do nome.
-- [ ] [R37] Deve ser possível ordenar equipamentos por designação.
+- [x] [R37] Deve ser possível ordenar equipamentos por designação.
+- > [Note] vou presumir que designação é modelos.
 - [x] [R39] Deve ser possível listar todos os utilizadores.
 - [x] [R40] Deve ser possível listar utilizadores por tipo.
 - [ ] [R41] Deve ser possível listar todos os serviços.
@@ -72,7 +73,8 @@ Equipment Manufacturer).
 - [x] [R49] Deve ser possível pesquisar utilizadores por login ou nome.
 - [ ] [R50] Deve ser possível pesquisar serviços por código ou uma palavra que surja na descrição.
 - [x] [R51] Deve ser possível pesquisar equipamentos por marca ou código.
-- [ ] [R52] Deve ser possível pesquisar equipamentos que possuem uma determinada categoria.
+- [x] [R52] Deve ser possível pesquisar equipamentos que possuem uma determinada categoria.
+- > [Note] assumir que categoria é a designação dela
 - [x] [R53] Deve ser possível realizar pesquisas avançadas, ou seja, apresentar todos os registos que apresentem um termo de pesquisa, mesmo que parcialmente
 - (e.g. termo de pesquisa “Ana” deve apresentar como resultado “Ana Sousa”, “Ana Silva” e “Anabela”).
 

@@ -29,14 +29,20 @@ public class Administrador extends Utilizador {
         }
     }
 
-    private static void perfilUtilizador(Utilizador user) {
-        System.out.println("*******************");
-        System.out.println("Perfil           ");
-        System.out.println("Login: " + user.getLogin());
-        System.out.println("Nome: " + user.getNome());
-        System.out.println("Email: " + user.getEmail());
-        System.out.println("Tipo: " + user.getTipo());
-        System.out.println("******************* \n");
+    private static void perfilUtilizador(Utilizador user, boolean mostrar) {
+        if (mostrar) {
+            System.out.println("*******************");
+            System.out.println("Perfil           ");
+            System.out.println("Login: " + user.getLogin());
+            System.out.println("Nome: " + user.getNome());
+            System.out.println("Email: " + user.getEmail());
+            System.out.println("******************* \n");
+        }
+        else {
+            System.out.println("Login: " + user.getLogin() + "\nNome:" + 
+                user.getNome() + "\nEmail: " + user.getEmail() + "\nTipo: " + 
+                user.getTipo() + "\n");
+        }
     }
 
     private static void utilizadoresRegeditados(List<Utilizador> inativos) {
@@ -47,9 +53,8 @@ public class Administrador extends Utilizador {
         else {
             System.out.println("\nUtilizadores inativos:");
             for (int i = 0; i < inativos.size(); i++) {
-                System.out.println((i + 1) + ". \nLogin: " + inativos.get(i).getLogin() + "\nNome:" + 
-                inativos.get(i).getNome() + "\nEmail: " + inativos.get(i).getEmail() + "\nTipo: " + 
-                inativos.get(i).getTipo() + "\n");
+                System.out.println((i + 1) + ".");
+                perfilUtilizador(inativos.get(i), false);
             }
         }
     }
@@ -80,7 +85,7 @@ public class Administrador extends Utilizador {
         boolean running = true;
         while (running) {
             Main.clearConsole();
-            perfilUtilizador(user);
+            perfilUtilizador(user, true);
             Main.pressEnterKey();
             System.out.println("|-------------------|");
             System.out.println("|Editar perfil      |");
@@ -142,7 +147,7 @@ public class Administrador extends Utilizador {
                     Main.clearConsole();
                     System.out.println("Utilizadores por ordem alfabética:");
                     for (int i = 0; i < oredemAlfabetica.size(); i++) {
-                        perfilUtilizador(oredemAlfabetica.get(i));
+                        perfilUtilizador(oredemAlfabetica.get(i), false);
                     }
                     Main.pressEnterKey();
                     break;
@@ -150,7 +155,7 @@ public class Administrador extends Utilizador {
                     Main.clearConsole();
                     System.out.println("Todos os utilizadores:");
                     for (int i = 0; i < Sistema.getInstance().getUtilizadores().size(); i++) {
-                        perfilUtilizador(Sistema.getInstance().getUtilizadores().get(i));
+                        perfilUtilizador(Sistema.getInstance().getUtilizadores().get(i), false);
                     }
                     Main.pressEnterKey();
                     break;
@@ -161,7 +166,7 @@ public class Administrador extends Utilizador {
                     Main.clearConsole();
                     System.out.println("Utilizadores do tipo " + tipo + ":");
                     for (int i = 0; i < utilizadoresPorTipo.size(); i++) {
-                        perfilUtilizador(utilizadoresPorTipo.get(i));
+                        perfilUtilizador(utilizadoresPorTipo.get(i), false);
                     }
                     Main.pressEnterKey();
                     break;
@@ -172,7 +177,7 @@ public class Administrador extends Utilizador {
                     Main.clearConsole();
                     System.out.println("Utilizadores encontrados:");
                     for (int i = 0; i < utilizadoresPesquisados.size(); i++) {
-                        perfilUtilizador(utilizadoresPesquisados.get(i));
+                        perfilUtilizador(utilizadoresPesquisados.get(i), false);
                     }
                     Main.pressEnterKey();
                     break;

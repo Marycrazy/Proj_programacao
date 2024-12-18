@@ -67,9 +67,8 @@ public class Administrador extends Utilizador {
                 break;
             }
             else {
-                Utilizador utilizador = inativos.get(escolha - 1);
-                utilizador.setEstado(true);
-                System.out.println("Utilizador " + utilizador.getLogin() + " aprovado com sucesso!");
+                inativos.get(escolha - 1).setEstado(true);
+                System.out.println("Utilizador " + inativos.get(escolha - 1).getLogin() + " aprovado com sucesso!");
                 Input.clearBuffer();
                 running = false;
             }
@@ -148,11 +147,10 @@ public class Administrador extends Utilizador {
                     Main.pressEnterKey();
                     break;
                 case "2":
-                    List<Utilizador> todosUtilizadores = Sistema.getInstance().getUtilizadores();
                     Main.clearConsole();
                     System.out.println("Todos os utilizadores:");
-                    for (int i = 0; i < todosUtilizadores.size(); i++) {
-                        perfilUtilizador(todosUtilizadores.get(i));
+                    for (int i = 0; i < Sistema.getInstance().getUtilizadores().size(); i++) {
+                        perfilUtilizador(Sistema.getInstance().getUtilizadores().get(i));
                     }
                     Main.pressEnterKey();
                     break;
@@ -190,7 +188,6 @@ public class Administrador extends Utilizador {
             }
         }
     }
-
 
     public static void loggedUserLoop(Utilizador user) {
         boolean running = true;

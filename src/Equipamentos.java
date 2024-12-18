@@ -128,6 +128,8 @@ public class Equipamentos implements Serializable {
         // Verifica a lista específica do equipamento
         if (categorias.size() >= 4) {
             System.out.println("Já atingiu o limite de categorias para este equipamento.");
+            Input.clearBuffer();
+            Main.pressEnterKey();
             return;
         }
         List<Categoria> cat = Sistema.getInstance().getCategorias();
@@ -186,7 +188,7 @@ public class Equipamentos implements Serializable {
             System.out.print("Selecione o equipamento a atualizar o"+ type + "(ou 0 para cancelar): ");
         }
         else if (type.equals("fornecedor") || type.equals("categoria")){
-            System.out.print("Selecione "+ type +" a adicionar o fornecedor (ou 0 para cancelar): ");
+            System.out.print("Selecione "+ type +" a adicionar ao equipamento (ou 0 para cancelar): ");
         }
         int escolha = Input.readInt();
         if (escolha == 0) {

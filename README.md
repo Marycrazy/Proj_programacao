@@ -24,7 +24,7 @@ contacto telefónico.
 - [ ] [R11] Os administradores  aprovam e encerram os  pedidos de serviço  (encomenda),  bem como  associam um técnico responsável a cada serviço.
 - [x] [R12] Os técnicos introduzem equipamentos, categorias e fornecedores.
 >[NOTE] vou assumir que quando for para intruduzir os equipamentos, já existam categoria e fornecedores criados e sendo assim ele tera de associar
-- [ ] [R13] Os clientes realizam pedidos de compras de equipamentos, que devem ser aprovadas pelos técnicos.
+- [ ] [R13] Os clientes realizam pedidos de compras de equipamentos
 - [ ] [R14] Os administradores podem gerir todas as vendas realizadas.
 - [ ] [R15] Os técnicos apenas podem gerir as suas vendas.
 - [ ] [R16] Os clientes apenas podem gerir as suas compras
@@ -33,6 +33,7 @@ contacto telefónico.
 - [ ] [R17] O serviço de compra inicia com o cliente a solicitar uma encomenda, indicando os produtos pretendidos.
 - [ ] [R18] O administrador aprova o serviço e associa um técnico responsável.
 - [ ] [R19] Após ser designado para um serviço, o técnico responsável regista a informação do processo,nomeadamente  pode  criar  sub-tarefas e associar  outros  técnicos  adicionais  às  sub-tarefas, e gere o processo até à sua conclusão.
+- > [Nota] quem faz o que e a desgninaçao da tarefas(montar pc)
 - [ ] [R20] Um serviço de compra (encomenda), além de ter associado um técnico responsável, inclui a listagem dos produtos incluídos (equipamentos de hardware, podendo definir a quantidade), uma data de realização do pedido, uma descrição, o estado e o tempo que demorou a ser processado o valor total da venda.
 - [ ] [R21] Adicionalmente, cada serviço possui um código identificador único e sequencial.
 - [ ] [R22] O estado do serviço apresenta um dos seguintes valores:
@@ -66,7 +67,7 @@ Equipment Manufacturer).
 - [ ] [R44] Deve ser possível listar serviços com tempo despendido superior a um determinado limite (introduzido pelo utilizador no momento de pesquisa).
 - [ ] [R45] Deve ser possível listar todos os equipamentos.
 - [ ] [R46] Deve ser possível listar equipamentos que sejam (ou não) OEM.
-- [ ] [R47] Deve  ser  possível  listar  equipamentos  com  uma  quantidade  de  stock  abaixo  de  um  determinado  limite 
+- [ ] [R47] Deve  ser  possível  listar  equipamentos  com  uma  quantidade  de  stock  abaixo  de  um  determinado  limite
 (introduzido pelo utilizador no momento de pesquisa).
 - [x] [R49] Deve ser possível pesquisar utilizadores por login ou nome.
 - [ ] [R50] Deve ser possível pesquisar serviços por código ou uma palavra que surja na descrição.

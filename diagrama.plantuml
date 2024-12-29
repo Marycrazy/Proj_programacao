@@ -154,6 +154,13 @@ class Sistema {
   +buscarUtilizadorPorLogin()
   +autenticarUtilizador()
 }
+
+enum EstadoServico {
+    SUBMETIDO
+    ACEITE
+    CONCLUIDO
+}
+
 class Servico {
         -int codigo
         -Date dataPedido
@@ -162,10 +169,14 @@ class Servico {
         -double tempoProcessamento
         -double valorTotal
         -List~Equipamento~ equipamentos
-        -Map~Equipamento, Integer~ quantidades
-        +calcularValorTotal()
-        +adicionarEquipamento()
-        +concluirServico()
+        -List~Integer~ quantidades
+        -List~SubServico~ subServicos
+        -Tecnico tecnicoResponsavel
+}
+
+class SubServico{
+    String designacao
+    Tecnico tecnicoResponsavel
 }
 
 class Equipamentos {
@@ -281,4 +292,5 @@ Categoria <-- Sistema
 Fornecedor <-- Equipamentos
 Fornecedor -- Input
 Fornecedor <-- Sistema
-
+SubServico <-- Servico
+Servico --> EstadoServico

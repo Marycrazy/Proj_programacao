@@ -375,7 +375,7 @@ public class Equipamentos implements Serializable {
                 case "5":
                     System.out.print("Marca ou Código Interno: ");
                     String marcaOuCodigo = Input.readLine();
-                    List<Equipamentos> marcaOuCodigoList = Sistema.getInstance().getEquipamentos().stream().filter(e -> e.getMarca().contains(marcaOuCodigo) || e.getCodigoInterno().contains(marcaOuCodigo)).toList();
+                    List<Equipamentos> marcaOuCodigoList = Sistema.getInstance().getEquipamentos().stream().filter(e -> e.getMarca().contains(marcaOuCodigo) || e.getCodigoInterno().contains(marcaOuCodigo.toLowerCase())).toList();
                     System.out.println("Equipamentos com a marca ou código interno "+marcaOuCodigo+":\n");
                     for (int i = 0; i < marcaOuCodigoList.size(); i++) {
                         listarEquipamentos(marcaOuCodigoList.get(i), i);

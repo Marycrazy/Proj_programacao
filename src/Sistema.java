@@ -8,7 +8,7 @@ public class Sistema implements Serializable {
 
     // Listas para armazenar utilizadores, serviços e equipamentos
     private List<Utilizador> utilizadores;
-    //private List<Servico> servicos;
+    private List<Servicos> servicos;
     private List<Equipamentos> equipamentos;
     private List<Categoria> categorias;
     private List<Fornecedor> fornecedores;

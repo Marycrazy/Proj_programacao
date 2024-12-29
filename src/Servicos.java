@@ -1,7 +1,6 @@
 package src;
 import java.sql.Date;
 import java.util.List;
-import java.util.Map;
 public class Servicos {
     private int codigo;
     private Date data;
@@ -9,6 +8,8 @@ public class Servicos {
     private String estado;
     private double tempoProcessamento;
     private double valorTotal;
+    private Tecnicos tecnicoResponsavel;
     private List<Equipamentos> equipamento;
-    private Map <Equipamentos, Integer> quantidades;
+    private List<Integer> quantidades;
+    private List<SubServico> subServicos;
 }

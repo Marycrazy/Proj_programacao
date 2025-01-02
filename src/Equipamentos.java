@@ -233,7 +233,7 @@ public class Equipamentos implements Serializable {
         return equipamento;
     }
 
-    private static void listarEquipamentos(Equipamentos equipamentos, int i) {
+    public static void listarEquipamentos(Equipamentos equipamentos, int i) {
         System.out.println((i + 1) + ".\n"+"Marca: " + equipamentos.getMarca() + " Modelo: " + equipamentos.getModelo() +
         "\nCódigo Interno: " + equipamentos.getCodigoInterno() + " Preço de Venda: " + equipamentos.getPrecoVenda() +
         "\nOEM: " + (equipamentos.isOEM() ? "Sim" : "Não") + " Quantidade de Stock: " + equipamentos.getQuantidadeStock() + "\n");

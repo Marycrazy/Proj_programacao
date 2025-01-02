@@ -29,7 +29,7 @@ public class Sistema implements Serializable {
     // Construtor
     public Sistema() {
         this.utilizadores = new ArrayList<>();
-        //this.servicos = new ArrayList<>();
+        this.servicos = new ArrayList<>();
         this.equipamentos = new ArrayList<>();
         this.categorias = new ArrayList<>();
         this.fornecedores = new ArrayList<>(); // Inicializando a lista de fornecedores
@@ -51,9 +51,9 @@ public class Sistema implements Serializable {
         System.out.println("utilizador adicionado: " + utilizador.getLogin());
     }
 
-    /*public void adicionarServico(Servico servico) {
+    public void adicionarServico(Servicos servico) {
         this.servicos.add(servico);
-    }*/
+    }
 
     public void adicionarEquipamento(Equipamentos equipamento) {
         this.equipamentos.add(equipamento);
@@ -83,6 +83,10 @@ public class Sistema implements Serializable {
 
     public List<Fornecedor> getFornecedores() {
         return fornecedores;
+    }
+
+    public List<Servicos> getServicos() {
+        return servicos;
     }
 
     public void carregarDados() {
@@ -165,6 +169,20 @@ public class Sistema implements Serializable {
                                     for (Categoria categoria : equipamento.getCategorias()) {
                                         System.out.println("Categoria: " + categoria.getDesignacao());
                                     }
+        }
+        System.out.println("\nServiços cadastrados:");
+        for (Servicos servico : servicos) {
+            System.out.println("\n codigo: " + servico.getCodigo() +
+                               " Designação: " + servico.getDescricao() +
+                               ", Estado: " + servico.getEstado() +
+                               ", Tempo de Processamento: " + servico.getTempoProcessamento() +
+                               ", Valor Total: " + servico.getValorTotal());
+            for (Equipamentos equipamento : servico.getEquipamento()) {
+                System.out.println("Equipamento: " + equipamento.getMarca() + " " + equipamento.getModelo());
+            }
+            for (SubServico subServico : servico.getSubServicos()) {
+                System.out.println("Subserviço: " + subServico.getDesignacao());
+            }
         }
     }
 

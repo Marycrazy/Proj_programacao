@@ -1,5 +1,9 @@
 package src;
 
+import java.util.Date;
+import java.util.List;
+
+
 public class Cliente extends Utilizador {
     private static final long serialVersionUID = 1L;
     private String NIF;
@@ -113,15 +117,73 @@ public class Cliente extends Utilizador {
         }
     }
 
+    private static void realizarPedido() {
+        Main.clearConsole();
+        List<Equipamentos> equipamentos = Sistema.getInstance().getEquipamentos();
+        System.out.println("Realizar Pedido");
+        System.out.println("*******************");
+        System.out.println("Lista de equipamentos");
+        for (int i = 0; i < equipamentos.size(); i++){
+            Equipamentos.listarEquipamentos(equipamentos.get(i), i);
+        }
+        System.out.println("*******************");
+        boolean running = true;
+        Servicos pedido = new Servicos(new Date(), "", 0);
+        do {
+            System.out.println("Escolha o equipamento que deseja comprar ou 0 para sair.");
+            System.out.print("ID: ");
+            int id = Input.readInt();
+            if (id == 0) {
+                System.out.println("A voltar ao menu principal.");
+                Main.pressEnterKey();
+                running = false;
+            }
+           else if (id <= 0 || id > equipamentos.size()) {
+                System.out.println("ID inválido. Por favor tente novamente.");
+                Main.pressEnterKey();
+                continue;
+            }
+            else {
+                System.out.println("Quantidade: ");
+                int quantidade = Input.readInt();
+                pedido.adicionarEquipamento(equipamentos.get(id-1), quantidade);
+                Input.clearBuffer();
+                System.out.println("Deseja adicionar mais algum equipamento ao pedido? (S/N)");
+                String addEquipamento = Input.readLine();
+                if (addEquipamento.equalsIgnoreCase("S")) {
+                    continue;
+                }
+                else {
+                    System.out.println("Deseja adicionar alguma descrição ao pedido (ex: Montagem, instalação de algo)? (S/N)");
+                    String descricao = Input.readLine();
+                    if (descricao.equalsIgnoreCase("S")) {
+                        System.out.println("Descrição: ");
+                        descricao = Input.readLine();
+                    }
+                    else {
+                        descricao = "Sem descrição.";
+                    }
+                    pedido.setValorTotal(pedido.calcularValorTotal());
+                    pedido.setDescricao(descricao);
+                    Sistema.getInstance().adicionarServico(pedido);
+                    System.out.println("Pedido realizado com sucesso. Valor total: " + pedido.getValorTotal());
+                    Main.pressEnterKey();
+                    running = false;
+                }
+            }
+        } while (running);
+    }
+
     public static void loggedUserLoop(Utilizador user) {
         boolean running = true;
         while (running) {
             Main.clearConsole();
-            System.out.println("|------------------------|");
-            System.out.println("|1. Editar perfil        |");
-            System.out.println("|2. Listar equipamentos  |");
-            System.out.println("|4. Sair                 |");
-            System.out.println("|------------------------|");
+            System.out.println("|------------------------------------|");
+            System.out.println("|1. Editar perfil                    |");
+            System.out.println("|2. Listar equipamentos              |");
+            System.out.println("|3. Realizar um pedido de compra     |");
+            System.out.println("|4. Sair                             |");
+            System.out.println("|------------------------------------|");
             System.out.print("Option: ");
             String option = Input.readLine();
             switch (option) {
@@ -132,6 +194,7 @@ public class Cliente extends Utilizador {
                     Equipamentos.listarEquipamentosLoop();
                     break;
                 case "3":
+                    realizarPedido();
                     break;
                 case "4":
                     Main.clearConsole();

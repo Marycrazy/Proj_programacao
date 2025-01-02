@@ -54,7 +54,7 @@ Equipment Manufacturer).
 - [x] [R30] Cada série possui uma geração e sequência (atributos numéricos).
 - [x] [R31] Cada versão é caracterizada pela unidade, valor alfa e valor beta (atributos numéricos).
 - [x] [R32] É possível alterar a quantidade em stock de um equipamento.
-- [ ] [R33] Sempre que um equipamento é vendido,a quantidade em stock deve ser actualizada.
+- [x] [R33] Sempre que um equipamento é vendido,a quantidade em stock deve ser actualizada.
 
 ## Listagem de Pesquisas
 - [x] [R36] Deve ser possível ordenar utilizadores por ordem alfabética do nome.

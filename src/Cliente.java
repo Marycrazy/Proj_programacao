@@ -154,12 +154,14 @@ public class Cliente extends Utilizador {
             System.out.println("Deseja adicionar mais algum equipamento ao pedido? (S/N)");
             String addEquipamento = Input.readLine();
             if (addEquipamento.equalsIgnoreCase("S")) {
+                equipamentos.get(id-1).setQuantidadeStock(equipamentos.get(id-1).getQuantidadeStock() - quantidade);
                 return true;
             }
             else {
                 String descricao = handleDescricao(pedido);
                 pedido.setValorTotal(pedido.calcularValorTotal());
                 pedido.setDescricao(descricao);
+                equipamentos.get(id-1).setQuantidadeStock(equipamentos.get(id-1).getQuantidadeStock() - quantidade);
                 Sistema.getInstance().adicionarServico(pedido);
                 System.out.println("Pedido realizado com sucesso. Valor total: " + pedido.getValorTotal());
                 Main.pressEnterKey();

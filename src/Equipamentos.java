@@ -81,8 +81,8 @@ public class Equipamentos implements Serializable {
         return categorias;
     }
 
-    public void setQuantidadeStock() {
-        this.quantidadeStock = Integer.parseInt(Validator.validateInput("Quantidade de Stock"));
+    public void setQuantidadeStock(int quantidadeStock) {
+        this.quantidadeStock = quantidadeStock;
     }
 
     private static void addFornecedor(List<Fornecedor> fornecedores) {
@@ -252,7 +252,7 @@ public class Equipamentos implements Serializable {
         }
         else {
             Input.clearBuffer();
-            equipamentos.get(escolha - 1).setQuantidadeStock();
+            equipamentos.get(escolha - 1).setQuantidadeStock(Integer.parseInt(Validator.validateInput("Quantidade de Stock")));
             System.out.println("Stock atualizado com sucesso!");
             Main.pressEnterKey();
         }

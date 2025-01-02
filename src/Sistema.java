@@ -174,6 +174,7 @@ public class Sistema implements Serializable {
         for (Servicos servico : servicos) {
             System.out.println("\n codigo: " + servico.getCodigo() +
                                " Designação: " + servico.getDescricao() +
+                               ", Data: " + servico.getData() +
                                ", Estado: " + servico.getEstado() +
                                ", Tempo de Processamento: " + servico.getTempoProcessamento() +
                                ", Valor Total: " + servico.getValorTotal());

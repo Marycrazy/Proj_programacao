@@ -67,7 +67,9 @@ public class Validator {
         Map.entry("voltagem", Validator::isValidFloatNumeric),
         Map.entry("quantidade de stock", Validator::isValidIntegerNumeric),
         Map.entry("preço de venda", Validator::isValidFloatNumeric),
-        Map.entry("observações", Validator::isValidObs)
+        Map.entry("observações", Validator::isValidObs),
+        Map.entry("quantidade", Validator::isValidIntegerNumeric),
+        Map.entry("descrição", Validator::isValidObs)
     );
 
     public static String validatePassword(String type) {

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.io.Serializable;
 public class Servicos implements Serializable {
     private static final long serialVersionUID = 1L;
+    private Cliente cliente;
     private int codigo;
     private Date data;
     private String descricao;
@@ -16,8 +17,9 @@ public class Servicos implements Serializable {
     private List<Integer> quantidades;
     private List<SubServico> subServicos;
 
-    public Servicos(Date data, String descricao, double valorTotal) {
+    public Servicos(Cliente cliente, Date data, String descricao, double valorTotal) {
         this.codigo = Sistema.getInstance().getServicos().size() + 1;
+        this.cliente = cliente;
         this.data = data;
         this.descricao = descricao;
         this.estado = EstadoServico.SUBMETIDO;
@@ -25,6 +27,9 @@ public class Servicos implements Serializable {
         this.equipamento = new ArrayList<>();
         this.quantidades = new ArrayList<>();
         this.subServicos = new ArrayList<>();
+    }
+    public Cliente getCliente() {
+        return cliente;
     }
     public int getCodigo() {
         return codigo;
@@ -95,5 +100,21 @@ public class Servicos implements Serializable {
             valorTotal += this.equipamento.get(i).getPrecoVenda() * this.quantidades.get(i);
         }
         return valorTotal;
+    }
+
+    public static int quantidadeequipamento(Equipamentos equipamento) {
+        int quantidade;
+        boolean check = true;
+        do {
+            quantidade = Integer.parseInt(Validator.validateInput("Quantidade"));
+            if (quantidade > equipamento.getQuantidadeStock() || quantidade <= 0) {
+                System.out.println("Quantidade indisponível. Por favor tente novamente.");
+                continue;
+            }
+            else {
+                check = false;
+            }
+            } while (check);
+        return quantidade;
     }
 }

@@ -117,7 +117,7 @@ public class Cliente extends Utilizador {
         }
     }
 
-    private static void realizarPedido() {
+    private static void realizarPedido(Utilizador user) {
         Main.clearConsole();
         List<Equipamentos> equipamentos = Sistema.getInstance().getEquipamentos();
         System.out.println("Realizar Pedido");
@@ -128,50 +128,58 @@ public class Cliente extends Utilizador {
         }
         System.out.println("*******************");
         boolean running = true;
-        Servicos pedido = new Servicos(new Date(), "", 0);
+        Servicos pedido = new Servicos((Cliente)user, new Date(), "", 0);
         do {
-            System.out.println("Escolha o equipamento que deseja comprar ou 0 para sair.");
-            System.out.print("ID: ");
-            int id = Input.readInt();
-            if (id == 0) {
-                System.out.println("A voltar ao menu principal.");
-                Main.pressEnterKey();
-                running = false;
-            }
-           else if (id <= 0 || id > equipamentos.size()) {
-                System.out.println("ID inválido. Por favor tente novamente.");
-                Main.pressEnterKey();
-                continue;
+            running = processPedido(equipamentos, pedido);
+        } while (running);
+    }
+
+    private static boolean processPedido(List<Equipamentos> equipamentos, Servicos pedido) {
+        System.out.println("Escolha o equipamento que deseja comprar ou 0 para sair.");
+        System.out.print("ID: ");
+        int id = Input.readInt();
+        Input.clearBuffer();
+        if (id == 0) {
+            System.out.println("A voltar ao menu principal.");
+            Main.pressEnterKey();
+            return false;
+        }
+        else if (id <= 0 || id > equipamentos.size()) {
+            System.out.println("ID inválido. Por favor tente novamente.");
+            Main.pressEnterKey();
+        }
+        else {
+            int quantidade = Servicos.quantidadeequipamento(equipamentos.get(id-1));
+            pedido.adicionarEquipamento(equipamentos.get(id-1), quantidade);
+            System.out.println("Deseja adicionar mais algum equipamento ao pedido? (S/N)");
+            String addEquipamento = Input.readLine();
+            if (addEquipamento.equalsIgnoreCase("S")) {
+                return true;
             }
             else {
-                System.out.println("Quantidade: ");
-                int quantidade = Input.readInt();
-                pedido.adicionarEquipamento(equipamentos.get(id-1), quantidade);
-                Input.clearBuffer();
-                System.out.println("Deseja adicionar mais algum equipamento ao pedido? (S/N)");
-                String addEquipamento = Input.readLine();
-                if (addEquipamento.equalsIgnoreCase("S")) {
-                    continue;
-                }
-                else {
-                    System.out.println("Deseja adicionar alguma descrição ao pedido (ex: Montagem, instalação de algo)? (S/N)");
-                    String descricao = Input.readLine();
-                    if (descricao.equalsIgnoreCase("S")) {
-                        System.out.println("Descrição: ");
-                        descricao = Input.readLine();
-                    }
-                    else {
-                        descricao = "Sem descrição.";
-                    }
-                    pedido.setValorTotal(pedido.calcularValorTotal());
-                    pedido.setDescricao(descricao);
-                    Sistema.getInstance().adicionarServico(pedido);
-                    System.out.println("Pedido realizado com sucesso. Valor total: " + pedido.getValorTotal());
-                    Main.pressEnterKey();
-                    running = false;
-                }
+                String descricao = handleDescricao(pedido);
+                pedido.setValorTotal(pedido.calcularValorTotal());
+                pedido.setDescricao(descricao);
+                Sistema.getInstance().adicionarServico(pedido);
+                System.out.println("Pedido realizado com sucesso. Valor total: " + pedido.getValorTotal());
+                Main.pressEnterKey();
+                return false;
             }
-        } while (running);
+        }
+        return true;
+    }
+
+    private static String handleDescricao(Servicos pedido) {
+        System.out.println("Deseja adicionar alguma descrição ao pedido (ex: Montagem, instalação de algo)? (S/N)");
+        String descricao = Input.readLine();
+        if (descricao.equalsIgnoreCase("S")) {
+            System.out.println("Descrição deve ter no maximo 500 caracteres.");
+            descricao = Validator.validateInput("Descrição");
+        }
+        else {
+            descricao = "Sem descrição.";
+        }
+        return descricao;
     }
 
     public static void loggedUserLoop(Utilizador user) {
@@ -194,7 +202,7 @@ public class Cliente extends Utilizador {
                     Equipamentos.listarEquipamentosLoop();
                     break;
                 case "3":
-                    realizarPedido();
+                    realizarPedido(user);
                     break;
                 case "4":
                     Main.clearConsole();

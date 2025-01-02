@@ -30,13 +30,13 @@ contacto telefónico.
 - [ ] [R16] Os clientes apenas podem gerir as suas compras
 
 ### Ações
-- [ ] [R17] O serviço de compra inicia com o cliente a solicitar uma encomenda, indicando os produtos pretendidos.
+- [x] [R17] O serviço de compra inicia com o cliente a solicitar uma encomenda, indicando os produtos pretendidos.
 - [ ] [R18] O administrador aprova o serviço e associa um técnico responsável.
 - [ ] [R19] Após ser designado para um serviço, o técnico responsável regista a informação do processo,nomeadamente  pode  criar  sub-tarefas e associar  outros  técnicos  adicionais  às  sub-tarefas, e gere o processo até à sua conclusão.
 - > [Nota] quem faz o que (tecnico responsavel nomeado pelo tecnico responsavel pelo serviço) e a desgninaçao da tarefas(montar pc)
-- [ ] [R20] Um serviço de compra (encomenda), além de ter associado um técnico responsável, inclui a listagem dos produtos incluídos (equipamentos de hardware, podendo definir a quantidade), uma data de realização do pedido, uma descrição, o estado e o tempo que demorou a ser processado o valor total da venda.
-- [ ] [R21] Adicionalmente, cada serviço possui um código identificador único e sequencial.
-- [ ] [R22] O estado do serviço apresenta um dos seguintes valores:
+- [x] [R20] Um serviço de compra (encomenda), além de ter associado um técnico responsável, inclui a listagem dos produtos incluídos (equipamentos de hardware, podendo definir a quantidade), uma data de realização do pedido, uma descrição, o estado e o tempo que demorou a ser processado o valor total da venda.
+- [x] [R21] Adicionalmente, cada serviço possui um código identificador único e sequencial.
+- [x] [R22] O estado do serviço apresenta um dos seguintes valores:
 > [NOTE] a) se o serviço está *submetido* (cliente realizou o pedido, mas ainda não foi aceite pelo administrador);
 - > b) se a serviço foi *aceite* (administrador aceita o serviço);
 - > c) ou se já foi *concluído* (técnico responsável termina o processo).

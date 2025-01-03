@@ -102,6 +102,28 @@ public class Servicos implements Serializable {
         return valorTotal;
     }
 
+    public static void listarServicos(List<Servicos> submetidos) {
+        if (submetidos == null) {
+            System.out.println("Nenhum serviço submetido encontrado.");
+            return;
+        }
+        else {
+            System.out.println("\nServiços submetidos:");
+            for (int i = 0; i < submetidos.size(); i++) {
+                System.out.println((i + 1) + ".");
+                System.out.println("Cliente: " + submetidos.get(i).getCliente().getNome());
+                System.out.println("Data: " + submetidos.get(i).getData());
+                System.out.println("Descrição: " + submetidos.get(i).getDescricao());
+                for (int j = 0; j < submetidos.get(i).getEquipamento().size(); j++) {
+                    System.out.println("\t Equipamento: \n \t\tMarca: " + submetidos.get(i).getEquipamento().get(j).getMarca() + "\t Modelo: " + submetidos.get(i).getEquipamento().get(j).getModelo());
+                    System.out.println("\t\t observações: " + submetidos.get(i).getEquipamento().get(j).getObservacoes() + "\t\t OEM: " + submetidos.get(i).getEquipamento().get(j).isOEM());
+                    System.out.println("\t\t Quantidade de venda: " + submetidos.get(i).getQuantidades().get(j));
+                }
+                System.out.println("Valor total: " + submetidos.get(i).getValorTotal());
+            }
+        }
+    }
+
     public static int quantidadeequipamento(Equipamentos equipamento) {
         int quantidade;
         boolean check = true;

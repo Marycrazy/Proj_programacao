@@ -194,15 +194,73 @@ public class Administrador extends Utilizador {
         }
     }
 
+    private static List<Servicos> getServicosSubmetidos() {
+        List<Servicos> submetidos = Sistema.getInstance().getServicos().stream().filter(s -> s.getEstado().equals(Servicos.EstadoServico.SUBMETIDO)).toList();
+        if (submetidos.isEmpty()) {
+            return null;
+        }
+        else {
+            return submetidos;
+        }
+    }
+
+    private static void associarTecnico(Servicos servicos){
+        List<Utilizador> utilizadoresPorTipo = Sistema.getInstance().getUtilizadores().stream()
+        .filter(u -> u.getTipo().equalsIgnoreCase("tecnico") && u.getEstado())
+        .toList();
+        System.out.println("Tecnicos:");
+                    for (int i = 0; i < utilizadoresPorTipo.size(); i++) {
+                        System.out.println((i + 1) + ".");
+                        perfilUtilizador(utilizadoresPorTipo.get(i), false);
+                    }
+        System.out.print("Selecione o tecnico a associar ao serviço:");
+        int escolha = Input.readInt();
+        if (utilizadoresPorTipo.get(escolha - 1).getEstado()) {
+            Tecnicos tecnicoSelecionado = (Tecnicos) utilizadoresPorTipo.get(escolha - 1);
+            servicos.setTecnicoResponsavel(tecnicoSelecionado);
+            System.out.println("Técnico " + tecnicoSelecionado.getNome() + " associado com sucesso ao serviço.");
+            Input.clearBuffer();
+            Main.pressEnterKey();
+        }
+        else {
+            System.out.println("Tecnico inativo. Por favor selecione outro.");
+            Input.clearBuffer();
+            Main.pressEnterKey();
+            associarTecnico(servicos);
+        }
+    }
+
+    public static void aprovadoServico() {
+        List<Servicos> submetidos = getServicosSubmetidos();
+        Servicos.listarServicos(submetidos);
+        System.out.print("Selecione o serviço a aprovar (ou 0 para cancelar): ");
+        int escolha = Input.readInt();
+        if (escolha == 0) {
+            System.out.println("A voltar ao menu principal.");
+            Main.pressEnterKey();
+        }
+        else {
+            submetidos.get(escolha - 1).setEstado(Servicos.EstadoServico.ACEITE);
+            System.out.println("Serviço " + submetidos.get(escolha - 1).getCliente().getNome() + " aprovado com sucesso!");
+            System.out.println("Associar um tecnico responsável ao serviço.");
+            associarTecnico(submetidos.get(escolha - 1));
+            System.out.println("Tecnico associado com sucesso!");
+            Input.clearBuffer();
+            Main.pressEnterKey();
+        }
+    }
+
     public static void loggedUserLoop(Utilizador user) {
         boolean running = true;
         while (running) {
             Main.clearConsole();
             System.out.println("|-------------------------------------|");
             System.out.println("|Tens "+ (getUtilizadoresInativos() != null ? getUtilizadoresInativos().size() : 0) + " pedidos de registo por aprovar|");
+            System.out.println("|Tens "+ (getServicosSubmetidos() != null ? getServicosSubmetidos().size() : 0) + " pedidos de serviço por aprovar|");
             System.out.println("|-------------------------------------|");
             System.out.println("|1. Editar perfil                     |");
             System.out.println("|2. Aprovar Registo                   |");
+            System.out.println("|3. Aprovar Serviço                   |");
             System.out.println("|4. Listagem de utilizadores          |");
             System.out.println("|5. Sair                              |");
             System.out.println("|-------------------------------------|");
@@ -216,6 +274,8 @@ public class Administrador extends Utilizador {
                     aprovarRegisto();
                     break;
                 case "3":
+                    System.out.println("Aprovar Serviço");
+                    aprovadoServico();
                     break;
                 case "4":
                     listagemUtilizadores();

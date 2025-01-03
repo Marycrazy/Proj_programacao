@@ -1,5 +1,7 @@
 package src;
 
+import java.util.List;
+
 public class Tecnicos extends Utilizador{
     private static final long serialVersionUID = 1L;
     private String NIF;
@@ -112,17 +114,29 @@ public class Tecnicos extends Utilizador{
         }
     }
 
+    private static List<Servicos> getServicosTecnico(Tecnicos tecnico) {
+        List<Servicos> servicosTecnico = Sistema.getInstance().getServicos().stream().filter(s -> s.getTecnicoResponsavel().equals(tecnico)).toList();
+        if (servicosTecnico.isEmpty()) {
+            return null;
+        }
+        else {
+            return servicosTecnico;
+        }
+    }
+
     public static void loggedUserLoop(Utilizador user) {
         boolean running = true;
         while (running) {
             Main.clearConsole();
-            System.out.println("|-----------------------------|");
-            System.out.println("|1. Editar perfil             |");
-            System.out.println("|2. Gerir equipamento         |");
-            System.out.println("|3. Adicionar fornecedor      |");
-            System.out.println("|4. Adicionar categoria       |");
-            System.out.println("|5. Sair                      |");
-            System.out.println("|-----------------------------|");
+            System.out.println("|--------------------------------|");
+            System.out.println("|Tens "+ (getServicosTecnico((Tecnicos) user) != null ? getServicosTecnico((Tecnicos) user).size() : 0) + " serviços associados a ti |");
+            System.out.println("|--------------------------------|");
+            System.out.println("|1. Editar perfil                |");
+            System.out.println("|2. Gerir equipamento            |");
+            System.out.println("|3. Adicionar fornecedor         |");
+            System.out.println("|4. Adicionar categoria          |");
+            System.out.println("|5. Sair                         |");
+            System.out.println("|--------------------------------|");
             System.out.print("Option: ");
             String option = Input.readLine();
             switch (option) {

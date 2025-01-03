@@ -178,7 +178,8 @@ public class Sistema implements Serializable {
                                ", Data: " + servico.getData() +
                                ", Estado: " + servico.getEstado() +
                                ", Tempo de Processamento: " + servico.getTempoProcessamento() +
-                               ", Valor Total: " + servico.getValorTotal());
+                               ", Valor Total: " + servico.getValorTotal() +
+                               ", Tecnico Responsavel: " + servico.getTecnicoResponsavel().getNome());
             for (Equipamentos equipamento : servico.getEquipamento()) {
                 System.out.println("Equipamento: " + equipamento.getMarca() + " " + equipamento.getModelo());
                 System.out.println("Quantidade: " + servico.getQuantidades().get(servico.getEquipamento().indexOf(equipamento)));

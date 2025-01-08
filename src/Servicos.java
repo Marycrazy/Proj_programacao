@@ -102,7 +102,7 @@ public class Servicos implements Serializable {
         return valorTotal;
     }
 
-    public static void listarServicos(List<Servicos> submetidos) {
+    public static void listarServicos(List<Servicos> submetidos, boolean mostrar) {
         if (submetidos == null) {
             System.out.println("Nenhum serviço submetido encontrado.");
             return;
@@ -114,12 +114,18 @@ public class Servicos implements Serializable {
                 System.out.println("Cliente: " + submetidos.get(i).getCliente().getNome());
                 System.out.println("Data: " + submetidos.get(i).getData());
                 System.out.println("Descrição: " + submetidos.get(i).getDescricao());
+                System.out.println("Estado: " + submetidos.get(i).getEstado());
                 for (int j = 0; j < submetidos.get(i).getEquipamento().size(); j++) {
-                    System.out.println("\t Equipamento: \n \t\tMarca: " + submetidos.get(i).getEquipamento().get(j).getMarca() + "\t Modelo: " + submetidos.get(i).getEquipamento().get(j).getModelo());
-                    System.out.println("\t\t observações: " + submetidos.get(i).getEquipamento().get(j).getObservacoes() + "\t\t OEM: " + submetidos.get(i).getEquipamento().get(j).isOEM());
-                    System.out.println("\t\t Quantidade de venda: " + submetidos.get(i).getQuantidades().get(j));
+                    System.out.println("\t Equipamento: \n \t\t");
+                    Equipamentos.listarEquipamentos(submetidos.get(i).getEquipamento().get(j));
                 }
                 System.out.println("Valor total: " + submetidos.get(i).getValorTotal());
+                if(mostrar){
+                    System.out.println("Técnico responsável: " + submetidos.get(i).getTecnicoResponsavel().getNome());
+                    System.out.println("Tempo de processamento: " + submetidos.get(i).getTempoProcessamento());
+                    System.out.println("Subserviços:");
+                    SubServico.listarSubServico(submetidos.get(i).getSubServicos());
+                }
             }
         }
     }

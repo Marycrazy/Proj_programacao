@@ -169,7 +169,8 @@ public class Equipamentos implements Serializable {
         List<Equipamentos> equipamentos = Sistema.getInstance().getEquipamentos();
         System.out.println("Equipamentos:\n");
         for (int i = 0; i < equipamentos.size(); i++) {
-            listarEquipamentos(equipamentos.get(i), i);
+            System.out.println(i + 1 + ".");
+            listarEquipamentos(equipamentos.get(i));
         }
         int escolha = select(type);
         if (escolha == 0) {
@@ -233,8 +234,8 @@ public class Equipamentos implements Serializable {
         return equipamento;
     }
 
-    public static void listarEquipamentos(Equipamentos equipamentos, int i) {
-        System.out.println((i + 1) + ".\n"+"Marca: " + equipamentos.getMarca() + " Modelo: " + equipamentos.getModelo() +
+    public static void listarEquipamentos(Equipamentos equipamentos) {
+        System.out.println("Marca: " + equipamentos.getMarca() + " Modelo: " + equipamentos.getModelo() +
         "\nCódigo Interno: " + equipamentos.getCodigoInterno() + " Preço de Venda: " + equipamentos.getPrecoVenda() +
         "\nOEM: " + (equipamentos.isOEM() ? "Sim" : "Não") + " Quantidade de Stock: " + equipamentos.getQuantidadeStock() + "\n");
     }
@@ -244,7 +245,8 @@ public class Equipamentos implements Serializable {
         List<Equipamentos> equipamentos = Sistema.getInstance().getEquipamentos();
         System.out.println("Equipamentos:\n");
         for (int i = 0; i < equipamentos.size(); i++) {
-            listarEquipamentos(equipamentos.get(i), i);
+            System.out.println(i + 1 + ".");
+            listarEquipamentos(equipamentos.get(i));
         }
         int escolha = select("stock");
         if (escolha == 0) {
@@ -330,7 +332,8 @@ public class Equipamentos implements Serializable {
                     List<Equipamentos> modelo = Sistema.getInstance().getEquipamentos().stream().filter(e -> e.getModelo().contains(designacao)).toList();
                     System.out.println("Equipamentos com o seguinte moedelo "+designacao+":\n");
                     for (int i = 0; i < modelo.size(); i++) {
-                        listarEquipamentos(modelo.get(i), i);
+                        System.out.println(i + 1 + ".");
+                        listarEquipamentos(modelo.get(i));
                     }
                     Main.pressEnterKey();
                     break;
@@ -338,7 +341,8 @@ public class Equipamentos implements Serializable {
                     List<Equipamentos> equipamentos = Sistema.getInstance().getEquipamentos();
                     System.out.println("Equipamentos:\n");
                     for (int i = 0; i < equipamentos.size(); i++) {
-                        listarEquipamentos(equipamentos.get(i), i);
+                        System.out.println(i + 1 + ".");
+                        listarEquipamentos(equipamentos.get(i));
                     }
                     Main.pressEnterKey();
                     break;
@@ -349,14 +353,16 @@ public class Equipamentos implements Serializable {
                         List<Equipamentos> equipamentosOEM = Sistema.getInstance().getEquipamentos().stream().filter(e -> e.isOEM()).toList();
                         System.out.println("Equipamentos OEM:\n");
                         for (int i = 0; i < equipamentosOEM.size(); i++) {
-                            listarEquipamentos(equipamentosOEM.get(i), i);
+                            System.out.println(i + 1 + ".");
+                            listarEquipamentos(equipamentosOEM.get(i));
                         }
                     }
                     else{
                         List<Equipamentos> equipamentosOEM = Sistema.getInstance().getEquipamentos().stream().filter(e -> !e.isOEM()).toList();
                         System.out.println("Equipamentos não OEM:\n");
                         for (int i = 0; i < equipamentosOEM.size(); i++) {
-                            listarEquipamentos(equipamentosOEM.get(i), i);
+                            System.out.println(i + 1 + ".");
+                            listarEquipamentos(equipamentosOEM.get(i));
                         }
                     }
                     Main.pressEnterKey();
@@ -367,7 +373,8 @@ public class Equipamentos implements Serializable {
                     List<Equipamentos> stockList = Sistema.getInstance().getEquipamentos().stream().filter(e -> e.getQuantidadeStock() <= limiteEstoque).toList();
                     System.out.println("Equipamentos com stock menor ou igual a "+limiteEstoque+":\n");
                     for (int i = 0; i < stockList.size(); i++) {
-                        listarEquipamentos(stockList.get(i), i);
+                        System.out.println(i + 1 + ".");
+                        listarEquipamentos(stockList.get(i));
                     }
                     Input.clearBuffer();
                     Main.pressEnterKey();
@@ -378,7 +385,8 @@ public class Equipamentos implements Serializable {
                     List<Equipamentos> marcaOuCodigoList = Sistema.getInstance().getEquipamentos().stream().filter(e -> e.getMarca().contains(marcaOuCodigo) || e.getCodigoInterno().contains(marcaOuCodigo.toLowerCase())).toList();
                     System.out.println("Equipamentos com a marca ou código interno "+marcaOuCodigo+":\n");
                     for (int i = 0; i < marcaOuCodigoList.size(); i++) {
-                        listarEquipamentos(marcaOuCodigoList.get(i), i);
+                        System.out.println(i + 1 + ".");
+                        listarEquipamentos(marcaOuCodigoList.get(i));
                     }
                     Main.pressEnterKey();
                     break;
@@ -388,7 +396,8 @@ public class Equipamentos implements Serializable {
                     List<Equipamentos> categoriaList = Sistema.getInstance().getEquipamentos().stream().filter(e -> e.getCategorias().stream().anyMatch(c -> c.getDesignacao().contains(categoria))).toList();
                     System.out.println("Equipamentos com a categoria "+categoria+":\n");
                     for (int i = 0; i < categoriaList.size(); i++) {
-                        listarEquipamentos(categoriaList.get(i), i);
+                        System.out.println(i + 1 + ".");
+                        listarEquipamentos(categoriaList.get(i));
                         Categoria.listarCategorias(categoriaList.get(i).getCategorias(), false);
                     }
                     Main.pressEnterKey();

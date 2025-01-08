@@ -31,7 +31,7 @@ contacto telefónico.
 
 ### Ações
 - [x] [R17] O serviço de compra inicia com o cliente a solicitar uma encomenda, indicando os produtos pretendidos.
-- [ ] [R18] O administrador aprova o serviço e associa um técnico responsável.
+- [x] [R18] O administrador aprova o serviço e associa um técnico responsável.
 - [ ] [R19] Após ser designado para um serviço, o técnico responsável regista a informação do processo,nomeadamente  pode  criar  sub-tarefas e associar  outros  técnicos  adicionais  às  sub-tarefas, e gere o processo até à sua conclusão.
 - > [Nota] quem faz o que (tecnico responsavel nomeado pelo tecnico responsavel pelo serviço) e a desgninaçao da tarefas(montar pc)
 - [x] [R20] Um serviço de compra (encomenda), além de ter associado um técnico responsável, inclui a listagem dos produtos incluídos (equipamentos de hardware, podendo definir a quantidade), uma data de realização do pedido, uma descrição, o estado e o tempo que demorou a ser processado o valor total da venda.
@@ -62,7 +62,7 @@ Equipment Manufacturer).
 - > [Note] vou presumir que designação é modelos.
 - [x] [R39] Deve ser possível listar todos os utilizadores.
 - [x] [R40] Deve ser possível listar utilizadores por tipo.
-- [ ] [R41] Deve ser possível listar todos os serviços.
+- [x] [R41] Deve ser possível listar todos os serviços.
 - [ ] [R42] Deve ser possível listar todos os serviços associados a um cliente.
 - [ ] [R43] Deve ser possível listar todos os serviços por estado.
 - [ ] [R44] Deve ser possível listar serviços com tempo despendido superior a um determinado limite (introduzido pelo utilizador no momento de pesquisa).

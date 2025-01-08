@@ -124,7 +124,8 @@ public class Cliente extends Utilizador {
         System.out.println("*******************");
         System.out.println("Lista de equipamentos");
         for (int i = 0; i < equipamentos.size(); i++){
-            Equipamentos.listarEquipamentos(equipamentos.get(i), i);
+            System.out.println(i + 1 + ".");
+            Equipamentos.listarEquipamentos(equipamentos.get(i));
         }
         System.out.println("*******************");
         boolean running = true;

@@ -230,9 +230,9 @@ public class Administrador extends Utilizador {
         }
     }
 
-    public static void aprovadoServico() {
+    private static void aprovadoServico() {
         List<Servicos> submetidos = getServicosSubmetidos();
-        Servicos.listarServicos(submetidos);
+        Servicos.listarServicos(submetidos, false);
         System.out.print("Selecione o serviço a aprovar (ou 0 para cancelar): ");
         int escolha = Input.readInt();
         if (escolha == 0) {
@@ -250,6 +250,44 @@ public class Administrador extends Utilizador {
         }
     }
 
+    private static void listagemServiços(){
+        boolean running = true;
+        while (running) {
+            Main.clearConsole();
+            System.out.println("|-----------------------------------|");
+            System.out.println("|Listar Serviços                    |");
+            System.out.println("|1. Listar todos  os serviços       |");
+            System.out.println("|2. Listar serviços aceites         |");
+            System.out.println("|3. Listar serviços concluídos      |");
+            System.out.println("|4. Sair                            |");
+            System.out.println("|-----------------------------------|");
+            System.out.print("Option: ");
+            String option = Input.readLine();
+            switch (option) {
+                case "1":
+                    List<Servicos> todosServicos = Sistema.getInstance().getServicos();
+                    Servicos.listarServicos(todosServicos, true);
+                    Main.pressEnterKey();
+                    break;
+                case "2":
+                    
+                    break;
+                case "3":
+                    
+                    break;
+                case "4":
+                    System.out.println("A voltar ao menu principal.");
+                    Main.pressEnterKey();
+                    running = false;
+                    break;
+                default:
+                    System.out.println("Invalid option. Please try again.");
+                    Main.pressEnterKey();
+                    break;
+            }
+        }
+    }
+
     public static void loggedUserLoop(Utilizador user) {
         boolean running = true;
         while (running) {
@@ -262,7 +300,8 @@ public class Administrador extends Utilizador {
             System.out.println("|2. Aprovar Registo                   |");
             System.out.println("|3. Aprovar Serviço                   |");
             System.out.println("|4. Listagem de utilizadores          |");
-            System.out.println("|5. Sair                              |");
+            System.out.println("|5. Listagem de serviços              |");
+            System.out.println("|6. Sair                              |");
             System.out.println("|-------------------------------------|");
             System.out.print("Option: ");
             String option = Input.readLine();
@@ -281,6 +320,9 @@ public class Administrador extends Utilizador {
                     listagemUtilizadores();
                     break;
                 case "5":
+                    listagemServiços();
+                    break;
+                case "6":
                     Main.clearConsole();
                     System.out.println("Adeus " + user.getNome());
                     Main.pressEnterKey();

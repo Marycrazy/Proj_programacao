@@ -186,6 +186,7 @@ public class Sistema implements Serializable {
             }
             for (SubServico subServico : servico.getSubServicos()) {
                 System.out.println("Subserviço: " + subServico.getDesignacao());
+                System.out.println("Responsável " + subServico.getTecnicoresponsavel());
             }
         }
     }

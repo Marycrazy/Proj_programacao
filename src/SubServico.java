@@ -1,5 +1,7 @@
 package src;
 
+import java.util.List;
+
 public class SubServico {
     private String designacao;
     private Tecnicos tecnicoresponsavel;
@@ -23,5 +25,12 @@ public class SubServico {
 
     public void setTecnicoresponsavel(Tecnicos tecnicoresponsavel) {
         this.tecnicoresponsavel = tecnicoresponsavel;
+    }
+
+    public static void listarSubServico(List<SubServico> subServicos) {
+        for (int i = 0; i < subServicos.size(); i++) {
+            System.out.println("Designacao: " + subServicos.get(i).getDesignacao());
+            System.out.println("Tecnico Responsavel: " + subServicos.get(i).getTecnicoresponsavel().getNome());
+        }
     }
 }

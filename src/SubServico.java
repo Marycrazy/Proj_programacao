@@ -28,9 +28,15 @@ public class SubServico {
     }
 
     public static void listarSubServico(List<SubServico> subServicos) {
-        for (int i = 0; i < subServicos.size(); i++) {
-            System.out.println("Designacao: " + subServicos.get(i).getDesignacao());
-            System.out.println("Tecnico Responsavel: " + subServicos.get(i).getTecnicoresponsavel().getNome());
+        if (subServicos.isEmpty()) {
+            System.out.println("Nao existem sub-servicos. \n");
+            return;
+        }
+        else{
+            for (int i = 0; i < subServicos.size(); i++) {
+                System.out.println("Designacao: " + subServicos.get(i).getDesignacao());
+                System.out.println("Tecnico Responsavel: " + subServicos.get(i).getTecnicoresponsavel().getNome());
+            }
         }
     }
 }

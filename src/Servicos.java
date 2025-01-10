@@ -116,7 +116,7 @@ public class Servicos implements Serializable {
                 System.out.println("Descrição: " + submetidos.get(i).getDescricao());
                 System.out.println("Estado: " + submetidos.get(i).getEstado());
                 for (int j = 0; j < submetidos.get(i).getEquipamento().size(); j++) {
-                    System.out.println("\t Equipamento: \n \t\t");
+                    System.out.println("\nEquipamento:");
                     Equipamentos.listarEquipamentos(submetidos.get(i).getEquipamento().get(j));
                 }
                 System.out.println("Valor total: " + submetidos.get(i).getValorTotal());

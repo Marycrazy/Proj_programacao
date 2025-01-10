@@ -69,7 +69,8 @@ public class Validator {
         Map.entry("preço de venda", Validator::isValidFloatNumeric),
         Map.entry("observações", Validator::isValidObs),
         Map.entry("quantidade", Validator::isValidIntegerNumeric),
-        Map.entry("descrição", Validator::isValidObs)
+        Map.entry("descrição", Validator::isValidObs),
+        Map.entry("designação", Validator::isValidObs)
     );
 
     public static String validatePassword(String type) {

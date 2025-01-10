@@ -204,6 +204,26 @@ public class Administrador extends Utilizador {
         }
     }
 
+    private static void aprovadoServico() {
+        List<Servicos> submetidos = getServicosSubmetidos();
+        Servicos.listarServicos(submetidos, false);
+        System.out.print("Selecione o serviço a aprovar (ou 0 para cancelar): ");
+        int escolha = Input.readInt();
+        if (escolha == 0) {
+            System.out.println("A voltar ao menu principal.");
+            Main.pressEnterKey();
+        }
+        else {
+            submetidos.get(escolha - 1).setEstado(Servicos.EstadoServico.ACEITE);
+            System.out.println("Serviço " + submetidos.get(escolha - 1).getCliente().getNome() + " aprovado com sucesso!");
+            System.out.println("Associar um tecnico responsável ao serviço.");
+            associarTecnico(submetidos.get(escolha - 1));
+            System.out.println("Tecnico associado com sucesso!");
+            Input.clearBuffer();
+            Main.pressEnterKey();
+        }
+    }
+
     private static void associarTecnico(Servicos servicos){
         List<Utilizador> utilizadoresPorTipo = Sistema.getInstance().getUtilizadores().stream()
         .filter(u -> u.getTipo().equalsIgnoreCase("tecnico") && u.getEstado())
@@ -227,26 +247,6 @@ public class Administrador extends Utilizador {
             Input.clearBuffer();
             Main.pressEnterKey();
             associarTecnico(servicos);
-        }
-    }
-
-    private static void aprovadoServico() {
-        List<Servicos> submetidos = getServicosSubmetidos();
-        Servicos.listarServicos(submetidos, false);
-        System.out.print("Selecione o serviço a aprovar (ou 0 para cancelar): ");
-        int escolha = Input.readInt();
-        if (escolha == 0) {
-            System.out.println("A voltar ao menu principal.");
-            Main.pressEnterKey();
-        }
-        else {
-            submetidos.get(escolha - 1).setEstado(Servicos.EstadoServico.ACEITE);
-            System.out.println("Serviço " + submetidos.get(escolha - 1).getCliente().getNome() + " aprovado com sucesso!");
-            System.out.println("Associar um tecnico responsável ao serviço.");
-            associarTecnico(submetidos.get(escolha - 1));
-            System.out.println("Tecnico associado com sucesso!");
-            Input.clearBuffer();
-            Main.pressEnterKey();
         }
     }
 

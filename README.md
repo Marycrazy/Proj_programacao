@@ -32,7 +32,7 @@ contacto telefónico.
 ### Ações
 - [x] [R17] O serviço de compra inicia com o cliente a solicitar uma encomenda, indicando os produtos pretendidos.
 - [x] [R18] O administrador aprova o serviço e associa um técnico responsável.
-- [ ] [R19] Após ser designado para um serviço, o técnico responsável regista a informação do processo,nomeadamente  pode  criar  sub-tarefas e associar  outros  técnicos  adicionais  às  sub-tarefas, e gere o processo até à sua conclusão.
+- [x] [R19] Após ser designado para um serviço, o técnico responsável regista a informação do processo,nomeadamente  pode  criar  sub-tarefas e associar  outros  técnicos  adicionais  às  sub-tarefas, e gere o processo até à sua conclusão.
 - > [Nota] quem faz o que (tecnico responsavel nomeado pelo tecnico responsavel pelo serviço) e a desgninaçao da tarefas(montar pc)
 - [x] [R20] Um serviço de compra (encomenda), além de ter associado um técnico responsável, inclui a listagem dos produtos incluídos (equipamentos de hardware, podendo definir a quantidade), uma data de realização do pedido, uma descrição, o estado e o tempo que demorou a ser processado o valor total da venda.
 - [x] [R21] Adicionalmente, cada serviço possui um código identificador único e sequencial.
@@ -40,7 +40,7 @@ contacto telefónico.
 > [NOTE] a) se o serviço está *submetido* (cliente realizou o pedido, mas ainda não foi aceite pelo administrador);
 - > b) se a serviço foi *aceite* (administrador aceita o serviço);
 - > c) ou se já foi *concluído* (técnico responsável termina o processo).
-- [ ] [R23] Quando um técnico conclui um serviço deve indicar o tempo despendido no processamento do pedido.
+- [x] [R23] Quando um técnico conclui um serviço deve indicar o tempo despendido no processamento do pedido.
 O valor total da venda deve ser calculado automaticamente (somatório do custo dos vários equipamentos e respectivas quantidades).
 - [x] [R24] A aplicação deve permitir introduzir e gerir equipamentos de hardware.
 Os equipamentos de hardware são caracterizados por uma marca, modelo, código interno, série, versão,
@@ -63,9 +63,9 @@ Equipment Manufacturer).
 - [x] [R39] Deve ser possível listar todos os utilizadores.
 - [x] [R40] Deve ser possível listar utilizadores por tipo.
 - [x] [R41] Deve ser possível listar todos os serviços.
-- [ ] [R42] Deve ser possível listar todos os serviços associados a um cliente.
-- [ ] [R43] Deve ser possível listar todos os serviços por estado.
-- [ ] [R44] Deve ser possível listar serviços com tempo despendido superior a um determinado limite (introduzido pelo utilizador no momento de pesquisa).
+- [x] [R42] Deve ser possível listar todos os serviços associados a um cliente.
+- [x] [R43] Deve ser possível listar todos os serviços por estado.
+- [x] [R44] Deve ser possível listar serviços com tempo despendido superior a um determinado limite (introduzido pelo utilizador no momento de pesquisa).
 - [x] [R45] Deve ser possível listar todos os equipamentos.
 - [x] [R46] Deve ser possível listar equipamentos que sejam (ou não) OEM.
 - [x] [R47] Deve  ser  possível  listar  equipamentos  com  uma  quantidade  de  stock  abaixo  de  um  determinado  limite
@@ -79,8 +79,8 @@ Equipment Manufacturer).
 - (e.g. termo de pesquisa “Ana” deve apresentar como resultado “Ana Sousa”, “Ana Silva” e “Anabela”).
 
 - [ ] [R54] Os clientes podem listar e pesquisar os seus serviços que realizaram.
-- [ ] [R55] Os técnicos podem listar e pesquisar os seus serviços que processaram.
-- [ ] [R56] Os administradores podem listar e pesquisar todos os serviços.
+- [x] [R55] Os técnicos podem listar e pesquisar os seus serviços que processaram.
+- [x] [R56] Os administradores podem listar e pesquisar todos os serviços.
 
 ## Manipulação e armazenamento de dados persistente
 - [x] [R57] O  acesso  à  aplicação  deve  ser  restringido  com  credenciais  (login/password),  informação  que  deverá ser armazenada num ficheiro de texto “credenciais_acesso.txt”.

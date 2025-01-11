@@ -177,7 +177,7 @@ public class Sistema implements Serializable {
                                " Designação: " + servico.getDescricao() +
                                ", Data: " + servico.getData() +
                                ", Estado: " + servico.getEstado() +
-                               ", Tempo de Processamento: " + servico.getTempoProcessamento() +
+                               ", Tempo de Processamento: " + Servicos.formatarTempo(servico.getTempoProcessamento()) +
                                ", Valor Total: " + servico.getValorTotal() +
                                ", Tecnico Responsavel: " + servico.getTecnicoResponsavel().getNome());
             for (Equipamentos equipamento : servico.getEquipamento()) {

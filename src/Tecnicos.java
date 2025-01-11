@@ -173,6 +173,141 @@ public class Tecnicos extends Utilizador{
         }
     }
 
+    private static void encerrarServico(List<Servicos> servicosTecnico) {
+        System.out.print("Selecione o serviço a encerrar (ou 0 para cancelar): ");
+        int service = Input.readInt();
+        if (service == 0) {
+            System.out.println("A voltar ao menu principal.");
+        }
+        else {
+            System.out.println("Vão ser pedidas as semanas, os dias, as horas e os minutos, caso algum deles seja nulo, ou seja, não demorou semanas deve ser 0.");
+            System.out.println("Indique o tempo gasto no serviço:.");
+            servicosTecnico.get(service - 1).setTempoProcessamento(Servicos.tempoGasto());
+            servicosTecnico.get(service - 1).setEstado(Servicos.EstadoServico.CONCLUIDO);
+        }
+    }
+
+    private static void listagemServiçosLoop(List<Servicos> servicosTecnico) {
+        boolean running = true;
+        while (running) {
+            Main.clearConsole();
+            System.out.println("|-------------------------------------------------------------------------|");
+            System.out.println("|Listar Serviços                                                          |");
+            System.out.println("|1. Listar todos os serviços                                              |");
+            System.out.println("|2. Listar serviços aceites                                               |");
+            System.out.println("|3. Listar serviços concluídos                                            |");
+            System.out.println("|4. Listar serviços submetidos                                            |");
+            System.out.println("|5. Listar serviços por cliente                                           |");
+            System.out.println("|6. Listar serviços por tempo despendido superior a um determinado limite |");
+            System.out.println("|7. Pesquisar serviços por código ou uma palavra que esteja na descrição  |");
+            System.out.println("|8. Sair                                                                  |");
+            System.out.println("|-------------------------------------------------------------------------|");
+            System.out.print("Option: ");
+            String option = Input.readLine();
+            switch (option) {
+                case "1":
+                    Main.clearConsole();
+                    if (servicosTecnico.isEmpty()) {
+                        System.out.println("Nenhum serviço encontrado.");
+                    }
+                    else {
+                        System.out.println("Todos os serviços:");
+                        Servicos.listarServicos(servicosTecnico, true);
+                    }
+                    Main.pressEnterKey();
+                    break;
+                case "2":
+                    List<Servicos> servicosAceites = servicosTecnico.stream().filter(s -> s.getEstado().equals(Servicos.EstadoServico.ACEITE)).toList();
+                    Main.clearConsole();
+                    if (servicosAceites.isEmpty()) {
+                        System.out.println("Nenhum serviço aceite encontrado.");
+                    }
+                    else {
+                        System.out.println("Serviços aceites:");
+                        Servicos.listarServicos(servicosAceites, true);
+                    }
+                    Main.pressEnterKey();
+                    break;
+                case "3":
+                    List<Servicos> servicosConcluidos = servicosTecnico.stream().filter(s -> s.getEstado().equals(Servicos.EstadoServico.CONCLUIDO)).toList();
+                    Main.clearConsole();
+                    if (servicosConcluidos.isEmpty()) {
+                        System.out.println("Nenhum serviço concluído encontrado.");
+                    }
+                    else {
+                        System.out.println("Serviços concluídos:");
+                        Servicos.listarServicos(servicosConcluidos, true);
+                    }
+                    Main.pressEnterKey();
+                    break;
+                case "4":
+                    List<Servicos> submetidos = servicosTecnico.stream().filter(s -> s.getEstado().equals(Servicos.EstadoServico.SUBMETIDO)).toList();
+                    Main.clearConsole();
+                    if (submetidos.isEmpty()) {
+                        System.out.println("Nenhum serviço submetido encontrado.");
+                    }
+                    else {
+                        System.out.println("Serviços submetidos:");
+                        Servicos.listarServicos(submetidos, true);
+                    }
+                    Main.pressEnterKey();
+                    break;
+                case "5":
+                    System.out.print("Nome do cliente a pesquisar: ");
+                    String cliente = Input.readLine();
+                    List<Servicos> servicosPorCliente = servicosTecnico.stream().filter(s -> s.getCliente().getNome().toLowerCase().contains(cliente.toLowerCase())).toList();
+                    Main.clearConsole();
+                    if (servicosPorCliente.isEmpty()) {
+                        System.out.println("Nenhum serviço encontrado para o cliente " + cliente + ".");
+                    }
+                    else {
+                        System.out.println("Serviços do cliente " + cliente + ":");
+                        Servicos.listarServicos(servicosPorCliente, true);
+                    }
+                    Main.pressEnterKey();
+                    break;
+                case "6":
+                    System.out.println("Vão ser pedidas as semanas, os dias, as horas e os minutos, caso algum deles seja nulo, ou seja, <po exemplo não demorou semanas deve ser 0.");
+                    System.out.println("Tempo despendido superior a: ");
+                    int tempo = Servicos.tempoGasto();
+                    List<Servicos> servicosPorTempo = servicosTecnico.stream().filter(s -> s.getTempoProcessamento() >= tempo).toList();
+                    Main.clearConsole();
+                    if (servicosPorTempo.isEmpty()) {
+                        System.out.println("Nenhum serviço encontrado com tempo despendido superior a " + Servicos.formatarTempo(tempo) + ".");
+                    }
+                    else {
+                        System.out.println("Serviços com tempo despendido superior a " + Servicos.formatarTempo(tempo) + ":");
+                        Servicos.listarServicos(servicosPorTempo, true);
+                    }
+                    Main.pressEnterKey();
+                    break;
+                case "7":
+                    System.out.print("Código ou palavra na descrição a pesquisar: ");
+                    String pesquisa = Input.readLine();
+                    List<Servicos> servicosPesquisados = servicosTecnico.stream().filter(s -> String.valueOf(s.getCodigo()).contains(pesquisa) || s.getDescricao().contains(pesquisa)).toList();
+                    Main.clearConsole();
+                    if (servicosPesquisados.isEmpty()) {
+                        System.out.println("Nenhum serviço encontrado com o código ou palavra na descrição " + pesquisa + ".");
+                    }
+                    else {
+                        System.out.println("Serviços encontrados com o código ou palavra na descrição " + pesquisa + ":");
+                        Servicos.listarServicos(servicosPesquisados, true);
+                    }
+                    Main.pressEnterKey();
+                break;
+                case "8":
+                    System.out.println("A voltar ao menu principal.");
+                    Main.pressEnterKey();
+                    running = false;
+                    break;
+                default:
+                    System.out.println("Invalid option. Please try again.");
+                    Main.pressEnterKey();
+                    break;
+            }
+        }
+    }
+
     private static void gestaoServicos(List<Servicos> servicosTecnico) {
         boolean running = true;
         while (running) {
@@ -187,7 +322,7 @@ public class Tecnicos extends Utilizador{
             String option = Input.readLine();
             switch (option) {
                 case "1":
-                    listarServicosTecnico(servicosTecnico);
+                    listagemServiçosLoop(servicosTecnico);
                     Main.pressEnterKey();
                     break;
                 case "2":
@@ -214,6 +349,7 @@ public class Tecnicos extends Utilizador{
                 case "3":
                     listarServicosTecnico(servicosTecnico);
                     encerrarServico(servicosTecnico);
+                    Main.pressEnterKey();
                     break;
                 case "4":
                     System.out.println("A voltar ao menu principal.");

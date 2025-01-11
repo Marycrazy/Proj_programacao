@@ -70,7 +70,11 @@ public class Validator {
         Map.entry("observações", Validator::isValidObs),
         Map.entry("quantidade", Validator::isValidIntegerNumeric),
         Map.entry("descrição", Validator::isValidObs),
-        Map.entry("designação", Validator::isValidObs)
+        Map.entry("designação", Validator::isValidObs),
+        Map.entry("semanas", Validator::isValidIntegerNumeric),
+        Map.entry("dias", Validator::isValidIntegerNumeric),
+        Map.entry("horas", Validator::isValidIntegerNumeric),
+        Map.entry("minutos", Validator::isValidIntegerNumeric)
     );
 
     public static String validatePassword(String type) {

@@ -416,8 +416,4 @@ public class Equipamentos implements Serializable {
         }
     }
 
-    public String toString() {
-        return "Equipamento: " + marca + " " + modelo + ", Código: " + codigoInterno + ", Preço: " + precoVenda +
-               ", OEM: " + (isOEM ? "Sim" : "Não") + ", Quantidade: " + quantidadeStock;
-    }
 }

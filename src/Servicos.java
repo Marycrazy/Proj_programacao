@@ -31,48 +31,48 @@ public class Servicos implements Serializable {
     public Cliente getCliente() {
         return cliente;
     }
-    
+
     public int getCodigo() {
         return codigo;
     }
-    
+
     public Date getData() {
         return data;
     }
-    
+
     public String getDescricao() {
         return descricao;
     }
-    
+
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
-    
+
     public EstadoServico getEstado() {
         return estado;
     }
-    
+
     public EstadoServico setEstado(EstadoServico estado) {
         this.estado = estado;
         return this.estado;
     }
-    
+
     public int getTempoProcessamento() {
         return tempoProcessamento;
     }
-    
+
     public void setTempoProcessamento(int tempoProcessamento) {
         this.tempoProcessamento = tempoProcessamento;
     }
-    
+
     public double getValorTotal() {
         return valorTotal;
     }
-    
+
     public void setValorTotal(double valorTotal) {
         this.valorTotal = valorTotal;
     }
-   
+
     public Tecnicos getTecnicoResponsavel() {
         return tecnicoResponsavel;
     }
@@ -88,6 +88,7 @@ public class Servicos implements Serializable {
     public List<Integer> getQuantidades() {
         return quantidades;
     }
+
     public List<SubServico> getSubServicos() {
         return subServicos;
     }
@@ -175,7 +176,6 @@ public class Servicos implements Serializable {
             return String.format("%d semanas e %d dias", semanas, dias);
         }
     }
-
 
     public static int tempoGasto() {
         int semanas = (Integer.parseInt(Validator.validateInput("Semanas")))* 7 * 24 * 60 ;

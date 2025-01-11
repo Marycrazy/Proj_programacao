@@ -100,4 +100,25 @@ public class Ficheiros {
         return null;
     }
 
+    public static void salvarInfoSistema(InfoSistema info) {
+        try (ObjectOutputStream oos = Input.openObjectWrite("docs/info_sistema.dat", false)) {
+            oos.writeObject(info);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static InfoSistema carregarInfoSistema() {
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("docs/info_sistema.dat"))) {
+            InfoSistema info = (InfoSistema) ois.readObject();
+            System.out.println("Informações do sistema carregadas com sucesso.");
+            return info;
+        } catch (FileNotFoundException e) {
+            return new InfoSistema();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+            return new InfoSistema();
+        }
+    }
+
 }

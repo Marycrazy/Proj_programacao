@@ -57,7 +57,7 @@ public class Cliente extends Utilizador {
     }
 
     private static List<Servicos> getServicosCliente(Cliente cliente) {
-        List<Servicos> servicosCliente = Sistema.getInstance().getServicos().stream().filter(s -> s.getTecnicoResponsavel().equals(cliente)).toList();
+        List<Servicos> servicosCliente = Sistema.getInstance().getServicos().stream().filter(s -> s.getCliente().equals(cliente)).toList();
         if (servicosCliente.isEmpty()) {
             return null;
         }

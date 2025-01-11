@@ -3,11 +3,11 @@ import java.io.Serializable;
 
 public class Utilizador implements Serializable{
     private static final long serialVersionUID = 1L;
-    private String login; //unico
+    private String login;
     private String password;
     private String nome;
     private boolean estado;
-    private String email; //unico
+    private String email;
     private String tipo;
 
     //construtor

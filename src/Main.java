@@ -1,10 +1,14 @@
 package src;
 
 public class Main {
+    private static InfoSistema infoSistema;
     public static void main(String[] args) {
         try {
             Sistema.getInstance().carregarDados();
             pressEnterKey();
+             // Carregar informações do sistema
+            infoSistema = InfoSistema.carregarDados();
+            Main.pressEnterKey();
             mainLoop();
         } catch (Exception e) {
             System.out.println("Exception: " + e);
@@ -38,6 +42,8 @@ public class Main {
                 case "0":
                     Sistema.getInstance().save();
                     clearConsole();
+                    Ficheiros.salvarInfoSistema(infoSistema);
+                    pressEnterKey();
                     System.out.println("A sair...");
                     running = false;
                     break;
@@ -58,6 +64,7 @@ public class Main {
         String password = Validator.encryptPassword(Input.readLine());
         Utilizador user = Sistema.getInstance().autenticarUtilizador(login, password);
         if (user != null) {
+            infoSistema.setUltimoUtilizador(user.getLogin());
             if(user.getEstado()){
                 clearConsole();
                 System.out.println("Bem-vindo " + user.getNome());

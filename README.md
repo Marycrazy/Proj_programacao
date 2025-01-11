@@ -21,13 +21,13 @@ contacto telefónico.
 
 ### Funções
 - [x] [R10] Os  administradores  aprovam  os  pedidos  de  registo  dos  utilizadores.  Todos  os  pedidos  devem  ser  aprovados antes de poderem ser usados para autenticação.
-- [ ] [R11] Os administradores  aprovam e encerram os  pedidos de serviço  (encomenda),  bem como  associam um técnico responsável a cada serviço.
+- [x] [R11] Os administradores  aprovam e encerram os  pedidos de serviço  (encomenda),  bem como  associam um técnico responsável a cada serviço.
 - [x] [R12] Os técnicos introduzem equipamentos, categorias e fornecedores.
 >[NOTE] vou assumir que quando for para intruduzir os equipamentos, já existam categoria e fornecedores criados e sendo assim ele tera de associar
-- [ ] [R13] Os clientes realizam pedidos de compras de equipamentos
-- [ ] [R14] Os administradores podem gerir todas as vendas realizadas.
-- [ ] [R15] Os técnicos apenas podem gerir as suas vendas.
-- [ ] [R16] Os clientes apenas podem gerir as suas compras
+- [x] [R13] Os clientes realizam pedidos de compras de equipamentos
+- [x] [R14] Os administradores podem gerir todas as vendas realizadas.
+- [x] [R15] Os técnicos apenas podem gerir as suas vendas.
+- [x] [R16] Os clientes apenas podem gerir as suas compras
 
 ### Ações
 - [x] [R17] O serviço de compra inicia com o cliente a solicitar uma encomenda, indicando os produtos pretendidos.
@@ -71,14 +71,14 @@ Equipment Manufacturer).
 - [x] [R47] Deve  ser  possível  listar  equipamentos  com  uma  quantidade  de  stock  abaixo  de  um  determinado  limite
 (introduzido pelo utilizador no momento de pesquisa).
 - [x] [R49] Deve ser possível pesquisar utilizadores por login ou nome.
-- [ ] [R50] Deve ser possível pesquisar serviços por código ou uma palavra que surja na descrição.
+- [x] [R50] Deve ser possível pesquisar serviços por código ou uma palavra que surja na descrição.
 - [x] [R51] Deve ser possível pesquisar equipamentos por marca ou código.
 - [x] [R52] Deve ser possível pesquisar equipamentos que possuem uma determinada categoria.
 - > [Note] assumir que categoria é a designação dela
 - [x] [R53] Deve ser possível realizar pesquisas avançadas, ou seja, apresentar todos os registos que apresentem um termo de pesquisa, mesmo que parcialmente
 - (e.g. termo de pesquisa “Ana” deve apresentar como resultado “Ana Sousa”, “Ana Silva” e “Anabela”).
 
-- [ ] [R54] Os clientes podem listar e pesquisar os seus serviços que realizaram.
+- [x] [R54] Os clientes podem listar e pesquisar os seus serviços que realizaram.
 - [x] [R55] Os técnicos podem listar e pesquisar os seus serviços que processaram.
 - [x] [R56] Os administradores podem listar e pesquisar todos os serviços.
 
@@ -90,15 +90,15 @@ Equipment Manufacturer).
 
 ## Gestão geral da aplicação
 ### Interacção com o utilizador
-- [ ] [R61] Disponibilizar uma interface em modo texto onde o utilizador possa interagir e controlar a aplicação.
+- [x] [R61] Disponibilizar uma interface em modo texto onde o utilizador possa interagir e controlar a aplicação.
 
 ### Monitorização de acessos
 - [ ] [R62] Todas as acções dos utilizadores deverão ser guardadas num ficheiro de texto denominado “log.txt”.
 Este ficheiro deverá ser escrito de forma sequencial, apresentando as acções mais recentes no início do
 ficheiro.
 As entradas deverão ter o seguinte formato: <utilizador> <acção>.
-- [ ] [R63] Deve ser possível consultar o log de acções através da aplicação.
-- [ ] [R64] Deverá ser registado o número total (até ao momento) de execuções do sistema e o username do último
+- [] [R63] Deve ser possível consultar o log de acções através da aplicação.
+- [x] [R64] Deverá ser registado o número total (até ao momento) de execuções do sistema e o username do último
 utilizador que acedeu à aplicação.
 Esta informação deverá ser guardada num ficheiro de objectos e actualizada sempre que a aplicação é
 executada, apresentando os dados ao utilizador.
@@ -106,13 +106,13 @@ Quando a aplicação é terminada esta informação deve ser novamente armazenad
 denominado “info_sistema.dat”.
 
 ### Programação Orientada a Objectos
-- [ ] [R65] A aplicação deve estar correctamente  estruturada, tendo em conta o paradigma Orientado a Objectos e recorrendo à linguagem Java.
-- [ ] [R66] Implemente as estruturas de armazenamento necessárias, procurando optimizar os recursos utilizados.
+- [x] [R65] A aplicação deve estar correctamente  estruturada, tendo em conta o paradigma Orientado a Objectos e recorrendo à linguagem Java.
+- [x] [R66] Implemente as estruturas de armazenamento necessárias, procurando optimizar os recursos utilizados.
 
 ### Validação de dados e notificações
-- [ ] [R67] Valide todas as leituras de dados do utilizador
+- [x] [R67] Valide todas as leituras de dados do utilizador
 - (e.g. verifique se os nomes são únicos).
-- [ ] [R68] Sempre que necessário, apresentar ao utilizador mensagens informativas adequadas.
+- [x] [R68] Sempre que necessário, apresentar ao utilizador mensagens informativas adequadas.
 - Quando um utilizador realizar uma acção sobre a aplicação, esta deve informar se acção foi realizada com sucesso ou insucesso.
 
 - utilizar a classe sistemas para guardar varios objetos do mesmo tipo dentro depois do ficheiro.

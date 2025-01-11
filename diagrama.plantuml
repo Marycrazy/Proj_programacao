@@ -7,6 +7,7 @@ class Utilizador {
   - estado: boolean
   - email: String
   - tipo: String
+
   + Utilizador(login: String, password: String, nome: String, estado: boolean, email: String, tipo: String)
   + getLogin(): String
   + getPassword(): String
@@ -24,57 +25,66 @@ class Utilizador {
 }
 
 class Cliente extends Utilizador {
-  - NIF: String
-  - morada: String
-  - telefone: String
-  + Cliente(login: String, password: String, nome: String, estado: String, email: String, tipo: String, NIF: String, morada: String, telefone: String)
-  + getNIF(): String
-  + getMorada(): String
-  + getTelefone(): String
-  + setNIF()
-  + setMorada()
-  + setTelefone()
-  + loggedUserLoop(user: Utilizador)
-  + registerNewUser(estado: String, type: String): Cliente
-  + editperfil(Utilizador user)
-  + perfilUtilizador(Utilizador user)
-  + realizarPedido()
-  + consultarCompras()
+  - String NIF
+  - String morada
+  - String telefone
+
+  + Cliente(String login, String password, String nome, boolean estado, String email, String tipo, String NIF, String morada, String telefone)
+  + String getNIF()
+  + String getMorada()
+  + String getTelefone()
+  + void setNIF()
+  + void setMorada()
+  + void setTelefone()
+  + static void perfilUtilizador(Utilizador user)
+  + static List<Servicos> getServicosCliente(Cliente cliente)
+  + static void editperfil(Utilizador user)
+  + static void realizarPedido(Utilizador user)
+  + static boolean processPedido(List<Equipamentos> equipamentos, Servicos pedido)
+  + static String handleDescricao(Servicos pedido)
+  + static void listagemServiçosLoop(List<Servicos> servicosCliente)
+  + static void loggedUserLoop(Utilizador user)
+  + static Cliente registerNewUser(boolean estado, String type)
 }
 
 class Tecnicos extends Utilizador {
-  - NIF: String
-  - morada: String
-  - telefone: String
-  + Tecnicos(login: String, password: String, nome: String, estado: String, email: String, tipo: String, NIF: String, morada: String, telefone: String)
-  + getNIF(): String
-  + getMorada(): String
-  + getTelefone(): String
-  + setNIF()
-  + setMorada()
-  + setTelefone()
-  + loggedUserLoop(user: Utilizador)
-  + registerNewUser(estado: String, type: String): Tecnicos
-  + editperfil(Utilizador user)
-  + perfilUtilizador(Utilizador user)
-  + gerirEquipamentos()
-  + gerirVendas()
-  + processarPedido()
+  - String NIF
+  - String morada
+  - String telefone
+
+  + Tecnicos(String login, String password, String nome, boolean estado, String email, String tipo, String NIF, String morada, String telefone)
+  + String getNIF()
+  + String getMorada()
+  + String getTelefone()
+  + void setNIF()
+  + void setMorada()
+  + void setTelefone()
+  + static void perfilUtilizador(Utilizador user)
+  + static void editperfil(Utilizador user)
+  + static List<Servicos> getServicosTecnico(Tecnicos tecnico)
+  + static void listarServicosTecnico(List<Servicos> servicosTecnico)
+  + static SubServico criarSubServico(List<Servicos> servicosTecnico)
+  + static void encerrarServico(List<Servicos> servicosTecnico)
+  + static void listagemServiçosLoop(List<Servicos> servicosTecnico)
+  + static void gestaoServicos(List<Servicos> servicosTecnico)
+  + static void loggedUserLoop(Utilizador user)
+  + static Tecnicos registerNewUser(boolean estado, String type)
 }
 
 class Administrador extends Utilizador {
-    +Administrador()
-    +loggedUserLoop()
-    +registerNewUser()
-    +aprovarRegisto()
-    +List<Utilizador> getUtilizadoresInativos()
-    +perfilUtilizador(Utilizador user)
-    +utilizadoresRegeditados()
-    +editperfil(Utilizador user)
-    +listagemUtilizadores()
-    +aprovarPedidos()
-    +gerirVendas()
-    +associarTecnico()
+  + Administrador(String login, String password, String nome, boolean estado, String email, String tipo)
+  + static Administrador registerNewUser(boolean estado, String type)
+  + static List<Utilizador> getUtilizadoresInativos()
+  + static void perfilUtilizador(Utilizador user, boolean mostrar)
+  + static void utilizadoresRegeditados(List<Utilizador> inativos)
+  + static void aprovarRegisto()
+  + static void editperfil(Utilizador user)
+  + static void listagemUtilizadores()
+  + static List<Servicos> getServicosSubmetidos()
+  + static void aprovadoServico()
+  + static void associarTecnico(Servicos servicos)
+  + static void listagemServiçosLoop()
+  + static void loggedUserLoop(Utilizador user)
 }
 
 class Main {
@@ -84,7 +94,7 @@ class Main {
         +loginUser() Utilizador
         +pressEnterKey()
         +clearConsole()
-    }
+}
 
 class Validator {
   - validators: Map<String, Function<String, Boolean>>
@@ -136,23 +146,25 @@ class Input {
 }
 
 class Sistema {
-  -List~Utilizador~ utilizadores
-  -List~Servico~ servicos
-  -List~Equipamentos~ equipamentos
-  -List~Categoria~ categorias
-  -List~Fornecedor~ fornecedores
-  - static Sistema sistema
-  +getInstance()
-  +setInstance()
-  +Sistema()
-  +save()
-  +adicionarUtilizador()
-  +adicionarEquipamento()
-  +adicionarCategoria()
-  +adicionarServico()
-  +carregarDados()
-  +buscarUtilizadorPorLogin()
-  +autenticarUtilizador()
+  - List<Utilizador> utilizadores
+  - List<Equipamentos> equipamentos
+  - List<Categoria> categorias
+  - List<Fornecedor> fornecedores
+  - List<Servicos> servicos
+
+  + void adicionarutilizador(Utilizador utilizador)
+  + void adicionarServico(Servicos servico)
+  + void adicionarEquipamento(Equipamentos equipamento)
+  + void adicionarCategoria(Categoria categoria)
+  + void adicionarFornecedor(Fornecedor fornecedor)
+  + List<Utilizador> getUtilizadores()
+  + List<Equipamentos> getEquipamentos()
+  + List<Categoria> getCategorias()
+  + List<Fornecedor> getFornecedores()
+  + List<Servicos> getServicos()
+  + void carregarDados()
+  + Utilizador buscarUtilizadorPorLogin(String login)
+  + Utilizador autenticarUtilizador(String login, String password)
 }
 
 enum EstadoServico {
@@ -162,21 +174,54 @@ enum EstadoServico {
 }
 
 class Servico {
-        -int codigo
-        -Date dataPedido
-        -String descricao
-        -EstadoServico estado
-        -double tempoProcessamento
-        -double valorTotal
-        -List~Equipamento~ equipamentos
-        -List~Integer~ quantidades
-        -List~SubServico~ subServicos
-        -Tecnico tecnicoResponsavel
+  - Cliente cliente
+  - int codigo
+  - Date data
+  - String descricao
+  - EstadoServico estado
+  - int tempoProcessamento
+  - double valorTotal
+  - Tecnicos tecnicoResponsavel
+  - List<Equipamentos> equipamento
+  - List<Integer> quantidades
+  - List<SubServico> subServicos
+
+  + Servicos(Cliente cliente, Date data, String descricao, double valorTotal)
+  + Cliente getCliente()
+  + int getCodigo()
+  + Date getData()
+  + String getDescricao()
+  + EstadoServico getEstado()
+  + int getTempoProcessamento()
+  + double getValorTotal()
+  + Tecnicos getTecnicoResponsavel()
+  + List<Equipamentos> getEquipamento()
+  + List<Integer> getQuantidades()
+  + List<SubServico> getSubServicos()
+  + void setCliente(Cliente cliente)
+  + void setCodigo(int codigo)
+  + void setData(Date data)
+  + void setDescricao(String descricao)
+  + void setEstado(EstadoServico estado)
+  + void setTempoProcessamento(int tempoProcessamento)
+  + void setValorTotal(double valorTotal)
+  + void setTecnicoResponsavel(Tecnicos tecnicoResponsavel)
+  + void adicionarEquipamento(Equipamentos equipamento, int quantidade)
+  + void adicionarSubServico(SubServico subServico)
+  + static int tempoGasto()
+  + static String formatarTempo(int minutos)
 }
 
 class SubServico{
-    String designacao
-    Tecnico tecnicoResponsavel
+  - String designacao
+  - Tecnicos tecnicoresponsavel
+
+  + SubServico(String designacao, Tecnicos tecnicoresponsavel)
+  + String getDesignacao()
+  + void setDesignacao(String designacao)
+  + Tecnicos getTecnicoresponsavel()
+  + void setTecnicoresponsavel(Tecnicos tecnicoresponsavel)
+  + static void listarSubServico(List<SubServico> subServicos)
 }
 
 class Equipamentos {
@@ -215,7 +260,6 @@ class Equipamentos {
     +addEquipamentos(): Equipamento
     +listarEquipamentos()
     +equipamentosLoop()
-    +toString(): String
     +atualizarStock()
     +listarEquipamentosLoop()
 }

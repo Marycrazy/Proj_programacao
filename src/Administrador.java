@@ -1,5 +1,6 @@
 package src;
 
+import java.lang.ProcessHandle.Info;
 import java.util.Comparator;
 import java.util.List;
 
@@ -386,7 +387,8 @@ public class Administrador extends Utilizador {
             System.out.println("|3. Aprovar Serviço                   |");
             System.out.println("|4. Listagem de utilizadores          |");
             System.out.println("|5. Listagem de serviços              |");
-            System.out.println("|6. Sair                              |");
+            System.out.println("|6. Informações do sistema            |");
+            System.out.println("|7. Sair                              |");
             System.out.println("|-------------------------------------|");
             System.out.print("Option: ");
             String option = Input.readLine();
@@ -408,6 +410,10 @@ public class Administrador extends Utilizador {
                     listagemServiçosLoop();
                     break;
                 case "6":
+                    InfoSistema.listarInfoSistema();
+                    Main.pressEnterKey();
+                    break;
+                case "7":
                     Main.clearConsole();
                     System.out.println("Adeus " + user.getNome());
                     Main.pressEnterKey();

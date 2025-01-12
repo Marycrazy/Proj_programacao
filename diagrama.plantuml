@@ -310,12 +310,27 @@ class Versao {
     +toString(): String
 }
 
+class InfoSistema {
+  - static int numeroExecucoes
+  - static String ultimoUtilizador
+
+  + void incrementarExecucoes()
+  + void setUltimoUtilizador(String login)
+  + int getNumeroExecucoes()
+  + String getUltimoUtilizador()
+  + static InfoSistema carregarDados()
+  + static void save(InfoSistema infoSistema)
+  + static void listarInfoSistema()
+}
+
 Sistema -- Utilizador
 Sistema -- Servico
 Sistema -- Equipamentos
 Sistema <-- Ficheiros
 Main --> Input
 Main -- Validator
+Main --> Sistema
+Main --> InfoSistema
 Tecnicos --> Validator
 Tecnicos -- Servico
 Tecnicos --> Sistema
@@ -338,3 +353,4 @@ Fornecedor -- Input
 Fornecedor <-- Sistema
 SubServico <-- Servico
 Servico --> EstadoServico
+InfoSistema <-- Ficheiros

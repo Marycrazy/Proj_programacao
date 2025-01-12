@@ -19,12 +19,13 @@ public class Main {
         boolean running = true;
         while (running) {
             clearConsole();
-            System.out.println("|------------|");
-            System.out.println("|Menu:       |");
-            System.out.println("|1. Login    |");
-            System.out.println("|2. Register |");
-            System.out.println("|0. Exit     |");
-            System.out.println("|------------|");
+            System.out.println("|---------------------------|");
+            System.out.println("|Menu:                      |");
+            System.out.println("|1. Login                   |");
+            System.out.println("|2. Register                |");
+            System.out.println("|3. Informações do sistema  |");
+            System.out.println("|0. Exit                    |");
+            System.out.println("|---------------------------|");
             System.out.print("\nOption: ");
             String option = Input.readLine();
             switch (option) {
@@ -37,6 +38,11 @@ public class Main {
                     break;
                 case "2":
                     registerUser();
+                    pressEnterKey();
+                    break;
+                case "3":
+                    clearConsole();
+                    InfoSistema.listarInfoSistema();
                     pressEnterKey();
                     break;
                 case "0":

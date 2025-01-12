@@ -36,7 +36,7 @@ public class InfoSistema implements Serializable {
     public static void listarInfoSistema() {
         System.out.println("\n=== Informações do Sistema ===");
         System.out.println("Número de execuções: " + numeroExecucoes);
-        if (!ultimoUtilizador.isEmpty()) {
+        if (ultimoUtilizador != null) {
             System.out.println("Último utilizador: " + ultimoUtilizador);
         }
         System.out.println("============================\n");

@@ -93,11 +93,11 @@ Equipment Manufacturer).
 - [x] [R61] Disponibilizar uma interface em modo texto onde o utilizador possa interagir e controlar a aplicação.
 
 ### Monitorização de acessos
-- [ ] [R62] Todas as acções dos utilizadores deverão ser guardadas num ficheiro de texto denominado “log.txt”.
+- [x] [R62] Todas as acções dos utilizadores deverão ser guardadas num ficheiro de texto denominado “log.txt”.
 Este ficheiro deverá ser escrito de forma sequencial, apresentando as acções mais recentes no início do
 ficheiro.
 As entradas deverão ter o seguinte formato: <utilizador> <acção>.
-- [] [R63] Deve ser possível consultar o log de acções através da aplicação.
+- [x] [R63] Deve ser possível consultar o log de acções através da aplicação.
 - [x] [R64] Deverá ser registado o número total (até ao momento) de execuções do sistema e o username do último
 utilizador que acedeu à aplicação.
 Esta informação deverá ser guardada num ficheiro de objectos e actualizada sempre que a aplicação é

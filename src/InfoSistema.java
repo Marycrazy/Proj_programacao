@@ -24,7 +24,6 @@ public class InfoSistema implements Serializable {
 
     public static InfoSistema carregarDados() {
         InfoSistema infoSistema = Ficheiros.carregarInfoSistema();
-        System.out.println("Carregando informações do sistema... " + infoSistema);
         infoSistema.incrementarExecucoes();
         return infoSistema;
     }

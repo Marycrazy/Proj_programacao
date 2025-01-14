@@ -1,6 +1,7 @@
 package src;
 
 import java.util.List;
+import java.util.Date;
 
 public class Tecnicos extends Utilizador{
     private static final long serialVersionUID = 1L;
@@ -75,30 +76,37 @@ public class Tecnicos extends Utilizador{
             switch (option) {
                 case "1":
                     user.setLogin();
+                    Logs.adicionarLog(new Logs(user, new Date(), "Alterou o login"));
                     Main.pressEnterKey();
                     break;
                 case "2":
                     user.setPassword();
+                    Logs.adicionarLog(new Logs(user, new Date(), "Alterou a password"));
                     Main.pressEnterKey();
                     break;
                 case "3":
                     user.setNome();
+                    Logs.adicionarLog(new Logs(user, new Date(), "Alterou o nome"));
                     Main.pressEnterKey();
                     break;
                 case "4":
                     user.setEmail();
+                    Logs.adicionarLog(new Logs(user, new Date(), "Alterou o email"));
                     Main.pressEnterKey();
                     break;
                 case "5":
                     ((Tecnicos) user).setNIF();
+                    Logs.adicionarLog(new Logs(user, new Date(), "Alterou o NIF"));
                     Main.pressEnterKey();
                     break;
                 case "6":
                     ((Tecnicos) user).setMorada();
+                    Logs.adicionarLog(new Logs(user, new Date(), "Alterou a morada"));
                     Main.pressEnterKey();
                     break;
                 case "7":
                     ((Tecnicos) user).setTelefone();
+                    Logs.adicionarLog(new Logs(user, new Date(), "Alterou o telefone"));
                     Main.pressEnterKey();
                     break;
                 case "8":
@@ -184,6 +192,7 @@ public class Tecnicos extends Utilizador{
             System.out.println("Indique o tempo gasto no serviço:.");
             servicosTecnico.get(service - 1).setTempoProcessamento(Servicos.tempoGasto());
             servicosTecnico.get(service - 1).setEstado(Servicos.EstadoServico.CONCLUIDO);
+            Logs.adicionarLog(new Logs(servicosTecnico.get(0).getTecnicoResponsavel(), new Date(), "Encerrou um serviço"));
         }
     }
 
@@ -207,6 +216,7 @@ public class Tecnicos extends Utilizador{
             switch (option) {
                 case "1":
                     Main.clearConsole();
+                    Main.clearConsole();
                     if (servicosTecnico.isEmpty()) {
                         System.out.println("Nenhum serviço encontrado.");
                     }
@@ -214,9 +224,11 @@ public class Tecnicos extends Utilizador{
                         System.out.println("Todos os serviços:");
                         Servicos.listarServicos(servicosTecnico, true);
                     }
+                    Logs.adicionarLog(new Logs(servicosTecnico.get(0).getTecnicoResponsavel(), new Date(), "Listou todos os serviços"));
                     Main.pressEnterKey();
                     break;
                 case "2":
+                    Main.clearConsole();
                     List<Servicos> servicosAceites = servicosTecnico.stream().filter(s -> s.getEstado().equals(Servicos.EstadoServico.ACEITE)).toList();
                     Main.clearConsole();
                     if (servicosAceites.isEmpty()) {
@@ -226,9 +238,11 @@ public class Tecnicos extends Utilizador{
                         System.out.println("Serviços aceites:");
                         Servicos.listarServicos(servicosAceites, true);
                     }
+                    Logs.adicionarLog(new Logs(servicosTecnico.get(0).getTecnicoResponsavel(), new Date(), "Listou os serviços aceites"));
                     Main.pressEnterKey();
                     break;
                 case "3":
+                    Main.clearConsole();
                     List<Servicos> servicosConcluidos = servicosTecnico.stream().filter(s -> s.getEstado().equals(Servicos.EstadoServico.CONCLUIDO)).toList();
                     Main.clearConsole();
                     if (servicosConcluidos.isEmpty()) {
@@ -238,9 +252,11 @@ public class Tecnicos extends Utilizador{
                         System.out.println("Serviços concluídos:");
                         Servicos.listarServicos(servicosConcluidos, true);
                     }
+                    Logs.adicionarLog(new Logs(servicosTecnico.get(0).getTecnicoResponsavel(), new Date(), "Listou os serviços concluídos"));
                     Main.pressEnterKey();
                     break;
                 case "4":
+                    Main.clearConsole();
                     List<Servicos> submetidos = servicosTecnico.stream().filter(s -> s.getEstado().equals(Servicos.EstadoServico.SUBMETIDO)).toList();
                     Main.clearConsole();
                     if (submetidos.isEmpty()) {
@@ -250,9 +266,11 @@ public class Tecnicos extends Utilizador{
                         System.out.println("Serviços submetidos:");
                         Servicos.listarServicos(submetidos, true);
                     }
+                    Logs.adicionarLog(new Logs(servicosTecnico.get(0).getTecnicoResponsavel(), new Date(), "Listou os serviços"));
                     Main.pressEnterKey();
                     break;
                 case "5":
+                    Main.clearConsole();
                     System.out.print("Nome do cliente a pesquisar: ");
                     String cliente = Input.readLine();
                     List<Servicos> servicosPorCliente = servicosTecnico.stream().filter(s -> s.getCliente().getNome().toLowerCase().contains(cliente.toLowerCase())).toList();
@@ -264,9 +282,11 @@ public class Tecnicos extends Utilizador{
                         System.out.println("Serviços do cliente " + cliente + ":");
                         Servicos.listarServicos(servicosPorCliente, true);
                     }
+                    Logs.adicionarLog(new Logs(servicosTecnico.get(0).getTecnicoResponsavel(), new Date(), "Listou os serviços do cliente " + cliente));
                     Main.pressEnterKey();
                     break;
                 case "6":
+                    Main.clearConsole();
                     System.out.println("Vão ser pedidas as semanas, os dias, as horas e os minutos, caso algum deles seja nulo, ou seja, <po exemplo não demorou semanas deve ser 0.");
                     System.out.println("Tempo despendido superior a: ");
                     int tempo = Servicos.tempoGasto();
@@ -279,13 +299,14 @@ public class Tecnicos extends Utilizador{
                         System.out.println("Serviços com tempo despendido superior a " + Servicos.formatarTempo(tempo) + ":");
                         Servicos.listarServicos(servicosPorTempo, true);
                     }
+                    Logs.adicionarLog(new Logs(servicosTecnico.get(0).getTecnicoResponsavel(), new Date(), "Listou os serviços com tempo despendido superior a " + Servicos.formatarTempo(tempo)));
                     Main.pressEnterKey();
                     break;
                 case "7":
+                    Main.clearConsole();
                     System.out.print("Código ou palavra na descrição a pesquisar: ");
                     String pesquisa = Input.readLine();
                     List<Servicos> servicosPesquisados = servicosTecnico.stream().filter(s -> String.valueOf(s.getCodigo()).contains(pesquisa) || s.getDescricao().contains(pesquisa)).toList();
-                    Main.clearConsole();
                     if (servicosPesquisados.isEmpty()) {
                         System.out.println("Nenhum serviço encontrado com o código ou palavra na descrição " + pesquisa + ".");
                     }
@@ -293,6 +314,7 @@ public class Tecnicos extends Utilizador{
                         System.out.println("Serviços encontrados com o código ou palavra na descrição " + pesquisa + ":");
                         Servicos.listarServicos(servicosPesquisados, true);
                     }
+                    Logs.adicionarLog(new Logs(servicosTecnico.get(0).getTecnicoResponsavel(), new Date(), "Pesquisou serviços com o código ou palavra na descrição " + pesquisa));
                     Main.pressEnterKey();
                 break;
                 case "8":
@@ -331,6 +353,7 @@ public class Tecnicos extends Utilizador{
                         SubServico subsevico = criarSubServico(servicosTecnico);
                         if (subsevico != null) {
                             System.out.println("Subserviço adicionado com sucesso.");
+                            Logs.adicionarLog(new Logs(servicosTecnico.get(0).getTecnicoResponsavel(), new Date(), "Adicionou um subserviço"));
                         }
                         else{
                             System.out.println("Subserviço não adicionado.");
@@ -385,12 +408,13 @@ public class Tecnicos extends Utilizador{
                     editperfil(user);
                     break;
                 case "2":
-                    Equipamentos.equipamentosLoop();
+                    Equipamentos.equipamentosLoop(user);
                     break;
                 case "3":
                     Fornecedor forne = Fornecedor.adicionarFornecedor();
                     if (forne != null) {
                         Sistema.getInstance().adicionarFornecedor(forne);
+                        Logs.adicionarLog(new Logs(user, new Date(), "Adicionou um fornecedor"));
                         Main.pressEnterKey();
                     }
                     else{
@@ -401,6 +425,7 @@ public class Tecnicos extends Utilizador{
                     Categoria cat = Categoria.adicionarCategoria();
                     if(cat != null){
                         Sistema.getInstance().adicionarCategoria(cat);
+                        Logs.adicionarLog(new Logs(user, new Date(), "Adicionou uma categoria"));
                         Main.pressEnterKey();
                     }
                     else{

@@ -129,8 +129,8 @@ public class Ficheiros {
         try {
             Input.openFileWrite("docs/log.txt", false);
             if (!logs.isEmpty()) {
-                for (Logs log : logs) {
-                    Input.writeFileLine(log.getUtilizador().getLogin() + ";" + log.getDate() + ";" + log.getAcao());
+                for (int i = 0; i < logs.size(); i++) {
+                    Input.writeFileLine(logs.get(i).getUtilizador().getLogin() + ";" + logs.get(i).getDate() + ";" + logs.get(i).getAcao());
                 }
                 System.out.println("Logs escritos com sucesso.");
             } else {
@@ -160,7 +160,6 @@ public class Ficheiros {
                 }
             }
             Input.closeFile();
-            System.out.println("Logs carregados com sucesso.");
             return registros;
         } catch (Exception e) {
             System.out.println("Erro ao carregar os logs: " + e.getMessage());

@@ -2,6 +2,7 @@ package src;
 import java.util.ArrayList;
 import java.util.List;
 import java.io.Serializable;
+import java.util.Date;
 
 public class Equipamentos implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -165,7 +166,7 @@ public class Equipamentos implements Serializable {
         }
     }
 
-    private static void addinforEquipamento(String type){
+    private static void addinforEquipamento(String type, Utilizador user) {
         List<Equipamentos> equipamentos = Sistema.getInstance().getEquipamentos();
         System.out.println("Equipamentos:\n");
         for (int i = 0; i < equipamentos.size(); i++) {
@@ -179,9 +180,11 @@ public class Equipamentos implements Serializable {
         else {
             if (type.equals("fornecedor")) {
                 addFornecedor(equipamentos.get(escolha - 1).getFornecedores());
+                Logs.adicionarLog(new Logs(user, new Date(), "Adicionou fornecedor ao equipamento " + equipamentos.get(escolha - 1).getModelo()));
             }
             else if (type.equals("categoria")) {
                 addCategoria(equipamentos.get(escolha - 1).getCategorias());
+                Logs.adicionarLog(new Logs(user, new Date(), "Adicionou categoria ao equipamento " + equipamentos.get(escolha - 1).getModelo()));
             }
         }
 
@@ -241,7 +244,7 @@ public class Equipamentos implements Serializable {
         "\nOEM: " + (equipamentos.isOEM() ? "Sim" : "Não") + " Quantidade de Stock: " + equipamentos.getQuantidadeStock() + "\n");
     }
 
-    private static void atualizarStock() {
+    private static void atualizarStock(Utilizador user) {
         Main.clearConsole();
         List<Equipamentos> equipamentos = Sistema.getInstance().getEquipamentos();
         System.out.println("Equipamentos:\n");
@@ -257,11 +260,12 @@ public class Equipamentos implements Serializable {
             Input.clearBuffer();
             equipamentos.get(escolha - 1).setQuantidadeStock(Integer.parseInt(Validator.validateInput("Quantidade de Stock")));
             System.out.println("Stock atualizado com sucesso!");
+            Logs.adicionarLog(new Logs(user, new Date(), "Atualizou o stock do equipamento " + equipamentos.get(escolha - 1).getModelo()));
             Main.pressEnterKey();
         }
     }
 
-    public static void equipamentosLoop() {
+    public static void equipamentosLoop(Utilizador user) {
         boolean running = true;
         while (running) {
             Main.clearConsole();
@@ -280,6 +284,7 @@ public class Equipamentos implements Serializable {
                     Equipamentos equip = addEquipamentos();
                     if (equip != null) {
                         Sistema.getInstance().adicionarEquipamento(equip);
+                        Logs.adicionarLog(new Logs(user, new Date(), "Adicionou o equipamento " + equip.getModelo()));
                         Main.pressEnterKey();
                     }
                     else{
@@ -287,16 +292,16 @@ public class Equipamentos implements Serializable {
                     }
                     break;
                 case "2":
-                    addinforEquipamento("fornecedor");
+                    addinforEquipamento("fornecedor", user);
                     break;
                 case "3":
-                    addinforEquipamento("categoria");
+                    addinforEquipamento("categoria", user);
                     break;
                 case "4":
-                    atualizarStock();
+                    atualizarStock(user);
                     break;
                 case "5":
-                    listarEquipamentosLoop();
+                    listarEquipamentosLoop(user);
                     break;
                 case "6":
                     System.out.println("A voltar ao menu principal.");
@@ -310,7 +315,7 @@ public class Equipamentos implements Serializable {
         }
     }
 
-    public static void listarEquipamentosLoop() {
+    public static void listarEquipamentosLoop(Utilizador user) {
         boolean running = true;
         while (running) {
             Main.clearConsole();
@@ -328,9 +333,11 @@ public class Equipamentos implements Serializable {
             String option = Input.readLine();
             switch (option) {
                 case "1":
+                    Main.clearConsole();
                     System.out.print("Designação (Modelo) do equipamento:");
                     String designacao = Input.readLine();
                     List<Equipamentos> modelo = Sistema.getInstance().getEquipamentos().stream().filter(e -> e.getModelo().contains(designacao)).toList();
+                    Logs.adicionarLog(new Logs(user, new Date(), "Listou equipamentos por designação: " + designacao));
                     System.out.println("Equipamentos com o seguinte moedelo "+designacao+":\n");
                     for (int i = 0; i < modelo.size(); i++) {
                         System.out.println(i + 1 + ".");
@@ -339,6 +346,8 @@ public class Equipamentos implements Serializable {
                     Main.pressEnterKey();
                     break;
                 case "2":
+                    Main.clearConsole();
+                    Logs.adicionarLog(new Logs(user, new Date(), "Listou todos os equipamentos"));
                     List<Equipamentos> equipamentos = Sistema.getInstance().getEquipamentos();
                     System.out.println("Equipamentos:\n");
                     for (int i = 0; i < equipamentos.size(); i++) {
@@ -348,9 +357,11 @@ public class Equipamentos implements Serializable {
                     Main.pressEnterKey();
                     break;
                 case "3":
+                    Main.clearConsole();
                     System.out.println("Listar equipamentos OEM ou não OEM (sim/não):");
                     String input = Input.readLine();
                     if (input.equalsIgnoreCase("sim")) {
+                        Logs.adicionarLog(new Logs(user, new Date(), "Listou equipamentos OEM"));
                         List<Equipamentos> equipamentosOEM = Sistema.getInstance().getEquipamentos().stream().filter(e -> e.isOEM()).toList();
                         System.out.println("Equipamentos OEM:\n");
                         for (int i = 0; i < equipamentosOEM.size(); i++) {
@@ -359,6 +370,7 @@ public class Equipamentos implements Serializable {
                         }
                     }
                     else{
+                        Logs.adicionarLog(new Logs(user, new Date(), "Listou equipamentos não OEM"));
                         List<Equipamentos> equipamentosOEM = Sistema.getInstance().getEquipamentos().stream().filter(e -> !e.isOEM()).toList();
                         System.out.println("Equipamentos não OEM:\n");
                         for (int i = 0; i < equipamentosOEM.size(); i++) {
@@ -369,9 +381,11 @@ public class Equipamentos implements Serializable {
                     Main.pressEnterKey();
                     break;
                 case "4":
-                    System.out.print("Limite de Stock: ");
+                    Main.clearConsole();
+                    System.out.println("Limite de Stock: ");
                     int limiteEstoque = Input.readInt();
                     List<Equipamentos> stockList = Sistema.getInstance().getEquipamentos().stream().filter(e -> e.getQuantidadeStock() <= limiteEstoque).toList();
+                    Logs.adicionarLog(new Logs(user, new Date(), "Listou equipamentos com stock menor ou igual a "+limiteEstoque));
                     System.out.println("Equipamentos com stock menor ou igual a "+limiteEstoque+":\n");
                     for (int i = 0; i < stockList.size(); i++) {
                         System.out.println(i + 1 + ".");
@@ -384,6 +398,7 @@ public class Equipamentos implements Serializable {
                     System.out.print("Marca ou Código Interno: ");
                     String marcaOuCodigo = Input.readLine();
                     List<Equipamentos> marcaOuCodigoList = Sistema.getInstance().getEquipamentos().stream().filter(e -> e.getMarca().contains(marcaOuCodigo) || e.getCodigoInterno().contains(marcaOuCodigo)).toList();
+                    Logs.adicionarLog(new Logs(user, new Date(), "Listou equipamentos com a marca ou código interno "+marcaOuCodigo));
                     System.out.println("Equipamentos com a marca ou código interno "+marcaOuCodigo+":\n");
                     for (int i = 0; i < marcaOuCodigoList.size(); i++) {
                         System.out.println(i + 1 + ".");
@@ -395,6 +410,7 @@ public class Equipamentos implements Serializable {
                     System.out.print("Designação da Categoria: ");
                     String categoria = Input.readLine();
                     List<Equipamentos> categoriaList = Sistema.getInstance().getEquipamentos().stream().filter(e -> e.getCategorias().stream().anyMatch(c -> c.getDesignacao().contains(categoria))).toList();
+                    Logs.adicionarLog(new Logs(user, new Date(), "Listou equipamentos com a categoria "+categoria));
                     System.out.println("Equipamentos com a categoria "+categoria+":\n");
                     for (int i = 0; i < categoriaList.size(); i++) {
                         System.out.println(i + 1 + ".");

@@ -1,8 +1,8 @@
 package src;
 
-import java.lang.ProcessHandle.Info;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Date;
 
 public class Administrador extends Utilizador {
 
@@ -60,7 +60,7 @@ public class Administrador extends Utilizador {
         }
     }
 
-    private static void aprovarRegisto() {
+    private static void aprovarRegisto(Utilizador user) {
         List<Utilizador> inativos = getUtilizadoresInativos();
         utilizadoresRegeditados(inativos);
         boolean running = true;
@@ -68,6 +68,7 @@ public class Administrador extends Utilizador {
             System.out.print("Selecione o utilizador a aprovar (ou 0 para cancelar): ");
             int escolha = Input.readInt();
             if (escolha==0) {
+                Logs.adicionarLog(new Logs(user, new Date(), "Cancelou a aprovação de um registo"));
                 System.out.println("A voltar ao menu principal.");
                 running = false;
                 break;
@@ -76,6 +77,7 @@ public class Administrador extends Utilizador {
                 inativos.get(escolha - 1).setEstado(true);
                 System.out.println("Utilizador " + inativos.get(escolha - 1).getLogin() + " aprovado com sucesso!");
                 Input.clearBuffer();
+                Logs.adicionarLog(new Logs(user, new Date(), "Aprovou o registo do utilizador " + inativos.get(escolha - 1).getNome()));
                 running = false;
             }
         } while (running);
@@ -101,18 +103,22 @@ public class Administrador extends Utilizador {
             switch (option) {
                 case "1":
                     user.setLogin();
+                    Logs.adicionarLog(new Logs(user, new Date(), "Alterou o login"));
                     Main.pressEnterKey();
                     break;
                 case "2":
                     user.setPassword();
+                    Logs.adicionarLog(new Logs(user, new Date(), "Alterou a password"));
                     Main.pressEnterKey();
                     break;
                 case "3":
                     user.setNome();
+                    Logs.adicionarLog(new Logs(user, new Date(), "Alterou o nome"));
                     Main.pressEnterKey();
                     break;
                 case "4":
                     user.setEmail();
+                    Logs.adicionarLog(new Logs(user, new Date(), "Alterou o email"));
                     Main.pressEnterKey();
                     break;
                 case "5":
@@ -128,7 +134,7 @@ public class Administrador extends Utilizador {
         }
     }
 
-    private static void listagemUtilizadores(){
+    private static void listagemUtilizadoresLoop(Utilizador user){
         boolean running = true;
         while (running) {
             Main.clearConsole();
@@ -145,6 +151,7 @@ public class Administrador extends Utilizador {
             switch (option) {
                 case "1":
                     List<Utilizador> oredemAlfabetica = Sistema.getInstance().getUtilizadores().stream().sorted(Comparator.comparing(Utilizador::getNome)).toList();
+                    Logs.adicionarLog(new Logs(user, new Date(), "Listou utilizadores por ordem alfabética"));
                     Main.clearConsole();
                     System.out.println("Utilizadores por ordem alfabética:");
                     for (int i = 0; i < oredemAlfabetica.size(); i++) {
@@ -153,6 +160,7 @@ public class Administrador extends Utilizador {
                     Main.pressEnterKey();
                     break;
                 case "2":
+                    Logs.adicionarLog(new Logs(user, new Date(), "Listou todos os utilizadores"));
                     Main.clearConsole();
                     System.out.println("Todos os utilizadores:");
                     for (int i = 0; i < Sistema.getInstance().getUtilizadores().size(); i++) {
@@ -164,6 +172,7 @@ public class Administrador extends Utilizador {
                     System.out.println("Tipo de utilizador a listar: ");
                     String tipo = Input.readLine();
                     List<Utilizador> utilizadoresPorTipo = Sistema.getInstance().getUtilizadores().stream().filter(u -> u.getTipo().equalsIgnoreCase(tipo)).toList();
+                    Logs.adicionarLog(new Logs(user, new Date(), "Listou utilizadores por tipo " + tipo));
                     Main.clearConsole();
                     System.out.println("Utilizadores do tipo " + tipo + ":");
                     for (int i = 0; i < utilizadoresPorTipo.size(); i++) {
@@ -175,6 +184,7 @@ public class Administrador extends Utilizador {
                     System.out.print("Nome ou login a pesquisar: ");
                     String pesquisa = Input.readLine();
                     List<Utilizador> utilizadoresPesquisados = Sistema.getInstance().getUtilizadores().stream().filter(u -> u.getNome().contains(pesquisa) || u.getLogin().contains(pesquisa)).toList();
+                    Logs.adicionarLog(new Logs(user, new Date(), "Pesquisou utilizadores por nome ou login: " + pesquisa));
                     Main.clearConsole();
                     System.out.println("Utilizadores encontrados:");
                     for (int i = 0; i < utilizadoresPesquisados.size(); i++) {
@@ -205,7 +215,7 @@ public class Administrador extends Utilizador {
         }
     }
 
-    private static void aprovadoServico() {
+    private static void aprovadoServico(Utilizador user) {
         List<Servicos> submetidos = getServicosSubmetidos();
         System.out.println("Serviços submetidos:");
         Servicos.listarServicos(submetidos, false);
@@ -218,9 +228,9 @@ public class Administrador extends Utilizador {
         else {
             submetidos.get(escolha - 1).setEstado(Servicos.EstadoServico.ACEITE);
             System.out.println("Serviço " + submetidos.get(escolha - 1).getCliente().getNome() + " aprovado com sucesso!");
+            Logs.adicionarLog(new Logs(user, new Date(), "Aprovou o serviço " + submetidos.get(escolha - 1).getCodigo()));
             System.out.println("Associar um tecnico responsável ao serviço.");
             associarTecnico(submetidos.get(escolha - 1));
-            System.out.println("Tecnico associado com sucesso!");
             Input.clearBuffer();
             Main.pressEnterKey();
         }
@@ -242,6 +252,7 @@ public class Administrador extends Utilizador {
             servicos.setTecnicoResponsavel(tecnicoSelecionado);
             System.out.println("Técnico " + tecnicoSelecionado.getNome() + " associado com sucesso ao serviço.");
             Input.clearBuffer();
+            Logs.adicionarLog(new Logs(tecnicoSelecionado, new Date(), "Foi associado ao serviço " + servicos.getCodigo()));
             Main.pressEnterKey();
         }
         else {
@@ -252,7 +263,7 @@ public class Administrador extends Utilizador {
         }
     }
 
-    private static void listagemServiçosLoop(){
+    private static void listagemServiçosLoop(Utilizador user) {
         boolean running = true;
         while (running) {
             Main.clearConsole();
@@ -271,6 +282,7 @@ public class Administrador extends Utilizador {
             String option = Input.readLine();
             switch (option) {
                 case "1":
+                    Logs.adicionarLog(new Logs(user, new Date(), "Listou todos os serviços"));
                     List<Servicos> todosServicos = Sistema.getInstance().getServicos();
                     Main.clearConsole();
                     if (todosServicos.isEmpty()) {
@@ -283,6 +295,7 @@ public class Administrador extends Utilizador {
                     Main.pressEnterKey();
                     break;
                 case "2":
+                    Logs.adicionarLog(new Logs(user, new Date(), "Listou serviços aceites"));
                     List<Servicos> servicosAceites = Sistema.getInstance().getServicos().stream().filter(s -> s.getEstado().equals(Servicos.EstadoServico.ACEITE)).toList();
                     Main.clearConsole();
                     if (servicosAceites.isEmpty()) {
@@ -295,6 +308,7 @@ public class Administrador extends Utilizador {
                     Main.pressEnterKey();
                     break;
                 case "3":
+                    Logs.adicionarLog(new Logs(user, new Date(), "Listou serviços concluídos"));
                     List<Servicos> servicosConcluidos = Sistema.getInstance().getServicos().stream().filter(s -> s.getEstado().equals(Servicos.EstadoServico.CONCLUIDO)).toList();
                     Main.clearConsole();
                     if (servicosConcluidos.isEmpty()) {
@@ -307,6 +321,7 @@ public class Administrador extends Utilizador {
                     Main.pressEnterKey();
                     break;
                 case "4":
+                    Logs.adicionarLog(new Logs(user, new Date(), "Listou serviços submetidos"));
                     List<Servicos> submetidos = getServicosSubmetidos();
                     Main.clearConsole();
                     if (submetidos == null) {
@@ -321,6 +336,7 @@ public class Administrador extends Utilizador {
                 case "5":
                     System.out.print("Nome do cliente a pesquisar: ");
                     String cliente = Input.readLine();
+                    Logs.adicionarLog(new Logs(user, new Date(), "Pesquisou serviços por cliente " + cliente));
                     List<Servicos> servicosPorCliente = Sistema.getInstance().getServicos().stream().filter(s -> s.getCliente().getNome().toLowerCase().contains(cliente.toLowerCase())).toList();
                     Main.clearConsole();
                     if (servicosPorCliente.isEmpty()) {
@@ -337,6 +353,7 @@ public class Administrador extends Utilizador {
                     System.out.println("Tempo despendido superior a: ");
                     int tempo = Servicos.tempoGasto();
                     List<Servicos> servicosPorTempo = Sistema.getInstance().getServicos().stream().filter(s -> s.getTempoProcessamento() >= tempo).toList();
+                    Logs.adicionarLog(new Logs(user, new Date(), "Listou serviços por tempo despendido superior a " + Servicos.formatarTempo(tempo)));
                     Main.clearConsole();
                     if (servicosPorTempo.isEmpty()) {
                         System.out.println("Nenhum serviço encontrado com tempo despendido superior a " + Servicos.formatarTempo(tempo) + ".");
@@ -351,6 +368,7 @@ public class Administrador extends Utilizador {
                     System.out.print("Código ou palavra na descrição a pesquisar: ");
                     String pesquisa = Input.readLine();
                     List<Servicos> servicosPesquisados = Sistema.getInstance().getServicos().stream().filter(s -> String.valueOf(s.getCodigo()).contains(pesquisa) || s.getDescricao().contains(pesquisa)).toList();
+                    Logs.adicionarLog(new Logs(user, new Date(), "Pesquisou serviços por código ou palavra na descrição " + pesquisa));
                     Main.clearConsole();
                     if (servicosPesquisados.isEmpty()) {
                         System.out.println("Nenhum serviço encontrado com o código ou palavra na descrição " + pesquisa + ".");
@@ -388,7 +406,8 @@ public class Administrador extends Utilizador {
             System.out.println("|4. Listagem de utilizadores          |");
             System.out.println("|5. Listagem de serviços              |");
             System.out.println("|6. Informações do sistema            |");
-            System.out.println("|7. Sair                              |");
+            System.out.println("|7. Listagem de logs                  |");
+            System.out.println("|8. Sair                              |");
             System.out.println("|-------------------------------------|");
             System.out.print("Option: ");
             String option = Input.readLine();
@@ -397,23 +416,29 @@ public class Administrador extends Utilizador {
                     editperfil(user);
                     break;
                 case "2":
-                    aprovarRegisto();
+                    aprovarRegisto(user);
                     break;
                 case "3":
                     System.out.println("Aprovar Serviço");
-                    aprovadoServico();
+                    aprovadoServico(user);
                     break;
                 case "4":
-                    listagemUtilizadores();
+                    listagemUtilizadoresLoop(user);
                     break;
                 case "5":
-                    listagemServiçosLoop();
+                    listagemServiçosLoop(user);
                     break;
                 case "6":
                     InfoSistema.listarInfoSistema();
+                    Logs.adicionarLog(new Logs(user, new Date(), "Listou informações do sistema"));
                     Main.pressEnterKey();
                     break;
                 case "7":
+                    Logs.listarLogs();
+                    Logs.adicionarLog(new Logs(user, new Date(), "Listou logs"));
+                    Main.pressEnterKey();
+                    break;
+                case "8":
                     Main.clearConsole();
                     System.out.println("Adeus " + user.getNome());
                     Main.pressEnterKey();

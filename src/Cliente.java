@@ -88,30 +88,37 @@ public class Cliente extends Utilizador {
             switch (option) {
                 case "1":
                     user.setLogin();
+                    Logs.adicionarLog(new Logs(user, new Date(), "Editou o login"));
                     Main.pressEnterKey();
                     break;
                 case "2":
                     user.setPassword();
+                    Logs.adicionarLog(new Logs(user, new Date(), "Editou a password"));
                     Main.pressEnterKey();
                     break;
                 case "3":
                     user.setNome();
+                    Logs.adicionarLog(new Logs(user, new Date(), "Editou o nome"));
                     Main.pressEnterKey();
                     break;
                 case "4":
                     user.setEmail();
+                    Logs.adicionarLog(new Logs(user, new Date(), "Editou o email"));
                     Main.pressEnterKey();
                     break;
                 case "5":
                     ((Cliente) user).setNIF();
+                    Logs.adicionarLog(new Logs(user, new Date(), "Editou o NIF"));
                     Main.pressEnterKey();
                     break;
                 case "6":
                     ((Cliente) user).setMorada();
+                    Logs.adicionarLog(new Logs(user, new Date(), "Editou a morada"));
                     Main.pressEnterKey();
                     break;
                 case "7":
                     ((Cliente) user).setTelefone();
+                    Logs.adicionarLog(new Logs(user, new Date(), "Editou o telefone"));
                     Main.pressEnterKey();
                     break;
                 case "8":
@@ -160,8 +167,9 @@ public class Cliente extends Utilizador {
             Main.pressEnterKey();
         }
         else {
-            int quantidade = Servicos.quantidadeequipamento(equipamentos.get(id-1));
+            int quantidade = Servicos.quantidadeEquipamentoDisponivel(equipamentos.get(id-1));
             pedido.adicionarEquipamento(equipamentos.get(id-1), quantidade);
+            Logs.adicionarLog(new Logs(pedido.getCliente(), new Date(), "Realizou um pedido de compra"));
             System.out.println("Deseja adicionar mais algum equipamento ao pedido? (S/N)");
             String addEquipamento = Input.readLine();
             if (addEquipamento.equalsIgnoreCase("S")) {
@@ -222,6 +230,7 @@ public class Cliente extends Utilizador {
                         System.out.println("Todos os serviços:");
                         Servicos.listarServicos(servicosCliente, true);
                     }
+                    Logs.adicionarLog(new Logs(servicosCliente.get(0).getCliente(), new Date(), "Listou todos os serviços"));
                     Main.pressEnterKey();
                     break;
                 case "2":
@@ -234,6 +243,7 @@ public class Cliente extends Utilizador {
                         System.out.println("Serviços aceites:");
                         Servicos.listarServicos(servicosAceites, true);
                     }
+                    Logs.adicionarLog(new Logs(servicosCliente.get(0).getCliente(), new Date(), "Listou os serviços aceites"));
                     Main.pressEnterKey();
                     break;
                 case "3":
@@ -246,6 +256,7 @@ public class Cliente extends Utilizador {
                         System.out.println("Serviços concluídos:");
                         Servicos.listarServicos(servicosConcluidos, true);
                     }
+                    Logs.adicionarLog(new Logs(servicosCliente.get(0).getCliente(), new Date(), "Listou os serviços concluídos"));
                     Main.pressEnterKey();
                     break;
                 case "4":
@@ -258,6 +269,7 @@ public class Cliente extends Utilizador {
                         System.out.println("Serviços submetidos:");
                         Servicos.listarServicos(submetidos, true);
                     }
+                    Logs.adicionarLog(new Logs(servicosCliente.get(0).getCliente(), new Date(), "Listou os serviços submetidos"));
                     Main.pressEnterKey();
                     break;
                 case "5":
@@ -272,6 +284,7 @@ public class Cliente extends Utilizador {
                         System.out.println("Serviços do cliente " + cliente + ":");
                         Servicos.listarServicos(servicosPorCliente, true);
                     }
+                    Logs.adicionarLog(new Logs(servicosCliente.get(0).getCliente(), new Date(), "Listou os serviços do cliente " + cliente));
                     Main.pressEnterKey();
                     break;
                 case "6":
@@ -287,6 +300,7 @@ public class Cliente extends Utilizador {
                         System.out.println("Serviços com tempo despendido superior a " + Servicos.formatarTempo(tempo) + ":");
                         Servicos.listarServicos(servicosPorTempo, true);
                     }
+                    Logs.adicionarLog(new Logs(servicosCliente.get(0).getCliente(), new Date(), "Listou os serviços com tempo despendido superior a " + Servicos.formatarTempo(tempo)));
                     Main.pressEnterKey();
                     break;
                 case "7":
@@ -301,6 +315,7 @@ public class Cliente extends Utilizador {
                         System.out.println("Serviços encontrados com o código ou palavra na descrição " + pesquisa + ":");
                         Servicos.listarServicos(servicosPesquisados, true);
                     }
+                    Logs.adicionarLog(new Logs(servicosCliente.get(0).getCliente(), new Date(), "Listou os serviços com o código ou palavra na descrição " + pesquisa));
                     Main.pressEnterKey();
                 break;
                 case "8":
@@ -334,14 +349,14 @@ public class Cliente extends Utilizador {
                     editperfil(user);
                     break;
                 case "2":
-                    Equipamentos.listarEquipamentosLoop();
+                    Equipamentos.listarEquipamentosLoop(user);
                     break;
                 case "3":
                     realizarPedido(user);
                     break;
                 case "4":
-                    List<Servicos> servicosTecnico = getServicosCliente((Cliente) user);
-                    listagemServiçosLoop(servicosTecnico);
+                    List<Servicos> servicosCliente = getServicosCliente((Cliente) user);
+                    listagemServiçosLoop(servicosCliente);
                     Main.pressEnterKey();
                     break;
                 case "5":

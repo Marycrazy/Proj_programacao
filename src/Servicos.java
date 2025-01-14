@@ -143,7 +143,7 @@ public class Servicos implements Serializable {
         }
     }
 
-    public static int quantidadeequipamento(Equipamentos equipamento) {
+    public static int quantidadeEquipamentoDisponivel(Equipamentos equipamento) {
         int quantidade;
         boolean check = true;
         do {

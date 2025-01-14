@@ -323,6 +323,23 @@ class InfoSistema {
   + static void listarInfoSistema()
 }
 
+class Logs {
+  - Utilizador utilizador
+  - Date data
+  - String acao
+  - static List<Logs> logs
+
+  + Logs(Utilizador utilizador, Date data, String acao)
+  + Utilizador getUtilizador()
+  + Date getDate()
+  + String getAcao()
+  + static void setInstance(List<Logs> logsCarregados)
+  + static void adicionarLog(Logs log)
+  + static void save()
+  + static void carregarLogs()
+  + static void listarLogs()
+}
+
 Sistema -- Utilizador
 Sistema -- Servico
 Sistema -- Equipamentos
@@ -331,14 +348,19 @@ Main --> Input
 Main -- Validator
 Main --> Sistema
 Main --> InfoSistema
+Main --> Logs
 Tecnicos --> Validator
 Tecnicos -- Servico
 Tecnicos --> Sistema
+Tecnicos --> SubServico
+Tecnicos --> Logs
 Cliente --> Validator
 Cliente --> Servico
 Cliente -- Sistema
+Cliente --> Logs
 Administrador --> Validator
 Administrador --> Sistema
+Administrador --> Logs
 Validator --> Input
 Ficheiros --> Input
 Utilizador --> Input
@@ -346,7 +368,9 @@ Equipamentos --> Fornecedor
 Equipamentos --> Categoria
 Equipamentos --> Serie
 Equipamentos --> Versao
+Equipamentos --> Logs
 Servico -- Equipamentos
+Servico --> Logs
 Categoria <-- Sistema
 Fornecedor <-- Equipamentos
 Fornecedor -- Input

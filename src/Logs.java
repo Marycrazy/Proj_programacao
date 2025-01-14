@@ -1,6 +1,8 @@
 package src;
 
 import java.io.Serializable;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.ArrayList;
@@ -11,14 +13,8 @@ public class Logs implements Serializable {
     private Date data;
     private String acao;
 
-    private static List<Logs> logs;
+    private static List<Logs> logs = new ArrayList<>();
 
-    public static List<Logs> getInstance() {
-        if (logs == null) {
-            logs = new ArrayList<>();
-        }
-        return logs;
-    }
 
     public static void setInstance(List<Logs> logsCarregados) {
         logs = logsCarregados;
@@ -52,23 +48,26 @@ public class Logs implements Serializable {
     }
 
     public static void save() {
+        Collections.sort(logs, Comparator.comparing(Logs::getDate).reversed());
         Ficheiros.insertLogs(logs);
         Main.pressEnterKey();
     }
 
     public static void carregarLogs() {
         List <Logs> log = Ficheiros.carregarLogs();
-        if (log != null) {
+        if (log != null && !log.isEmpty()) {
+            Collections.sort(logs, Comparator.comparing(Logs::getDate).reversed());
             Logs.setInstance(log);
+            System.out.println("Logs carregados com sucesso.");
         }
         else {
             System.out.println("Não foi possível carregar os logs.");
         }
     }
 
-    public void listarLogs() {
+    public static void listarLogs() {
         for (Logs log : logs) {
-            System.out.println("Utilizador: " + log.getUtilizador().getLogin());
+            System.out.println("\nUtilizador: \nLogin: " + log.getUtilizador().getLogin() + "\tNome: " + log.getUtilizador().getNome());
             System.out.println("Data: " + log.getDate());
             System.out.println("Ação: " + log.getAcao());
         }

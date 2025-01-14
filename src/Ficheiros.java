@@ -6,7 +6,10 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Date;
 
 public class Ficheiros {
 
@@ -119,6 +122,50 @@ public class Ficheiros {
             e.printStackTrace();
             return new InfoSistema();
         }
+    }
+
+    public static void insertLogs(List<Logs> logs) {
+        System.out.println("Inserting logs into file...");
+        try {
+            Input.openFileWrite("docs/log.txt", false);
+            if (!logs.isEmpty()) {
+                for (Logs log : logs) {
+                    Input.writeFileLine(log.getUtilizador().getLogin() + ";" + log.getDate() + ";" + log.getAcao());
+                }
+                System.out.println("Logs escritos com sucesso.");
+            } else {
+                System.out.println("Nenhum log encontrado.");
+            }
+        } catch (Exception e) {
+            System.out.println("Erro ao inserir os logs no ficheiro: " + e.getMessage());
+        }
+    }
+
+    public static List<Logs> carregarLogs() {
+        List<Logs> registros = new ArrayList<>();
+        try {
+            Input.openFIleReade("docs/log.txt");
+            String line;
+            while ((line = Input.readFileLine()) != null) {
+                String[] dados = line.split(";");
+                //obter utilizador por login
+                Utilizador utilizador = Sistema.getInstance().buscarUtilizadorPorLogin(dados[0]);
+                // Converter a string da data para Date
+                SimpleDateFormat dateFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy");
+                Date data = dateFormat.parse(dados[1]);
+                String acao = dados[2];
+                if (utilizador != null) {
+                    Logs log = new Logs(utilizador, data, acao);
+                    registros.add(log);
+                }
+            }
+            Input.closeFile();
+            System.out.println("Logs carregados com sucesso.");
+            return registros;
+        } catch (Exception e) {
+            System.out.println("Erro ao carregar os logs: " + e.getMessage());
+        }
+        return null;
     }
 
 }

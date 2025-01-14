@@ -1,4 +1,5 @@
 package src;
+import java.util.Date;
 
 public class Main {
     private static InfoSistema infoSistema;
@@ -8,7 +9,9 @@ public class Main {
             pressEnterKey();
              // Carregar informações do sistema
             infoSistema = InfoSistema.carregarDados();
-            Main.pressEnterKey();
+            pressEnterKey();
+            Logs.carregarLogs();
+            pressEnterKey();
             mainLoop();
         } catch (Exception e) {
             System.out.println("Exception: " + e);
@@ -33,6 +36,7 @@ public class Main {
                     Utilizador user = loginUser();
                     pressEnterKey();
                     if (user != null) {
+                        Logs.adicionarLog(new Logs(user, new Date(), "Realizou o Login"));
                         Utilizador.loggedUserLoop(user);
                     }
                     break;
@@ -48,7 +52,9 @@ public class Main {
                 case "0":
                     Sistema.getInstance().save();
                     clearConsole();
-                    Ficheiros.salvarInfoSistema(infoSistema);
+                    InfoSistema.save(infoSistema);
+                    pressEnterKey();
+                    Logs.save();
                     pressEnterKey();
                     System.out.println("A sair...");
                     running = false;
@@ -77,6 +83,7 @@ public class Main {
                 return user;
             }
             else{
+                Logs.adicionarLog(new Logs(user, new Date(), "Tentou realizar o login, mas está inativo"));
                 System.out.println(user.getNome() + " está inativo, ainda não pode aceder a aplicação.");
                 return null;
             }
@@ -101,14 +108,17 @@ public class Main {
                 case "1":
                     Utilizador admin = Utilizador.registerNewUser(false, "administrador");
                     Sistema.getInstance().adicionarutilizador(admin);
+                    Logs.adicionarLog(new Logs(admin, new Date(), "Registou-se como administrador"));
                     break;
                 case "2":
                     Utilizador tecnico = Utilizador.registerNewUser(false, "tecnico");
                     Sistema.getInstance().adicionarutilizador(tecnico);
+                    Logs.adicionarLog(new Logs(tecnico, new Date(), "Registou-se como tecnico"));
                     break;
                 case "3":
                     Utilizador cliente = Utilizador.registerNewUser(false, "cliente");
                     Sistema.getInstance().adicionarutilizador(cliente);
+                    Logs.adicionarLog(new Logs(cliente, new Date(), "Registou-se como cliente"));
                     break;
                 case "4":
                     System.out.println("A voltar ao menu principal.");

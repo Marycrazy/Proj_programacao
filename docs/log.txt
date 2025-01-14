@@ -1,0 +1,2 @@
+login2;Tue Jan 14 14:14:41 WET 2025;Registou-se como cliente
+admin;Tue Jan 14 14:15:00 WET 2025;Realizou o Login

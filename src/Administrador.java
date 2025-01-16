@@ -231,7 +231,6 @@ public class Administrador extends Utilizador {
             Logs.adicionarLog(new Logs(user, new Date(), "Aprovou o serviço " + submetidos.get(escolha - 1).getCodigo()));
             System.out.println("Associar um tecnico responsável ao serviço.");
             associarTecnico(submetidos.get(escolha - 1));
-            Input.clearBuffer();
             Main.pressEnterKey();
         }
     }
@@ -429,11 +428,13 @@ public class Administrador extends Utilizador {
                     listagemServiçosLoop(user);
                     break;
                 case "6":
+                    Main.clearConsole();
                     InfoSistema.listarInfoSistema();
                     Logs.adicionarLog(new Logs(user, new Date(), "Listou informações do sistema"));
                     Main.pressEnterKey();
                     break;
                 case "7":
+                    Main.clearConsole();
                     Logs.listarLogs();
                     Logs.adicionarLog(new Logs(user, new Date(), "Listou logs"));
                     Main.pressEnterKey();

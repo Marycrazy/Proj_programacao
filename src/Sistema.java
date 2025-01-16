@@ -178,8 +178,13 @@ public class Sistema implements Serializable {
                                ", Data: " + servico.getData() +
                                ", Estado: " + servico.getEstado() +
                                ", Tempo de Processamento: " + Servicos.formatarTempo(servico.getTempoProcessamento()) +
-                               ", Valor Total: " + servico.getValorTotal() +
-                               ", Tecnico Responsavel: " + servico.getTecnicoResponsavel().getNome());
+                               ", Valor Total: " + servico.getValorTotal() );
+                               if (servico.getTecnicoResponsavel() != null) {
+                                   System.out.println("Técnico Responsável: " + servico.getTecnicoResponsavel().getNome());
+                                
+                               }else{
+                                   System.out.println("Técnico Responsável: Não atribuído");
+                               }
             for (Equipamentos equipamento : servico.getEquipamento()) {
                 System.out.println("Equipamento: " + equipamento.getMarca() + " " + equipamento.getModelo());
                 System.out.println("Quantidade: " + servico.getQuantidades().get(servico.getEquipamento().indexOf(equipamento)));

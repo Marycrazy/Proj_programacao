@@ -40,11 +40,9 @@ public class Logs implements Serializable {
 
     public static void adicionarLog(Logs log) {
         if (log == null) {
-            System.out.println("Tentativa de adicionar um log nulo!");
             return;
         }
         logs.add(log);
-        System.out.println("Log adicionado: " + log.getAcao());
     }
 
     public static void save() {

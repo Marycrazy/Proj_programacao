@@ -213,6 +213,7 @@ public class Equipamentos implements Serializable {
         System.out.print("Adicionar equipamento: \n");
         String marca = Validator.validateInput("Marca");
         String modelo = Validator.validateInput("Modelo");
+        System.out.println("No código interno não é permitido: \n\tCaracteres especiais ou símbolos que não sejam letras maiúsculas/minúsculas, números ou underline(_) \n\tEspaços em branco");
         String codigoInterno = Validator.validateInput("Código Interno");
         Serie serie = Serie.adicionarSerie();
         Versao versao = Versao.adicionarVersao();
@@ -274,7 +275,7 @@ public class Equipamentos implements Serializable {
             System.out.println("|2. Adicionar fornecedor a equipamento   |");
             System.out.println("|3. Adicionar categoria a equipamento    |");
             System.out.println("|4. Atualizar Stock                      |");
-            System.out.println("|5. Listar Equipamentos                   |");
+            System.out.println("|5. Listar Equipamentos                  |");
             System.out.println("|6. Sair                                 |");
             System.out.println("|----------------------------------------|");
             System.out.print("Option: ");

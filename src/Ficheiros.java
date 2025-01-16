@@ -6,9 +6,11 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Date;
 
 public class Ficheiros {
@@ -146,21 +148,25 @@ public class Ficheiros {
         try {
             Input.openFIleReade("docs/log.txt");
             String line;
+            // Ajustando o padrão para incluir WET (Western European Time)
+            SimpleDateFormat dateFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss 'WET' yyyy", Locale.ENGLISH);
             while ((line = Input.readFileLine()) != null) {
                 String[] dados = line.split(";");
-                //obter utilizador por login
+                // Buscar o utilizador pelo login
                 Utilizador utilizador = Sistema.getInstance().buscarUtilizadorPorLogin(dados[0]);
-                // Converter a string da data para Date
-                SimpleDateFormat dateFormat = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy");
-                Date data = dateFormat.parse(dados[1]);
-                String acao = dados[2];
-                if (utilizador != null) {
-                    Logs log = new Logs(utilizador, data, acao);
-                    registros.add(log);
+                if (utilizador == null) {
+                    System.out.println("Utilizador não encontrado: " + dados[0]);
+                    continue;
                 }
+                Date data = dateFormat.parse(dados[1]);
+                Logs log = new Logs(utilizador, data, dados[2]);
+                registros.add(log);
             }
             Input.closeFile();
+            System.out.println("Logs carregados com sucesso.");
             return registros;
+        } catch (ParseException e) {
+            System.out.println("Erro ao carregar os logs: Formato de data inválido - " + e.getMessage());
         } catch (Exception e) {
             System.out.println("Erro ao carregar os logs: " + e.getMessage());
         }

@@ -223,53 +223,53 @@ public class Cliente extends Utilizador {
             switch (option) {
                 case "1":
                     Main.clearConsole();
-                    if (servicosCliente.isEmpty()) {
+                    if (servicosCliente == null || servicosCliente.isEmpty()) {
                         System.out.println("Nenhum serviço encontrado.");
                     }
                     else {
                         System.out.println("Todos os serviços:");
                         Servicos.listarServicos(servicosCliente, true);
+                        Logs.adicionarLog(new Logs(servicosCliente.get(0).getCliente(), new Date(), "Listou todos os serviços"));
                     }
-                    Logs.adicionarLog(new Logs(servicosCliente.get(0).getCliente(), new Date(), "Listou todos os serviços"));
                     Main.pressEnterKey();
                     break;
                 case "2":
                     List<Servicos> servicosAceites = servicosCliente.stream().filter(s -> s.getEstado().equals(Servicos.EstadoServico.ACEITE)).toList();
                     Main.clearConsole();
-                    if (servicosAceites.isEmpty()) {
+                    if (servicosAceites.isEmpty() || servicosAceites == null) {
                         System.out.println("Nenhum serviço aceite encontrado.");
                     }
                     else {
                         System.out.println("Serviços aceites:");
                         Servicos.listarServicos(servicosAceites, true);
+                        Logs.adicionarLog(new Logs(servicosCliente.get(0).getCliente(), new Date(), "Listou os serviços aceites"));
                     }
-                    Logs.adicionarLog(new Logs(servicosCliente.get(0).getCliente(), new Date(), "Listou os serviços aceites"));
                     Main.pressEnterKey();
                     break;
                 case "3":
                     List<Servicos> servicosConcluidos = servicosCliente.stream().filter(s -> s.getEstado().equals(Servicos.EstadoServico.CONCLUIDO)).toList();
                     Main.clearConsole();
-                    if (servicosConcluidos.isEmpty()) {
+                    if (servicosConcluidos.isEmpty() || servicosConcluidos == null) {
                         System.out.println("Nenhum serviço concluído encontrado.");
                     }
                     else {
                         System.out.println("Serviços concluídos:");
                         Servicos.listarServicos(servicosConcluidos, true);
+                        Logs.adicionarLog(new Logs(servicosCliente.get(0).getCliente(), new Date(), "Listou os serviços concluídos"));
                     }
-                    Logs.adicionarLog(new Logs(servicosCliente.get(0).getCliente(), new Date(), "Listou os serviços concluídos"));
                     Main.pressEnterKey();
                     break;
                 case "4":
                     List<Servicos> submetidos = servicosCliente.stream().filter(s -> s.getEstado().equals(Servicos.EstadoServico.SUBMETIDO)).toList();
                     Main.clearConsole();
-                    if (submetidos.isEmpty()) {
+                    if (submetidos.isEmpty() || submetidos == null) {
                         System.out.println("Nenhum serviço submetido encontrado.");
                     }
                     else {
                         System.out.println("Serviços submetidos:");
                         Servicos.listarServicos(submetidos, true);
+                        Logs.adicionarLog(new Logs(servicosCliente.get(0).getCliente(), new Date(), "Listou os serviços submetidos"));
                     }
-                    Logs.adicionarLog(new Logs(servicosCliente.get(0).getCliente(), new Date(), "Listou os serviços submetidos"));
                     Main.pressEnterKey();
                     break;
                 case "5":
@@ -277,14 +277,14 @@ public class Cliente extends Utilizador {
                     String cliente = Input.readLine();
                     List<Servicos> servicosPorCliente = servicosCliente.stream().filter(s -> s.getCliente().getNome().toLowerCase().contains(cliente.toLowerCase())).toList();
                     Main.clearConsole();
-                    if (servicosPorCliente.isEmpty()) {
+                    if (servicosPorCliente.isEmpty() || servicosPorCliente == null) {
                         System.out.println("Nenhum serviço encontrado para o cliente " + cliente + ".");
                     }
                     else {
                         System.out.println("Serviços do cliente " + cliente + ":");
                         Servicos.listarServicos(servicosPorCliente, true);
+                        Logs.adicionarLog(new Logs(servicosCliente.get(0).getCliente(), new Date(), "Listou os serviços do cliente " + cliente));
                     }
-                    Logs.adicionarLog(new Logs(servicosCliente.get(0).getCliente(), new Date(), "Listou os serviços do cliente " + cliente));
                     Main.pressEnterKey();
                     break;
                 case "6":
@@ -293,14 +293,14 @@ public class Cliente extends Utilizador {
                     int tempo = Servicos.tempoGasto();
                     List<Servicos> servicosPorTempo = servicosCliente.stream().filter(s -> s.getTempoProcessamento() >= tempo).toList();
                     Main.clearConsole();
-                    if (servicosPorTempo.isEmpty()) {
+                    if (servicosPorTempo.isEmpty() || servicosPorTempo == null) {
                         System.out.println("Nenhum serviço encontrado com tempo despendido superior a " + Servicos.formatarTempo(tempo) + ".");
                     }
                     else {
                         System.out.println("Serviços com tempo despendido superior a " + Servicos.formatarTempo(tempo) + ":");
                         Servicos.listarServicos(servicosPorTempo, true);
+                        Logs.adicionarLog(new Logs(servicosCliente.get(0).getCliente(), new Date(), "Listou os serviços com tempo despendido superior a " + Servicos.formatarTempo(tempo)));
                     }
-                    Logs.adicionarLog(new Logs(servicosCliente.get(0).getCliente(), new Date(), "Listou os serviços com tempo despendido superior a " + Servicos.formatarTempo(tempo)));
                     Main.pressEnterKey();
                     break;
                 case "7":
@@ -308,14 +308,14 @@ public class Cliente extends Utilizador {
                     String pesquisa = Input.readLine();
                     List<Servicos> servicosPesquisados = servicosCliente.stream().filter(s -> String.valueOf(s.getCodigo()).contains(pesquisa) || s.getDescricao().contains(pesquisa)).toList();
                     Main.clearConsole();
-                    if (servicosPesquisados.isEmpty()) {
+                    if (servicosPesquisados.isEmpty() || servicosPesquisados == null) {
                         System.out.println("Nenhum serviço encontrado com o código ou palavra na descrição " + pesquisa + ".");
                     }
                     else {
                         System.out.println("Serviços encontrados com o código ou palavra na descrição " + pesquisa + ":");
                         Servicos.listarServicos(servicosPesquisados, true);
+                        Logs.adicionarLog(new Logs(servicosCliente.get(0).getCliente(), new Date(), "Listou os serviços com o código ou palavra na descrição " + pesquisa));
                     }
-                    Logs.adicionarLog(new Logs(servicosCliente.get(0).getCliente(), new Date(), "Listou os serviços com o código ou palavra na descrição " + pesquisa));
                     Main.pressEnterKey();
                 break;
                 case "8":
@@ -339,7 +339,7 @@ public class Cliente extends Utilizador {
             System.out.println("|1. Editar perfil                    |");
             System.out.println("|2. Listar equipamentos              |");
             System.out.println("|3. Realizar um pedido de compra     |");
-            System.out.println("|4. Listar pedidos de serviço         |");
+            System.out.println("|4. Listar pedidos de serviço        |");
             System.out.println("|5. Sair                             |");
             System.out.println("|------------------------------------|");
             System.out.print("Option: ");

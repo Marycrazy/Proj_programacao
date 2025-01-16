@@ -1,8 +1,10 @@
 package src;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class SubServico {
+public class SubServico implements Serializable {
+    private static final long serialVersionUID = 1L;
     private String designacao;
     private Tecnicos tecnicoresponsavel;
 

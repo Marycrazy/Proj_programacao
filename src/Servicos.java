@@ -124,6 +124,7 @@ public class Servicos implements Serializable {
         else {
             for (int i = 0; i < submetidos.size(); i++) {
                 System.out.println((i + 1) + ".");
+                System.out.println("Código: " + submetidos.get(i).getCodigo());
                 System.out.println("Cliente: " + submetidos.get(i).getCliente().getNome());
                 System.out.println("Data: " + submetidos.get(i).getData());
                 System.out.println("Descrição: " + submetidos.get(i).getDescricao());
@@ -134,7 +135,12 @@ public class Servicos implements Serializable {
                 }
                 System.out.println("Valor total: " + submetidos.get(i).getValorTotal());
                 if(mostrar){
+                    if(submetidos.get(i).getTecnicoResponsavel() == null){
+                        System.out.println("Técnico responsável: Não atribuído");
+                    }
+                    else{
                     System.out.println("Técnico responsável: " + submetidos.get(i).getTecnicoResponsavel().getNome());
+                }
                     System.out.println("Tempo de processamento: " + formatarTempo(submetidos.get(i).getTempoProcessamento()));
                     System.out.println("Subserviços:");
                     SubServico.listarSubServico(submetidos.get(i).getSubServicos());

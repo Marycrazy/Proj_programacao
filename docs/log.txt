@@ -1,3 +1,39 @@
-admin;Tue Jan 14 17:06:17 WET 2025;Listou logs
-admin;Tue Jan 14 17:06:15 WET 2025;Listou logs
-admin;Tue Jan 14 17:06:12 WET 2025;Realizou o Login
+tecnico1;Thu Jan 16 17:06:59 WET 2025;Adicionou um subserviço
+tecnico1;Thu Jan 16 17:06:42 WET 2025;Realizou o Login
+tecnico1;Thu Jan 16 17:06:32 WET 2025;Foi associado ao serviço 1
+admin;Thu Jan 16 17:06:29 WET 2025;Aprovou o serviço 1
+admin;Thu Jan 16 17:06:26 WET 2025;Realizou o Login
+cliente1;Thu Jan 16 17:05:31 WET 2025;Realizou um pedido de compra
+cliente1;Thu Jan 16 17:05:23 WET 2025;Realizou o Login
+tecnico1;Thu Jan 16 17:01:28 WET 2025;Adicionou o equipamento Z flip
+tecnico1;Thu Jan 16 17:00:35 WET 2025;Realizou o Login
+admin;Thu Jan 16 17:00:05 WET 2025;Aprovou o registo do utilizador Antonio Dinis
+admin;Thu Jan 16 16:59:58 WET 2025;Aprovou o registo do utilizador Kelly Silva
+admin;Thu Jan 16 16:59:53 WET 2025;Aprovou o registo do utilizador Afonso Silva
+admin;Thu Jan 16 16:59:44 WET 2025;Aprovou o registo do utilizador Andre Santos
+admin;Thu Jan 16 16:59:38 WET 2025;Realizou o Login
+tecnico2;Thu Jan 16 16:11:36 WET 2025;Realizou o Login
+admin;Thu Jan 16 16:11:25 WET 2025;Aprovou o registo do utilizador Afonso Silva
+admin;Thu Jan 16 16:11:19 WET 2025;Realizou o Login
+tecnico1;Thu Jan 16 16:11:11 WET 2025;Realizou o Login
+tecnico1;Thu Jan 16 15:41:24 WET 2025;Foi associado ao serviço 1
+admin;Thu Jan 16 15:41:23 WET 2025;Aprovou o serviço 1
+admin;Thu Jan 16 15:41:17 WET 2025;Realizou o Login
+cliente2;Thu Jan 16 15:24:40 WET 2025;Realizou um pedido de compra
+cliente2;Thu Jan 16 15:24:27 WET 2025;Realizou um pedido de compra
+cliente2;Thu Jan 16 15:24:09 WET 2025;Realizou o Login
+admin;Thu Jan 16 15:23:57 WET 2025;Aprovou o registo do utilizador Antonio Dinis
+admin;Thu Jan 16 15:23:42 WET 2025;Realizou o Login
+cliente1;Thu Jan 16 15:19:49 WET 2025;Listou todos os serviços
+cliente1;Thu Jan 16 15:19:43 WET 2025;Realizou o Login
+cliente1;Thu Jan 16 15:16:01 WET 2025;Realizou um pedido de compra
+cliente1;Thu Jan 16 15:15:41 WET 2025;Realizou o Login
+tecnico1;Thu Jan 16 00:03:55 WET 2025;Listou equipamentos com a marca ou código interno A
+tecnico1;Thu Jan 16 00:00:32 WET 2025;Listou equipamentos com a marca ou código interno a
+tecnico1;Wed Jan 15 23:55:44 WET 2025;Atualizou o stock do equipamento iphone
+tecnico1;Wed Jan 15 23:53:41 WET 2025;Adicionou categoria ao equipamento iphone
+tecnico1;Wed Jan 15 23:51:46 WET 2025;Adicionou categoria ao equipamento iphone
+tecnico1;Wed Jan 15 23:51:03 WET 2025;Adicionou fornecedor ao equipamento Z Flip
+tecnico1;Wed Jan 15 23:42:46 WET 2025;Adicionou o equipamento iphone
+tecnico1;Wed Jan 15 23:41:13 WET 2025;Adicionou o equipamento Z Flip
+tecnico1;Wed Jan 15 23:34:15 WET 2025;Realizou o Login

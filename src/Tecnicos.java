@@ -123,11 +123,12 @@ public class Tecnicos extends Utilizador{
     }
 
     private static List<Servicos> getServicosTecnico(Tecnicos tecnico) {
-        List<Servicos> servicosTecnico = Sistema.getInstance().getServicos().stream().filter(s -> s.getTecnicoResponsavel().equals(tecnico)).toList();
+        List<Servicos> servicosTecnico = Sistema.getInstance().getServicos().stream()
+            .filter(s -> s.getTecnicoResponsavel() != null && s.getTecnicoResponsavel().equals(tecnico))
+            .toList();
         if (servicosTecnico.isEmpty()) {
             return null;
-        }
-        else {
+        } else {
             return servicosTecnico;
         }
     }
@@ -188,6 +189,7 @@ public class Tecnicos extends Utilizador{
             System.out.println("A voltar ao menu principal.");
         }
         else {
+            Input.clearBuffer();
             System.out.println("Vão ser pedidas as semanas, os dias, as horas e os minutos, caso algum deles seja nulo, ou seja, não demorou semanas deve ser 0.");
             System.out.println("Indique o tempo gasto no serviço:.");
             servicosTecnico.get(service - 1).setTempoProcessamento(Servicos.tempoGasto());

@@ -35,7 +35,7 @@ public class Fornecedor implements Serializable {
     }
 
     public static void listarfornecedores(List<Fornecedor> fornecedor) {
-        System.out.println("\n Fornecedores:");
+        System.out.println("\nFornecedores:");
         for (int i = 0; i < fornecedor.size(); i++) {
             System.out.println((i + 1) + ". \n Nome: " + fornecedor.get(i).getNome() + "\n Morada: " + fornecedor.get(i).getMorada() + "\n Contacto: " + fornecedor.get(i).getContacto() + "\n");
         }

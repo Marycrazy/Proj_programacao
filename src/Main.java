@@ -51,11 +51,11 @@ public class Main {
                     break;
                 case "0":
                     Sistema.getInstance().save();
-                    clearConsole();
                     InfoSistema.save(infoSistema);
                     pressEnterKey();
                     Logs.save();
                     pressEnterKey();
+                    clearConsole();
                     System.out.println("A sair...");
                     running = false;
                     break;
@@ -83,6 +83,7 @@ public class Main {
                 return user;
             }
             else{
+                clearConsole();
                 Logs.adicionarLog(new Logs(user, new Date(), "Tentou realizar o login, mas está inativo"));
                 System.out.println(user.getNome() + " está inativo, ainda não pode aceder a aplicação.");
                 return null;
@@ -107,16 +108,21 @@ public class Main {
             switch (option) {
                 case "1":
                     Utilizador admin = Utilizador.registerNewUser(false, "administrador");
+                    clearConsole();
                     Sistema.getInstance().adicionarutilizador(admin);
                     Logs.adicionarLog(new Logs(admin, new Date(), "Registou-se como administrador"));
                     break;
                 case "2":
                     Utilizador tecnico = Utilizador.registerNewUser(false, "tecnico");
+                    pressEnterKey();
+                    clearConsole();
                     Sistema.getInstance().adicionarutilizador(tecnico);
+                    pressEnterKey();
                     Logs.adicionarLog(new Logs(tecnico, new Date(), "Registou-se como tecnico"));
                     break;
                 case "3":
                     Utilizador cliente = Utilizador.registerNewUser(false, "cliente");
+                    clearConsole();
                     Sistema.getInstance().adicionarutilizador(cliente);
                     Logs.adicionarLog(new Logs(cliente, new Date(), "Registou-se como cliente"));
                     break;
